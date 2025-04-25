@@ -1,0 +1,11 @@
+.container {
+  background: url("../../images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  width: 100%;
+  height: 90vh;
+  font-weight: 700;
+  color: white;
+  padding: 40px;
+}
