@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Banner.module.css";
-import ButtonComp from "../Button/ButtonComp";
+import Button from "../Button/Button";
 
 const Banner = () => {
   return (
@@ -11,8 +11,8 @@ const Banner = () => {
         <p className="mb-4">Build Perfect body shape for</p>
         <p>good and healthy life</p>
         <div className="flex justify-center">
-          <ButtonComp>Be A Member</ButtonComp>
-          <ButtonComp>Member Login</ButtonComp>
+          <Button>Be A Member</Button>
+          <Button>Member Login</Button>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@
   name: "dark";
   default: true;
   --color-base-100: #000000;
+  --color-primary: oklch(79.2% 0.209 151.711);
 }
 
 :root {
