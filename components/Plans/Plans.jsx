@@ -3,19 +3,12 @@ import plan_bg from "../../images/plan_bg.jpg";
 import Image from "next/image";
 import Button from "../Button/Button";
 
-export async function SearchPlans() {
-  const data = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await data.json();
-  return posts;
-}
-
 const Plans = async () => {
   const data = await fetch("http://127.0.0.1:8000/plans/");
   const plans = await data.json();
-  console.log(plans);
   return (
-    <div className="max-w-[1200px] mx-auto">
-      <p className="text-primary font-bold text-3xl mb-10">-Membership Plans</p>
+    <div className="max-w-[1200px] mx-auto mb-10">
+      <p className="text-primary font-bold text-5xl mb-10">-Membership Plans</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 place-items-center">
         {plans?.map((p) => (
           <div
@@ -49,7 +42,7 @@ const Plans = async () => {
                 ))}
               </ul>
               <div className="card-actions justify-end">
-                <Button>Join Now </Button>
+                <Button>Buy now</Button>
               </div>
             </div>
           </div>
