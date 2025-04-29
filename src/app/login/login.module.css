@@ -1,0 +1,19 @@
+.container {
+  background: url("../../../images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 90vh;
+  font-weight: 700;
+  color: rgb(0, 0, 0);
+  padding: 40px;
+}
+
+.inputCont {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(221, 222, 236, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}

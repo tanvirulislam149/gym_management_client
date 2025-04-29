@@ -11,8 +11,12 @@ const Banner = () => {
         <p className="mb-4">Build Perfect body shape for</p>
         <p>good and healthy life</p>
         <div className="flex justify-center">
-          <Button>Be A Member</Button>
-          <Button>Member Login</Button>
+          <div className="mx-3">
+            <Button>Be A Member</Button>
+          </div>
+          <div className="mx-3">
+            <Button>Member Login</Button>
+          </div>
         </div>
       </div>
     </div>

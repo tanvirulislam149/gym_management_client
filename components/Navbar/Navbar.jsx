@@ -1,17 +1,52 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useGetUserQuery } from "@/Redux/services/userApi";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser, removeUser } from "@/Redux/features/userSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios
+        .get("http://127.0.0.1:8000/auth/users/me/", {
+          headers: {
+            Authorization: `JWT ${token}`,
+          },
+        })
+        .then((res) => {
+          dispatch(getUser(res.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    dispatch(removeUser());
+  };
+
+  const user = useSelector((state) => state?.user?.user);
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 md:px-20 z-10 sticky top-0 border-b-1 border-green-400">
       <div className="navbar-start">
-        <a className="btn btn-ghost text-xl text-green-400 sm:text-3xl">
+        <Link
+          href={"/"}
+          className="font-bold text-xl text-green-400 sm:text-3xl"
+        >
           Muscle Gain
-        </a>
+        </Link>
       </div>
+      {/*   -------------------------desktop view---------------------  */}
       <div className="navbar-end">
         <div className="hidden sm:flex items-center">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 text-base">
             <li>
               <Link href={"/asdf"}>Item 1</Link>
             </li>
@@ -19,7 +54,16 @@ const Navbar = () => {
               <a>Item 2</a>
             </li>
             <li>
-              <a>Item 3</a>
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-green-400 text-black mx-3"
+                >
+                  Log out
+                </button>
+              ) : (
+                <Link href={"/login"}>Login</Link>
+              )}
             </li>
             <img
               className="w-10 rounded-full ms-3"
@@ -28,6 +72,7 @@ const Navbar = () => {
             />
           </ul>
         </div>
+        {/* -----------------Mobile view----------------  */}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost sm:hidden">
             <svg
@@ -57,7 +102,16 @@ const Navbar = () => {
               <a>Item 2</a>
             </li>
             <li>
-              <a>Item 3</a>
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="btn bg-green-400 text-black mx-3"
+                >
+                  Log out
+                </button>
+              ) : (
+                <Link href={"/login"}>Login</Link>
+              )}
             </li>
             <img
               className="w-10 rounded-full my-2"
