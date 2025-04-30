@@ -51,7 +51,16 @@ const Navbar = () => {
               <Link href={"/asdf"}>Item 1</Link>
             </li>
             <li>
-              <a>Item 2</a>
+              {!user ? (
+                <Link
+                  className="btn bg-green-400 text-black mx-2"
+                  href={"/register"}
+                >
+                  Register
+                </Link>
+              ) : (
+                ""
+              )}
             </li>
             <li>
               {user ? (
@@ -62,7 +71,12 @@ const Navbar = () => {
                   Log out
                 </button>
               ) : (
-                <Link href={"/login"}>Login</Link>
+                <Link
+                  className="btn bg-green-400 text-black mx-2"
+                  href={"/login"}
+                >
+                  Login
+                </Link>
               )}
             </li>
             <img
