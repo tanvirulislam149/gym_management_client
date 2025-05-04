@@ -6,34 +6,9 @@ const Create_plan = () => {
   return (
     <AuthComp>
       <DashboardLayout>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
-        <h1 className="text-5xl">just checking</h1>
+        <div className="w-full">
+          <p className="text-5xl text-center text-green-400">Create Plan</p>
+        </div>
       </DashboardLayout>
     </AuthComp>
   );

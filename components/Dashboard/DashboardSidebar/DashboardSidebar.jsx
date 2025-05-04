@@ -20,10 +20,10 @@ const DashboardSidebar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu pt-25 lg:pt-4 text-black w-60 p-4">
+          <ul className="menu pt-25 text-base lg:pt-4 text-black w-60 p-4">
             {/* Sidebar content here */}
             <li>
-              <a>Sidebar Item 1</a>
+              <a>Create Plan</a>
             </li>
             <li>
               <a>Sidebar Item 2</a>

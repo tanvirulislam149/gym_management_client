@@ -4,7 +4,11 @@ import Link from "next/link";
 import { useGetUserQuery } from "@/Redux/services/userApi";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, removeUser } from "@/Redux/features/userSlice";
+import {
+  fetchUserInitial,
+  getUser,
+  removeUser,
+} from "@/Redux/features/userSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -12,6 +16,7 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      dispatch(fetchUserInitial());
       axios
         .get("http://127.0.0.1:8000/auth/users/me/", {
           headers: {
