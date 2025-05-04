@@ -48,7 +48,7 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center">
           <ul className="menu menu-horizontal px-1 text-base">
             <li>
-              <Link href={"/asdf"}>Item 1</Link>
+              <Link href={"/dashboard/create_plan"}>Dashboard</Link>
             </li>
             <li>
               {!user ? (
