@@ -5,10 +5,13 @@ import DashboardLayout from "../../../../layouts/DashboardLayout";
 import axios from "axios";
 import api_client from "@/api_client";
 import Modal from "../../../../components/Modal/Modal";
+import UpdatePlanModal from "../../../../components/UpdatePlan/UpdatePlan";
 
 const Manage_plan = () => {
   const [plans, setPlans] = useState([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [updateId, setUpdateId] = useState(null);
+
   useEffect(() => {
     fetchPlans();
   }, []);
@@ -59,7 +62,13 @@ const Manage_plan = () => {
                     ))}
                   </td>
                   <td>
-                    <button className="btn bg-green-400 text-black btn-sm">
+                    <button
+                      onClick={() => {
+                        document.getElementById("update_plan").showModal();
+                        setUpdateId(p.id);
+                      }}
+                      className="btn bg-green-400 text-black btn-sm"
+                    >
                       Update
                     </button>
                   </td>
@@ -77,6 +86,7 @@ const Manage_plan = () => {
           </table>
         </div>
         <Modal text={"Plan deleted successfully"} />
+        <UpdatePlanModal id={updateId} fetchPlans={fetchPlans} />
       </DashboardLayout>
     </AuthComp>
   );
