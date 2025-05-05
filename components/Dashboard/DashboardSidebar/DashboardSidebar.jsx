@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const DashboardSidebar = () => {
@@ -23,10 +24,10 @@ const DashboardSidebar = () => {
           <ul className="menu pt-25 text-base lg:pt-4 text-black w-60 p-4">
             {/* Sidebar content here */}
             <li>
-              <a>Create Plan</a>
+              <Link href={"/dashboard/create_plan"}>Create Plan</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link href={"/dashboard/manage_plan"}>Manage Plan</Link>
             </li>
           </ul>
         </div>
