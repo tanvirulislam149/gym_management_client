@@ -29,6 +29,9 @@ const DashboardSidebar = () => {
             <li>
               <Link href={"/dashboard/manage_plan"}>Manage Plan</Link>
             </li>
+            <li>
+              <Link href={"/dashboard/create_classes"}>Create Classes</Link>
+            </li>
           </ul>
         </div>
       </div>
