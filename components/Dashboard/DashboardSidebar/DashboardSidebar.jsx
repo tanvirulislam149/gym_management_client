@@ -21,16 +21,23 @@ const DashboardSidebar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu pt-25 text-base lg:pt-4 text-black w-60 p-4">
+          <ul className="menu pt-25 text-base lg:pt-4 bg-white lg:bg-transparent min-h-full text-black w-60 p-4">
             {/* Sidebar content here */}
             <li>
               <Link href={"/dashboard/create_plan"}>Create Plan</Link>
+              <hr />
             </li>
             <li>
               <Link href={"/dashboard/manage_plan"}>Manage Plan</Link>
+              <hr />
             </li>
             <li>
               <Link href={"/dashboard/create_classes"}>Create Classes</Link>
+              <hr />
+            </li>
+            <li>
+              <Link href={"/dashboard/manage_classes"}>Manage Classes</Link>
+              <hr />
             </li>
           </ul>
         </div>
