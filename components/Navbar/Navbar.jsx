@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import Link from "next/link";
-import { useGetUserQuery } from "@/Redux/services/userApi";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {

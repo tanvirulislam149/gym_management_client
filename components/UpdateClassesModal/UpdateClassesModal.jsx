@@ -21,14 +21,17 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
   useEffect(() => {
     console.log("checking");
     if (id) {
-      axios.get(`http://127.0.0.1:8000/fitness_classes/${id}`).then((res) => {
-        console.log(res.data);
-        reset({
-          name: res.data.name,
-          description: res.data.description,
-        });
-        setImageUrl(res.data.image);
-      });
+      axios
+        .get(`http://127.0.0.1:8000/fitness_classes/${id}`)
+        .then((res) => {
+          console.log(res.data);
+          reset({
+            name: res.data.name,
+            description: res.data.description,
+          });
+          setImageUrl(res.data.image);
+        })
+        .catch((err) => console.log(err));
     }
   }, [id]);
 

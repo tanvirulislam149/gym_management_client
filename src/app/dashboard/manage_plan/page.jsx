@@ -17,18 +17,24 @@ const Manage_plan = () => {
   }, []);
 
   const fetchPlans = () => {
-    axios.get("http://127.0.0.1:8000/plans/").then((res) => setPlans(res.data));
+    axios
+      .get("http://127.0.0.1:8000/plans/")
+      .then((res) => setPlans(res.data))
+      .catch((err) => console.log(err));
   };
 
   const handleDelete = (id) => {
     setDeleteLoading(true);
-    api_client.delete(`/plans/${id}`).then((res) => {
-      if (res.status === 204) {
-        setDeleteLoading(false);
-        fetchPlans();
-        document.getElementById("my_modal_3").showModal();
-      }
-    });
+    api_client
+      .delete(`/plans/${id}`)
+      .then((res) => {
+        if (res.status === 204) {
+          setDeleteLoading(false);
+          fetchPlans();
+          document.getElementById("my_modal_3").showModal();
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

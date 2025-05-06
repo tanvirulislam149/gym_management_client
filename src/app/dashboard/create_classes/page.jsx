@@ -25,13 +25,16 @@ const Create_classes = () => {
     formData.append("name", data.name);
     formData.append("description", data.description);
 
-    api_client.post("/fitness_classes/", formData).then((res) => {
-      if (res.status === 201) {
-        reset();
-        setLoading(false);
-        document.getElementById("my_modal_3").showModal();
-      }
-    });
+    api_client
+      .post("/fitness_classes/", formData)
+      .then((res) => {
+        if (res.status === 201) {
+          reset();
+          setLoading(false);
+          document.getElementById("my_modal_3").showModal();
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <AuthComp>

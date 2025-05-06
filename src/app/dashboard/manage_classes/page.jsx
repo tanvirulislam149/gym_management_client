@@ -15,7 +15,8 @@ const Manage_classes = () => {
   const fetchClasses = () => {
     axios
       .get("http://127.0.0.1:8000/fitness_classes/")
-      .then((res) => setClasses(res.data));
+      .then((res) => setClasses(res.data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
@@ -24,13 +25,16 @@ const Manage_classes = () => {
 
   const handleDelete = (id) => {
     setDeleteLoading(true);
-    api_client.delete(`/fitness_classes/${id}`).then((res) => {
-      if (res.status === 204) {
-        setDeleteLoading(false);
-        fetchClasses();
-        document.getElementById("my_modal_3").showModal();
-      }
-    });
+    api_client
+      .delete(`/fitness_classes/${id}`)
+      .then((res) => {
+        if (res.status === 204) {
+          setDeleteLoading(false);
+          fetchClasses();
+          document.getElementById("my_modal_3").showModal();
+        }
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <AuthComp>

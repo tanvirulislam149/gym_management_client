@@ -23,7 +23,10 @@ const Create_plan = () => {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/fitness_classes/")
-      .then((res) => setClasses(res.data));
+      .then((res) => setClasses(res.data))
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleCheckbox = (id, is_checked) => {
@@ -60,6 +63,9 @@ const Create_plan = () => {
             setLoading(false);
             document.getElementById("my_modal_3").showModal();
           }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   };

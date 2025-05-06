@@ -16,7 +16,7 @@ const AuthComp = ({ children }) => {
   if (!user?.is_staff) {
     return (
       <p className="text-2xl text-center h-screen mt-20">
-        You don't have to see this page
+        You don't have permission to see this page
       </p>
     );
   }

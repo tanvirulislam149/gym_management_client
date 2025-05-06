@@ -22,23 +22,27 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/fitness_classes/")
-      .then((res) => setClasses(res.data));
+      .then((res) => setClasses(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     if (id) {
       setSelectedClasses([]);
-      axios.get(`http://127.0.0.1:8000/plans/${id}`).then((res) => {
-        setUpdatePlan(res.data);
-        reset({
-          type: res.data.type,
-          months: res.data.months,
-          price: res.data.price,
-        });
-        res.data.fitness_classes.forEach((c) => {
-          setSelectedClasses((prev) => [...prev, c.id]);
-        });
-      });
+      axios
+        .get(`http://127.0.0.1:8000/plans/${id}`)
+        .then((res) => {
+          setUpdatePlan(res.data);
+          reset({
+            type: res.data.type,
+            months: res.data.months,
+            price: res.data.price,
+          });
+          res.data.fitness_classes.forEach((c) => {
+            setSelectedClasses((prev) => [...prev, c.id]);
+          });
+        })
+        .catch((err) => console.log(err));
     }
   }, [id]);
 
@@ -83,7 +87,8 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
             fetchPlans();
             document.getElementById("update_modal").showModal();
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }
   };
   return (
