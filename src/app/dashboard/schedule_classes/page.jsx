@@ -6,13 +6,15 @@ import CreateClassModal from "../../../../components/CreateClassModal/CreateClas
 import axios from "axios";
 import { format, parseISO } from "date-fns";
 import UpdateScheduledClassModal from "../../../../components/UpdateSchedulecClass/UpdateScheduledClassModal";
+import api_client from "@/api_client";
+import Modal from "../../../../components/Modal/Modal";
 
 const Schedule_classes = () => {
   const [scheduledClasses, setScheduledClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [id, setId] = useState("");
   const [updateId, setUpdateId] = useState(null);
-  console.log(id);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -26,7 +28,24 @@ const Schedule_classes = () => {
   const fetchClasses = () => {
     axios
       .get(`http://127.0.0.1:8000/scheduled_classes/?fitness_class_id=${id}`)
-      .then((res) => setScheduledClasses(res.data))
+      .then((res) => {
+        setScheduledClasses(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDelete = (id) => {
+    setDeleteLoading(true);
+    api_client
+      .delete(`http://127.0.0.1:8000/scheduled_classes/${id}/`)
+      .then((res) => {
+        if (res.status === 204) {
+          console.log(res);
+          setDeleteLoading(false);
+          fetchClasses();
+          document.getElementById("my_modal_3").showModal();
+        }
+      })
       .catch((err) => console.log(err));
   };
 
@@ -105,8 +124,7 @@ const Schedule_classes = () => {
                       onClick={() => handleDelete(p.id)}
                       className="btn bg-red-400 text-black btn-sm"
                     >
-                      {/* {deleteLoading ? "Deleting..." : "Delete"} */}
-                      Delete
+                      {deleteLoading ? "Deleting..." : "Delete"}
                     </button>
                   </td>
                 </tr>
@@ -114,6 +132,7 @@ const Schedule_classes = () => {
             </tbody>
           </table>
         </div>
+        <Modal text={"Class deleted."} />
         <CreateClassModal fetchClasses={fetchClasses} classes={classes} />
         <UpdateScheduledClassModal
           fetchClasses={fetchClasses}
