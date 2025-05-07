@@ -31,7 +31,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
         if (res.status === 201) {
           fetchClasses();
           setLoading(false);
-          document.getElementById("my_modal_3").showModal();
+          document.getElementById("createScheduledClass").showModal();
         }
       })
       .catch((err) => console.log(err));
@@ -103,7 +103,20 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
           </form>
         </div>
       </div>
-      <Modal text={"Class scheduled."} />
+      <dialog id="createScheduledClass" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Class Scheduled.</h3>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </dialog>
   );
 };

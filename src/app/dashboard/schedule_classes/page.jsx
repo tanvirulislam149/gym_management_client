@@ -88,9 +88,16 @@ const Schedule_classes = () => {
                 <th>Date</th>
                 <th>Time</th>
                 <th>Instructor</th>
-                <th>Total Seats</th>
-                <th>Booked Seats</th>
-                <th>Present Students</th>
+                <th>
+                  Total <br />
+                  Seats
+                </th>
+                <th>
+                  Booked <br /> Seats
+                </th>
+                <th>
+                  Present <br /> Students
+                </th>
                 <th></th>
                 <th></th>
               </tr>

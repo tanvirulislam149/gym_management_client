@@ -45,7 +45,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
         if (res.status === 200) {
           fetchClasses();
           setLoading(false);
-          document.getElementById("my_modal_3").showModal();
+          document.getElementById("updateScheduledClass").showModal();
         }
       })
       .catch((err) => console.log(err));
@@ -117,7 +117,20 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
           </form>
         </div>
       </div>
-      <Modal text={"Class updated."} />
+      <dialog id="updateScheduledClass" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Class Scheduled Updated.</h3>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </dialog>
   );
 };
