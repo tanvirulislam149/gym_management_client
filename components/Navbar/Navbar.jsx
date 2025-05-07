@@ -50,7 +50,7 @@ const Navbar = () => {
       {/*   -------------------------desktop view---------------------  */}
       <div className="navbar-end">
         <div className="hidden sm:flex items-center">
-          <ul className="menu menu-horizontal px-1 text-base">
+          <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
               <Link href={"/dashboard/create_plan"}>Dashboard</Link>
             </li>
@@ -68,12 +68,34 @@ const Navbar = () => {
             </li>
             <li>
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  className="btn bg-green-400 text-black mx-3"
-                >
-                  Log out
-                </button>
+                <>
+                  <div className="dropdown dropdown-end">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="btn btn-ghost btn-circle avatar"
+                    >
+                      <div className="w-10 rounded-full">
+                        <img
+                          alt="Tailwind CSS Navbar component"
+                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                        />
+                      </div>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 w-52 p-2 shadow text-center"
+                    >
+                      <p className="my-3">{user.email}</p>
+                      <button
+                        onClick={handleLogout}
+                        className="btn bg-green-400 text-black mx-3 border-0"
+                      >
+                        Log out
+                      </button>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <Link
                   className="btn bg-green-400 text-black mx-2"
@@ -83,11 +105,6 @@ const Navbar = () => {
                 </Link>
               )}
             </li>
-            <img
-              className="w-10 rounded-full ms-3"
-              alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
           </ul>
         </div>
         {/* -----------------Mobile view----------------  */}

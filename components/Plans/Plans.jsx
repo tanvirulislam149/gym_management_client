@@ -2,6 +2,7 @@ import React from "react";
 import plan_bg from "../../images/plan_bg.jpg";
 import Image from "next/image";
 import Button from "../Button/Button";
+import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 
 const Plans = async () => {
   const data = await fetch("http://127.0.0.1:8000/plans/");
@@ -42,7 +43,7 @@ const Plans = async () => {
                 ))}
               </ul>
               <div className="card-actions justify-end">
-                <Button>Buy now</Button>
+                <BookPlanBtn id={p.id} />
               </div>
             </div>
           </div>
