@@ -6,11 +6,25 @@ import { Controller, useForm } from "react-hook-form";
 import Modal from "../Modal/Modal";
 import { format } from "date-fns-tz";
 
-const CreateClassModal = ({ fetchClasses, classes }) => {
-  const { register, handleSubmit, control } = useForm();
+const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
+  const { register, handleSubmit, control, reset } = useForm();
   const [loading, setLoading] = useState(false);
 
   const timeZone = "Asia/Dhaka";
+
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`)
+      .then((res) => {
+        reset({
+          date_time: res.data.date_time,
+          fitness_class: res.data.fitness_class.id,
+          instructor: res.data.instructor,
+          total_seats: res.data.total_seats,
+        });
+      })
+      .catch((err) => console.log(err));
+  }, [updateId]);
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -23,12 +37,12 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
       date_time: date_time,
       total_seats: parseInt(data.total_seats),
     };
-    console.log(finalData);
 
     api_client
-      .post(`/scheduled_classes/`, finalData)
+      .put(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`, finalData)
       .then((res) => {
-        if (res.status === 201) {
+        console.log(res);
+        if (res.status === 200) {
           fetchClasses();
           setLoading(false);
           document.getElementById("my_modal_3").showModal();
@@ -38,7 +52,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
   };
 
   return (
-    <dialog id="CreateClassModal" className="modal">
+    <dialog id="updateScheduledClassModal" className="modal">
       <div className="modal-box bg-white text-black">
         <form method="dialog">
           {/* if there is a button in form, it will close the modal */}
@@ -103,9 +117,9 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
           </form>
         </div>
       </div>
-      <Modal text={"Class scheduled."} />
+      <Modal text={"Class updated."} />
     </dialog>
   );
 };
 
-export default CreateClassModal;
+export default UpdateScheduledClassModal;

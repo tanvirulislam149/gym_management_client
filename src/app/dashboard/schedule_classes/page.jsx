@@ -5,11 +5,13 @@ import DashboardLayout from "../../../../layouts/DashboardLayout";
 import CreateClassModal from "../../../../components/CreateClassModal/CreateClassModal";
 import axios from "axios";
 import { format, parseISO } from "date-fns";
+import UpdateScheduledClassModal from "../../../../components/UpdateSchedulecClass/UpdateScheduledClassModal";
 
 const Schedule_classes = () => {
   const [scheduledClasses, setScheduledClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [id, setId] = useState("");
+  const [updateId, setUpdateId] = useState(null);
   console.log(id);
 
   useEffect(() => {
@@ -88,7 +90,10 @@ const Schedule_classes = () => {
                   <td>
                     <button
                       onClick={() => {
-                        document.getElementById("update_plan").showModal();
+                        document
+                          .getElementById("updateScheduledClassModal")
+                          .showModal();
+                        setUpdateId(p.id);
                       }}
                       className="btn bg-green-400 text-black btn-sm"
                     >
@@ -110,6 +115,11 @@ const Schedule_classes = () => {
           </table>
         </div>
         <CreateClassModal fetchClasses={fetchClasses} classes={classes} />
+        <UpdateScheduledClassModal
+          fetchClasses={fetchClasses}
+          classes={classes}
+          updateId={updateId}
+        />
       </DashboardLayout>
     </AuthComp>
   );
