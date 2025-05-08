@@ -3,18 +3,18 @@ import api_client from "@/api_client";
 import React, { useState } from "react";
 
 const BookPlanBtn = ({ id }) => {
-  const [error, setError] = useState("");
   const handleBookPlan = () => {
-    setError("");
     api_client
       .post("http://127.0.0.1:8000/book_plans/", { plans: id })
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           document.getElementById("bookPlanSuccessful").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        document.getElementById("bookPlanError").showModal();
+      });
   };
 
   return (
@@ -41,7 +41,6 @@ const BookPlanBtn = ({ id }) => {
           <p className="text-sm">
             [N.B: You can only select the plan for once.]
           </p>
-          {error ? <p>{error}</p> : ""}
           <div className="flex justify-around mt-6">
             <button
               onClick={handleBookPlan}
@@ -63,7 +62,21 @@ const BookPlanBtn = ({ id }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Plan booked successfully.</h3>
+          <h3 className="font-bold text-lg"> Plan booked successfully.</h3>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+      <dialog id="bookPlanError" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Something went wrong.</h3>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
