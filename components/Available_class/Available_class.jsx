@@ -69,11 +69,7 @@ const Available_class = ({ id }) => {
               <hr />
               <div className="card-actions justify-end">
                 <button
-                  disabled={
-                    new Date(c.date_time) < new Date() < new Date()
-                      ? true
-                      : false
-                  }
+                  disabled={new Date(c.date_time) < new Date() ? true : false}
                   onClick={() => handleBookClass(c.id)}
                   className="btn btn-primary text-black mt-3"
                 >
