@@ -6,12 +6,16 @@ import React, { useEffect, useState } from "react";
 const AttendenceModal = ({ id, fetchClasses }) => {
   const [classes, setClasses] = useState([]);
 
+  const fetchAttendenceClass = () => {
+    api_client
+      .get(`http://127.0.0.1:8000/attendence/?scheduled_class_id=${id}`)
+      .then((res) => setClasses(res.data))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     if (id) {
-      api_client
-        .get(`http://127.0.0.1:8000/attendence/?scheduled_class_id=${id}`)
-        .then((res) => setClasses(res.data))
-        .catch((err) => console.log(err));
+      fetchAttendenceClass();
     }
   }, [id]);
 
@@ -20,14 +24,12 @@ const AttendenceModal = ({ id, fetchClasses }) => {
     api_client
       .put(`http://127.0.0.1:8000/attendence/${scheduled_class.id}/`, data)
       .then((res) => {
-        console.log(res);
         fetchClasses();
-        document.getElementById("attendenceModal").close();
+        fetchAttendenceClass();
       })
       .catch((err) => console.log(err));
   };
 
-  console.log(classes, id);
   return (
     <dialog id="attendenceModal" className="modal">
       <div className="modal-box bg-white text-black w-3/4 max-w-5xl">
@@ -48,6 +50,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
                   <th>Class Name</th>
                   <th>Date</th>
                   <th>Time</th>
+                  <th>Status</th>
                   <th></th>
                 </tr>
               </thead>
@@ -69,6 +72,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
                         "hh:mm aa"
                       )}
                     </td>
+                    <td>{p.attendence}</td>
                     <td>
                       <select
                         onChange={(e) => handleAttendence(p, e.target.value)}
