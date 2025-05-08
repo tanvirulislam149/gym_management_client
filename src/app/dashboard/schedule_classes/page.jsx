@@ -8,12 +8,14 @@ import { format, parseISO } from "date-fns";
 import UpdateScheduledClassModal from "../../../../components/UpdateSchedulecClass/UpdateScheduledClassModal";
 import api_client from "@/api_client";
 import Modal from "../../../../components/Modal/Modal";
+import AttendenceModal from "../../../../components/Attendence/AttendenceModal";
 
 const Schedule_classes = () => {
   const [scheduledClasses, setScheduledClasses] = useState([]);
   const [classes, setClasses] = useState([]);
   const [id, setId] = useState("");
   const [updateId, setUpdateId] = useState(null);
+  const [attendenceId, setAttendenceId] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
@@ -100,6 +102,7 @@ const Schedule_classes = () => {
                 </th>
                 <th></th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -113,6 +116,17 @@ const Schedule_classes = () => {
                   <td>{p.total_seats}</td>
                   <td>{p.booked_seats}</td>
                   <td>{p.present_students}</td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        document.getElementById("attendenceModal").showModal();
+                        setAttendenceId(p.id);
+                      }}
+                      className="btn bg-green-400 text-black btn-sm"
+                    >
+                      Attendence
+                    </button>
+                  </td>
                   <td>
                     <button
                       onClick={() => {
@@ -146,6 +160,7 @@ const Schedule_classes = () => {
           classes={classes}
           updateId={updateId}
         />
+        <AttendenceModal id={attendenceId} fetchClasses={fetchClasses} />
       </DashboardLayout>
     </AuthComp>
   );

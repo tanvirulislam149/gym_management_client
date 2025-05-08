@@ -13,17 +13,19 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
   const timeZone = "Asia/Dhaka";
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`)
-      .then((res) => {
-        reset({
-          date_time: res.data.date_time,
-          fitness_class: res.data.fitness_class.id,
-          instructor: res.data.instructor,
-          total_seats: res.data.total_seats,
-        });
-      })
-      .catch((err) => console.log(err));
+    if (updateId) {
+      axios
+        .get(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`)
+        .then((res) => {
+          reset({
+            date_time: res.data.date_time,
+            fitness_class: res.data.fitness_class.id,
+            instructor: res.data.instructor,
+            total_seats: res.data.total_seats,
+          });
+        })
+        .catch((err) => console.log(err));
+    }
   }, [updateId]);
 
   const onSubmit = (data) => {
