@@ -52,7 +52,15 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
-              <Link href={"/dashboard/create_plan"}>Dashboard</Link>
+              <Link
+                href={
+                  user?.is_staff
+                    ? "/dashboard/create_plan"
+                    : "/dashboard/my_plans"
+                }
+              >
+                Dashboard
+              </Link>
             </li>
             <li>
               {!user ? (

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 const DashboardSidebar = () => {
+  const { user, loading } = useSelector((state) => state?.user);
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -23,6 +25,10 @@ const DashboardSidebar = () => {
           ></label>
           <ul className="menu pt-25 text-base lg:pt-4 bg-white lg:bg-transparent min-h-full text-black w-60 p-4">
             {/* Sidebar content here */}
+            <li>
+              <Link href={"/dashboard/my_plans"}>My Plan</Link>
+              <hr />
+            </li>
             <li>
               <Link href={"/dashboard/create_plan"}>Create Plan</Link>
               <hr />
