@@ -25,30 +25,43 @@ const DashboardSidebar = () => {
           ></label>
           <ul className="menu pt-25 text-base lg:pt-4 bg-white lg:bg-transparent min-h-full text-black w-60 p-4">
             {/* Sidebar content here */}
-            <li>
-              <Link href={"/dashboard/my_plans"}>My Plan</Link>
-              <hr />
-            </li>
-            <li>
-              <Link href={"/dashboard/create_plan"}>Create Plan</Link>
-              <hr />
-            </li>
-            <li>
-              <Link href={"/dashboard/manage_plan"}>Manage Plan</Link>
-              <hr />
-            </li>
-            <li>
-              <Link href={"/dashboard/create_classes"}>Create Classes</Link>
-              <hr />
-            </li>
-            <li>
-              <Link href={"/dashboard/manage_classes"}>Manage Classes</Link>
-              <hr />
-            </li>
-            <li>
-              <Link href={"/dashboard/schedule_classes"}>Schedule Classes</Link>
-              <hr />
-            </li>
+            {user.is_staff ? (
+              <>
+                <li>
+                  <Link href={"/dashboard/schedule_classes"}>
+                    Schedule Classes
+                  </Link>
+                  <hr />
+                </li>
+                <li>
+                  <Link href={"/dashboard/create_plan"}>Create Plan</Link>
+                  <hr />
+                </li>
+                <li>
+                  <Link href={"/dashboard/manage_plan"}>Manage Plan</Link>
+                  <hr />
+                </li>
+                <li>
+                  <Link href={"/dashboard/create_classes"}>Create Classes</Link>
+                  <hr />
+                </li>
+                <li>
+                  <Link href={"/dashboard/manage_classes"}>Manage Classes</Link>
+                  <hr />
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link href={"/dashboard/my_plans"}>My Plan</Link>
+                  <hr />
+                </li>
+                <li>
+                  <Link href={"/dashboard/my_classes"}>My Classes</Link>
+                  <hr />
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

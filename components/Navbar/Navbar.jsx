@@ -52,16 +52,24 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
-              <Link
-                href={
-                  user?.is_staff
-                    ? "/dashboard/create_plan"
-                    : "/dashboard/my_plans"
-                }
-              >
-                Dashboard
-              </Link>
+              <Link href={"/#plans"}>Plans</Link>
             </li>
+            <li>
+              <Link href={"/#classes"}>Classes</Link>
+            </li>
+            {user && (
+              <li>
+                <Link
+                  href={
+                    user?.is_staff
+                      ? "/dashboard/schedule_classes"
+                      : "/dashboard/my_plans"
+                  }
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
             <li>
               {!user ? (
                 <Link
@@ -139,11 +147,24 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-32 items-center p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              <Link href={"/#plans"}>Plans</Link>
             </li>
             <li>
-              <a>Item 2</a>
+              <Link href={"/#classes"}>Classes</Link>
             </li>
+            {user && (
+              <li>
+                <Link
+                  href={
+                    user?.is_staff
+                      ? "/dashboard/schedule_classes"
+                      : "/dashboard/my_plans"
+                  }
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
             <li>
               {user ? (
                 <button

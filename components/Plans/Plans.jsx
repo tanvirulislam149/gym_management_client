@@ -8,7 +8,7 @@ const Plans = async () => {
   const data = await fetch("http://127.0.0.1:8000/plans/");
   const plans = await data.json();
   return (
-    <div className="max-w-[1200px] mx-auto mb-10">
+    <div id="plans" className="max-w-[1200px] mx-auto mb-10">
       <p className="text-primary font-bold text-5xl mb-10">-Membership Plans</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 place-items-center">
         {plans?.map((p) => (

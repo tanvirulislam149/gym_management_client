@@ -7,9 +7,8 @@ import Link from "next/link";
 const Fitness_classes = async () => {
   const data = await fetch("http://127.0.0.1:8000/fitness_classes/");
   const classes = await data.json();
-  console.log(classes);
   return (
-    <div className="max-w-[1200px] mx-auto my-20">
+    <div id="classes" className="max-w-[1200px] mx-auto my-20">
       <p className="text-primary font-bold text-5xl mb-10">-Fitness Classes</p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
         {classes?.map((c) => (

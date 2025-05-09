@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import AuthUser from "../../../../components/AuthUser/AuthUser";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import api_client from "@/api_client";
+import { format, parseISO } from "date-fns";
 
 const My_plans = () => {
   const [payments, setPayments] = useState([]);
   const [plan, setPlan] = useState();
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState("No active plan");
 
   useEffect(() => {
     api_client
@@ -20,10 +21,10 @@ const My_plans = () => {
     api_client
       .get("http://127.0.0.1:8000/book_plans/")
       .then((res) => {
-        if (res.data[0].current_plan_days !== "No active plan") {
-          setActive(true);
+        if (res?.data[0]?.current_plan_days) {
+          setActive(res?.data[0]?.current_plan_days);
         }
-        if (res.data[0].plans.id) {
+        if (res?.data[0]?.plans?.id) {
           api_client
             .get(`http://127.0.0.1:8000/plans/${res.data[0].plans.id}`)
             .then((res) => setPlan(res.data))
@@ -38,42 +39,75 @@ const My_plans = () => {
         <div>
           <p className="text-3xl font-bold text-center mb-8">My plan</p>
           <div className="lg:flex justify-between">
-            <div className="w-7/12">
+            <div className="w-8/12">
+              <div className="bg-white p-2 text-black mb-4 rounded-lg">
+                <p>
+                  <span className="font-bold">Current Plan Dates : </span>
+                  {active != "No active plan" ? (
+                    <span>
+                      {format(
+                        parseISO(active?.split(" to ")[0]),
+                        "MMMM dd, yyyy"
+                      )}{" "}
+                      to{" "}
+                      {format(
+                        parseISO(active?.split(" to ")[1]),
+                        "MMMM dd, yyyy"
+                      )}
+                    </span>
+                  ) : (
+                    active
+                  )}
+                </p>
+              </div>
               <div className="overflow-x-auto bg-white rounded-lg">
                 <p className="text-xl font-bold text-black text-center my-4">
                   Payments
                 </p>
-                <table className="table text-black">
-                  {/* head */}
-                  <thead className="text-black">
-                    <tr>
-                      <th>#</th>
-                      <th>Plan Type</th>
-                      <th>Start Date</th>
-                      <th>End Date</th>
-                      <th>Price</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {payments.map((p, index) => (
-                      <tr key={p.id}>
-                        <td>{index + 1}</td>
-                        <td>{p.booked_plans.plans.type}</td>
-                        <td>{p.start_date}</td>
-                        <td>{p.end_date}</td>
-                        <td>{p.amount}</td>
-                        <td>{p.status}</td>
+                {payments.length ? (
+                  <table className="table text-black mb-3">
+                    <thead className="text-black">
+                      <tr>
+                        <th>#</th>
+                        <th>Plan Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {payments.map((p, index) => (
+                        <tr key={p.id}>
+                          <td>{index + 1}</td>
+                          <td>{p.booked_plans.plans.type}</td>
+                          <td>
+                            {format(parseISO(p.start_date), "MMMM dd, yyyy")}
+                          </td>
+                          <td>
+                            {format(parseISO(p.end_date), "MMMM dd, yyyy")}
+                          </td>
+                          <td>{p.amount}</td>
+                          <td>
+                            <span className="bg-green-400 text-black px-4 py-2 rounded-full font-bold">
+                              {p.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p className="text-black text-center mb-5 text-lg">
+                    No payments done yet
+                  </p>
+                )}
               </div>
             </div>
-            <div className="w-5/12">
+            <div className="w-4/12">
               <div className="card mx-auto bg-base-200 image-full w-65 rounded-none shadow-sm">
                 <p className="text-right -mt-3">
-                  {active ? (
+                  {active !== "No active plan" ? (
                     <span className="bg-green-400 text-black px-3 py-2 rounded-full font-bold">
                       Active
                     </span>
@@ -83,24 +117,30 @@ const My_plans = () => {
                     </span>
                   )}
                 </p>
-                <div className="card-body">
-                  <h2 className="text-4xl font-bold text-green-400">
-                    {plan?.price} BDT
-                  </h2>
-                  <h2 className="text-xl font-bold leading-none mt-4">
-                    {plan?.type}
-                  </h2>
-                  <h2 className="text-xl font-bold leading-none mb-4">
-                    Membership
-                  </h2>
-                  <ul>
-                    {plan?.fitness_classes?.map((c) => (
-                      <li key={c.id} className="text-lg py-2">
-                        {c.name}
-                        <hr />
-                      </li>
-                    ))}
-                  </ul>
+                <div className="card-body mt-5">
+                  {plan ? (
+                    <>
+                      <h2 className="text-4xl font-bold text-green-400">
+                        {plan?.price} BDT
+                      </h2>
+                      <h2 className="text-xl font-bold leading-none mt-4">
+                        {plan?.type}
+                      </h2>
+                      <h2 className="text-xl font-bold leading-none mb-4">
+                        Membership
+                      </h2>
+                      <ul>
+                        {plan?.fitness_classes?.map((c) => (
+                          <li key={c.id} className="text-lg py-2">
+                            {c.name}
+                            <hr />
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p className="text-base font-bold">No plan booked</p>
+                  )}
                 </div>
               </div>
             </div>
