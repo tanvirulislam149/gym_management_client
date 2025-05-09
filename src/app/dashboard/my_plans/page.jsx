@@ -4,10 +4,12 @@ import AuthUser from "../../../../components/AuthUser/AuthUser";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import api_client from "@/api_client";
 import { format, parseISO } from "date-fns";
+import PaymentModal from "../../../../components/PaymentModal/PaymentModal";
 
 const My_plans = () => {
   const [payments, setPayments] = useState([]);
   const [plan, setPlan] = useState();
+  const [booked_plan, setBooked_plan] = useState();
   const [active, setActive] = useState("No active plan");
 
   useEffect(() => {
@@ -21,6 +23,7 @@ const My_plans = () => {
     api_client
       .get("http://127.0.0.1:8000/book_plans/")
       .then((res) => {
+        setBooked_plan(res.data);
         if (res?.data[0]?.current_plan_days) {
           setActive(res?.data[0]?.current_plan_days);
         }
@@ -40,25 +43,37 @@ const My_plans = () => {
           <p className="text-3xl font-bold text-center mb-8">My plan</p>
           <div className="lg:flex justify-between">
             <div className="w-8/12">
-              <div className="bg-white p-2 text-black mb-4 rounded-lg">
-                <p>
-                  <span className="font-bold">Current Plan Dates : </span>
-                  {active != "No active plan" ? (
-                    <span>
-                      {format(
-                        parseISO(active?.split(" to ")[0]),
-                        "MMMM dd, yyyy"
-                      )}{" "}
-                      to{" "}
-                      {format(
-                        parseISO(active?.split(" to ")[1]),
-                        "MMMM dd, yyyy"
-                      )}
-                    </span>
-                  ) : (
-                    active
-                  )}
-                </p>
+              <div className="flex justify-between">
+                <div className="bg-white p-2 w-full text-black mb-4 rounded-lg">
+                  <p>
+                    <span className="font-bold">Current Plan Dates : </span>
+                    {active != "No active plan" ? (
+                      <span>
+                        {format(
+                          parseISO(active?.split(" to ")[0]),
+                          "MMMM dd, yyyy"
+                        )}{" "}
+                        to{" "}
+                        {format(
+                          parseISO(active?.split(" to ")[1]),
+                          "MMMM dd, yyyy"
+                        )}
+                      </span>
+                    ) : (
+                      active
+                    )}
+                  </p>
+                </div>
+                <div className="w-2/12 flex justify-end">
+                  <button
+                    onClick={() =>
+                      document.getElementById("payment_modal").showModal()
+                    }
+                    className="btn ml-auto btn-primary text-black"
+                  >
+                    Pay now
+                  </button>
+                </div>
               </div>
               <div className="overflow-x-auto bg-white rounded-lg">
                 <p className="text-xl font-bold text-black text-center my-4">
@@ -146,6 +161,7 @@ const My_plans = () => {
             </div>
           </div>
         </div>
+        <PaymentModal booked_plan={booked_plan} />
       </DashboardLayout>
     </AuthUser>
   );
