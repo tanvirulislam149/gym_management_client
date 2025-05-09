@@ -21,7 +21,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/fitness_classes/")
+      .get("https://gym-management-henna.vercel.app/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -30,7 +30,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
     if (id) {
       setSelectedClasses([]);
       axios
-        .get(`http://127.0.0.1:8000/plans/${id}`)
+        .get(`https://gym-management-henna.vercel.app/plans/${id}`)
         .then((res) => {
           setUpdatePlan(res.data);
           reset({
@@ -67,7 +67,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
       const token = localStorage.getItem("token");
       axios
         .put(
-          `http://127.0.0.1:8000/plans/${id}`,
+          `https://gym-management-henna.vercel.app/plans/${id}`,
           {
             ...data,
             price: parseInt(data.price),

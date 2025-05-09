@@ -22,7 +22,7 @@ const Create_plan = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/fitness_classes/")
+      .get("https://gym-management-henna.vercel.app/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
         console.log(err);
@@ -44,7 +44,7 @@ const Create_plan = () => {
       const token = localStorage.getItem("token");
       axios
         .post(
-          "http://127.0.0.1:8000/plans/",
+          "https://gym-management-henna.vercel.app/plans/",
           {
             ...data,
             price: parseInt(data.price),

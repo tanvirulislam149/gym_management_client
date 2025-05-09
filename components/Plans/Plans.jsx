@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 
 const Plans = async () => {
-  const data = await fetch("http://127.0.0.1:8000/plans/");
+  const data = await fetch("https://gym-management-henna.vercel.app/plans/");
   const plans = await data.json();
   return (
     <div id="plans" className="max-w-[1200px] mx-auto mb-10">

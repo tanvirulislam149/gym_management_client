@@ -22,7 +22,7 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
     console.log("checking");
     if (id) {
       axios
-        .get(`http://127.0.0.1:8000/fitness_classes/${id}`)
+        .get(`https://gym-management-henna.vercel.app/fitness_classes/${id}`)
         .then((res) => {
           console.log(res.data);
           reset({

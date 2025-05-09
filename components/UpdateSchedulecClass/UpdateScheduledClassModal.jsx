@@ -15,7 +15,9 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
   useEffect(() => {
     if (updateId) {
       axios
-        .get(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`)
+        .get(
+          `https://gym-management-henna.vercel.app/scheduled_classes/${updateId}/`
+        )
         .then((res) => {
           reset({
             date_time: res.data.date_time,
@@ -41,7 +43,10 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
     };
 
     api_client
-      .put(`http://127.0.0.1:8000/scheduled_classes/${updateId}/`, finalData)
+      .put(
+        `https://gym-management-henna.vercel.app/scheduled_classes/${updateId}/`,
+        finalData
+      )
       .then((res) => {
         console.log(res);
         if (res.status === 200) {

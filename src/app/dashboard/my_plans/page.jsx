@@ -14,14 +14,14 @@ const My_plans = () => {
 
   useEffect(() => {
     api_client
-      .get("http://127.0.0.1:8000/payment/")
+      .get("https://gym-management-henna.vercel.app/payment/")
       .then((res) => setPayments(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
     api_client
-      .get("http://127.0.0.1:8000/book_plans/")
+      .get("https://gym-management-henna.vercel.app/book_plans/")
       .then((res) => {
         setBooked_plan(res.data);
         if (res?.data[0]?.current_plan_days) {
@@ -29,7 +29,9 @@ const My_plans = () => {
         }
         if (res?.data[0]?.plans?.id) {
           api_client
-            .get(`http://127.0.0.1:8000/plans/${res.data[0].plans.id}`)
+            .get(
+              `https://gym-management-henna.vercel.app/plans/${res.data[0].plans.id}`
+            )
             .then((res) => setPlan(res.data))
             .catch((err) => console.log(err));
         }

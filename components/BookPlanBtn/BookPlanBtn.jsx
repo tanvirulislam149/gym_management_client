@@ -5,7 +5,9 @@ import React, { useState } from "react";
 const BookPlanBtn = ({ id }) => {
   const handleBookPlan = () => {
     api_client
-      .post("http://127.0.0.1:8000/book_plans/", { plans: id })
+      .post("https://gym-management-henna.vercel.app/book_plans/", {
+        plans: id,
+      })
       .then((res) => {
         if (res.status === 201) {
           document.getElementById("bookPlanSuccessful").showModal();

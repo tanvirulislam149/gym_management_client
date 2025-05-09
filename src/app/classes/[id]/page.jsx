@@ -4,7 +4,9 @@ import Available_class from "../../../../components/Available_class/Available_cl
 
 const ClassDetails = async ({ params }) => {
   const { id } = await params;
-  const data = await fetch(`http://127.0.0.1:8000/fitness_classes/${id}`);
+  const data = await fetch(
+    `https://gym-management-henna.vercel.app/fitness_classes/${id}`
+  );
   const fitness_class = await data.json();
   return (
     <div className="min-h-screen mx-5 lg:mx-20 p-2 lg:p-10">

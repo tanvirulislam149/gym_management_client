@@ -9,7 +9,9 @@ const Available_class = ({ id }) => {
   console.log(error);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/scheduled_classes/?fitness_class_id=${id}`)
+    fetch(
+      `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}`
+    )
       .then((response) => response.json())
       .then((data) => setClasses(data));
   }, []);
@@ -17,7 +19,7 @@ const Available_class = ({ id }) => {
   const handleBookClass = (cid) => {
     setError("");
     api_client
-      .post("http://127.0.0.1:8000/book_classes/", {
+      .post("https://gym-management-henna.vercel.app/book_classes/", {
         scheduled_class: cid,
       })
       .then((res) => {

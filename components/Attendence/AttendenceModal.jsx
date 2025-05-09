@@ -8,7 +8,9 @@ const AttendenceModal = ({ id, fetchClasses }) => {
 
   const fetchAttendenceClass = () => {
     api_client
-      .get(`http://127.0.0.1:8000/attendence/?scheduled_class_id=${id}`)
+      .get(
+        `https://gym-management-henna.vercel.app/attendence/?scheduled_class_id=${id}`
+      )
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err));
   };
@@ -22,7 +24,10 @@ const AttendenceModal = ({ id, fetchClasses }) => {
   const handleAttendence = (scheduled_class, value) => {
     const data = { ...scheduled_class, attendence: value };
     api_client
-      .put(`http://127.0.0.1:8000/attendence/${scheduled_class.id}/`, data)
+      .put(
+        `https://gym-management-henna.vercel.app/attendence/${scheduled_class.id}/`,
+        data
+      )
       .then((res) => {
         fetchClasses();
         fetchAttendenceClass();

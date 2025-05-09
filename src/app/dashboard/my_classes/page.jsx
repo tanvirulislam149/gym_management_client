@@ -11,7 +11,7 @@ const My_classes = () => {
 
   useEffect(() => {
     api_client
-      .get("http://127.0.0.1:8000/attendence/")
+      .get("https://gym-management-henna.vercel.app/attendence/")
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err));
   }, []);

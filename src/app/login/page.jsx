@@ -19,7 +19,7 @@ const login = () => {
     const result = await loginUser({ email, password });
     localStorage.setItem("token", result?.data?.access);
     axios
-      .get("http://127.0.0.1:8000/auth/users/me/", {
+      .get("https://gym-management-henna.vercel.app/auth/users/me/", {
         headers: {
           Authorization: `JWT ${result?.data?.access}`,
         },

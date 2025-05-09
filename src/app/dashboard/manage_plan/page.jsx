@@ -18,7 +18,7 @@ const Manage_plan = () => {
 
   const fetchPlans = () => {
     axios
-      .get("http://127.0.0.1:8000/plans/")
+      .get("https://gym-management-henna.vercel.app/plans/")
       .then((res) => setPlans(res.data))
       .catch((err) => console.log(err));
   };

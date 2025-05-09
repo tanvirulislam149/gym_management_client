@@ -5,7 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Fitness_classes = async () => {
-  const data = await fetch("http://127.0.0.1:8000/fitness_classes/");
+  const data = await fetch(
+    "https://gym-management-henna.vercel.app/fitness_classes/"
+  );
   const classes = await data.json();
   return (
     <div id="classes" className="max-w-[1200px] mx-auto my-20">

@@ -20,7 +20,7 @@ const Schedule_classes = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/fitness_classes/")
+      .get("https://gym-management-henna.vercel.app/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
         console.log(err);
@@ -29,7 +29,9 @@ const Schedule_classes = () => {
 
   const fetchClasses = () => {
     axios
-      .get(`http://127.0.0.1:8000/scheduled_classes/?fitness_class_id=${id}`)
+      .get(
+        `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}`
+      )
       .then((res) => {
         setScheduledClasses(res.data);
       })
@@ -39,7 +41,9 @@ const Schedule_classes = () => {
   const handleDelete = (id) => {
     setDeleteLoading(true);
     api_client
-      .delete(`http://127.0.0.1:8000/scheduled_classes/${id}/`)
+      .delete(
+        `https://gym-management-henna.vercel.app/scheduled_classes/${id}/`
+      )
       .then((res) => {
         if (res.status === 204) {
           console.log(res);
