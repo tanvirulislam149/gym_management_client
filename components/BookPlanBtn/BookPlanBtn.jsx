@@ -1,8 +1,10 @@
 "use client";
 import api_client from "@/api_client";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 const BookPlanBtn = ({ id }) => {
+  const user = useSelector((state) => state?.user?.user);
   const handleBookPlan = () => {
     api_client
       .post("https://gym-management-henna.vercel.app/book_plans/", {
@@ -37,23 +39,31 @@ const BookPlanBtn = ({ id }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">
-            Are you sure you want to book this plan?
-          </h3>
-          <p className="text-sm">
-            [N.B: You can only select the plan for once.]
-          </p>
-          <div className="flex justify-around mt-6">
-            <button
-              onClick={handleBookPlan}
-              className="btn text-base btn-success text-black"
-            >
-              Yes
-            </button>
-            <form method="dialog">
-              <button className="btn text-base btn-error">No</button>
-            </form>
-          </div>
+          {user ? (
+            <>
+              <h3 className="font-bold text-lg">
+                Are you sure you want to book this plan?
+              </h3>
+              <p className="text-sm">
+                [N.B: You can only select the plan for once.]
+              </p>
+              <div className="flex justify-around mt-6">
+                <button
+                  onClick={handleBookPlan}
+                  className="btn text-base btn-success text-black"
+                >
+                  Yes
+                </button>
+                <form method="dialog">
+                  <button className="btn text-base btn-error">No</button>
+                </form>
+              </div>
+            </>
+          ) : (
+            <p className="font-bold text-center">
+              Please login first to book a plan
+            </p>
+          )}
         </div>
       </dialog>
       <dialog id="bookPlanSuccessful" className="modal">

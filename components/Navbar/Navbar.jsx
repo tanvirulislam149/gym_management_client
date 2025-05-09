@@ -94,7 +94,7 @@ const Navbar = () => {
                       <div className="w-10 rounded-full">
                         <img
                           alt="Tailwind CSS Navbar component"
-                          src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                         />
                       </div>
                     </div>
@@ -180,7 +180,7 @@ const Navbar = () => {
             <img
               className="w-10 rounded-full my-2"
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             />
           </ul>
         </div>

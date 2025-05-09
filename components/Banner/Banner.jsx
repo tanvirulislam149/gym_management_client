@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Banner.module.css";
 import Button from "../Button/Button";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -12,10 +13,14 @@ const Banner = () => {
         <p>good and healthy life</p>
         <div className="flex justify-center">
           <div className="mx-3">
-            <Button>Be A Member</Button>
+            <Link href={"/register"}>
+              <Button>Be A Member</Button>
+            </Link>
           </div>
           <div className="mx-3">
-            <Button>Member Login</Button>
+            <Link href={"/login"}>
+              <Button>Member Login</Button>
+            </Link>
           </div>
         </div>
       </div>
