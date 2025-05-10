@@ -71,18 +71,6 @@ const Navbar = () => {
               </li>
             )}
             <li>
-              {!user ? (
-                <Link
-                  className="btn bg-green-400 text-black mx-2"
-                  href={"/register"}
-                >
-                  Register
-                </Link>
-              ) : (
-                ""
-              )}
-            </li>
-            <li>
               {user ? (
                 <>
                   <div className="dropdown dropdown-end">

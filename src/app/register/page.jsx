@@ -5,6 +5,7 @@ import Button from "../../../components/Button/Button";
 import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@/Redux/services/userApi";
 import { useRouter } from "next/navigation";
+import Modal from "../../../components/Modal/Modal";
 
 const register = () => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ const register = () => {
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [error, setError] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
 
   const [registerUser, { isLoading, isSuccess, isError, error }] =
@@ -31,7 +32,8 @@ const register = () => {
       router.push("/login");
     }
     if (isError) {
-      alert(`${Object.values(error?.data)[0]}`);
+      setErrorMsg(`${Object.values(error?.data)[0]}`);
+      document.getElementById(`my_modal_3`).showModal();
     }
   }, [isError, isSuccess]);
 
@@ -58,7 +60,8 @@ const register = () => {
       });
       console.log(result);
     } else {
-      alert(`Password didn't matched`);
+      setErrorMsg(`Password didn't matched`);
+      document.getElementById(`my_modal_3`).showModal();
     }
   };
   return (
@@ -146,6 +149,7 @@ const register = () => {
           </form>
         </div>
       </div>
+      <Modal text={errorMsg} />
     </div>
   );
 };
