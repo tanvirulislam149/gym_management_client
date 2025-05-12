@@ -9,6 +9,7 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [fetchLoading, setFetchLoading] = useState(false);
 
   const {
     register,
@@ -19,8 +20,8 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
   } = useForm();
 
   useEffect(() => {
-    console.log("checking");
     if (id) {
+      setFetchLoading(true);
       axios
         .get(`https://gym-management-henna.vercel.app/fitness_classes/${id}`)
         .then((res) => {
@@ -31,7 +32,8 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
           });
           setImageUrl(res.data.image);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => setFetchLoading(false));
     }
   }, [id]);
 
@@ -43,7 +45,6 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
   };
 
   useEffect(() => {
-    console.log("checking---2");
     const fetchImageAsFile = async () => {
       const file = await urlToFile(imageUrl, "existing-image.jpg");
       setImageFile(file);
@@ -85,45 +86,51 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
               ✕
             </button>
           </form>
-          <div className="flex justify-center">
-            <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-              {/* register your input into the hook by invoking the "register" function */}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">Name :</legend>
+          {fetchLoading ? (
+            <div className="w-full h-30 flex justify-center items-center">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+                {/* register your input into the hook by invoking the "register" function */}
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">Name :</legend>
+                  <input
+                    type="text"
+                    className="input w-full"
+                    placeholder="Type here"
+                    {...register("name", { required: true })}
+                  />
+                </fieldset>
+                {errors.type && <span>This field is required</span>}
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">Image : </legend>
+                  <input
+                    type="file"
+                    className="file-input w-full"
+                    placeholder="Type here"
+                    {...register("image")}
+                  />
+                </fieldset>
+                {errors.months && <span>This field is required</span>}
+                <fieldset className="fieldset">
+                  <legend className="fieldset-legend">Description : </legend>
+                  <textarea
+                    className="input w-full h-24 mb-3"
+                    placeholder="Type here"
+                    {...register("description", { required: true })}
+                  ></textarea>
+                </fieldset>
+                {errors.price && <span>This field is required</span>}
                 <input
-                  type="text"
-                  className="input w-full"
-                  placeholder="Type here"
-                  {...register("name", { required: true })}
+                  className="btn btn-primary block text-black"
+                  type="submit"
+                  value={loading ? "Submitting..." : "Submit"}
                 />
-              </fieldset>
-              {errors.type && <span>This field is required</span>}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">Image : </legend>
-                <input
-                  type="file"
-                  className="file-input w-full"
-                  placeholder="Type here"
-                  {...register("image")}
-                />
-              </fieldset>
-              {errors.months && <span>This field is required</span>}
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">Description : </legend>
-                <textarea
-                  className="input w-full h-24 mb-3"
-                  placeholder="Type here"
-                  {...register("description", { required: true })}
-                ></textarea>
-              </fieldset>
-              {errors.price && <span>This field is required</span>}
-              <input
-                className="btn btn-primary block text-black"
-                type="submit"
-                value={loading ? "Submitting..." : "Submit"}
-              />
-            </form>
-          </div>
+              </form>
+            </div>
+          )}
         </div>
       </dialog>
       <dialog id="update_done_modal" className="modal">
