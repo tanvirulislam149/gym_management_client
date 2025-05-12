@@ -46,6 +46,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
             ✕
           </button>
         </form>
+        <p className="text-2xl font-bold text-center">Create</p>
         <div className="flex justify-center">
           <form className="w-full p-3" onSubmit={handleSubmit(onSubmit)}>
             <label className="font-bold text-sm">Date and Time:</label>

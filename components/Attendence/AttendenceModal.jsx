@@ -5,14 +5,17 @@ import React, { useEffect, useState } from "react";
 
 const AttendenceModal = ({ id, fetchClasses }) => {
   const [classes, setClasses] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const fetchAttendenceClass = () => {
+    setLoading(true);
     api_client
       .get(
         `https://gym-management-henna.vercel.app/attendence/?scheduled_class_id=${id}`
       )
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -45,7 +48,11 @@ const AttendenceModal = ({ id, fetchClasses }) => {
           </button>
         </form>
         <div className="overflow-x-auto rounded-box text-black">
-          {classes.length ? (
+          {loading ? (
+            <div className="w-full h-30 flex justify-center items-center">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          ) : classes.length ? (
             <table className="table text-black">
               {/* head */}
               <thead className="text-black">
@@ -94,7 +101,9 @@ const AttendenceModal = ({ id, fetchClasses }) => {
               </tbody>
             </table>
           ) : (
-            <p className="text-center font-bold">No class available</p>
+            <p className="text-center font-bold">
+              No student booked this class.
+            </p>
           )}
         </div>
       </div>
