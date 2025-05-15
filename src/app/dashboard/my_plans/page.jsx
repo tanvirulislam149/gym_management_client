@@ -11,15 +11,20 @@ const My_plans = () => {
   const [plan, setPlan] = useState();
   const [booked_plan, setBooked_plan] = useState();
   const [active, setActive] = useState("No active plan");
+  const [cardLoading, setCardLoading] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   useEffect(() => {
+    setPaymentLoading(true);
     api_client
       .get("https://gym-management-henna.vercel.app/payment/")
       .then((res) => setPayments(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setPaymentLoading(false));
   }, []);
 
   useEffect(() => {
+    setCardLoading(true);
     api_client
       .get("https://gym-management-henna.vercel.app/book_plans/")
       .then((res) => {
@@ -33,7 +38,8 @@ const My_plans = () => {
               `https://gym-management-henna.vercel.app/plans/${res.data[0].plans.id}`
             )
             .then((res) => setPlan(res.data))
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err))
+            .finally(() => setCardLoading(false));
         }
       })
       .catch((err) => console.log(err));
@@ -81,7 +87,11 @@ const My_plans = () => {
                 <p className="text-xl font-bold text-black text-center my-4">
                   Payments
                 </p>
-                {payments.length ? (
+                {paymentLoading ? (
+                  <div className="w-full my-20 flex justify-center items-center">
+                    <span className="loading loading-spinner loading-xl text-black"></span>
+                  </div>
+                ) : payments.length ? (
                   <table className="table text-black mb-3">
                     <thead className="text-black">
                       <tr>
@@ -135,7 +145,11 @@ const My_plans = () => {
                   )}
                 </p>
                 <div className="card-body mt-5">
-                  {plan ? (
+                  {cardLoading ? (
+                    <div className="w-full my-20 flex justify-center items-center">
+                      <span className="loading loading-spinner loading-xl"></span>
+                    </div>
+                  ) : plan ? (
                     <>
                       <h2 className="text-4xl font-bold text-green-400">
                         {plan?.price} BDT

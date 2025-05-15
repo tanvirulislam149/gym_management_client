@@ -7,13 +7,15 @@ import { format, parseISO } from "date-fns";
 
 const My_classes = () => {
   const [classes, setClasses] = useState([]);
-  console.log(classes);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     api_client
       .get("https://gym-management-henna.vercel.app/attendence/")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -21,50 +23,63 @@ const My_classes = () => {
       <DashboardLayout>
         <p className="text-3xl font-bold text-center mb-8">My Classes</p>
         <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-200">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th></th>
-                <th>Email</th>
-                <th>Class Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Instructor</th>
-                <th>Attendence</th>
-              </tr>
-            </thead>
-            <tbody>
-              {classes.map((c, index) => (
-                <tr key={c.id}>
-                  <th>{index + 1}</th>
-                  <td>{c.user.email}</td>
-                  <td>{c.scheduled_class.fitness_class.name}</td>
-                  <td>
-                    {format(
-                      parseISO(c.scheduled_class.date_time),
-                      "MMMM dd, yyyy"
-                    )}
-                  </td>
-                  <td>
-                    {format(parseISO(c.scheduled_class.date_time), "hh:mm aa")}
-                  </td>
-                  <td>{c.scheduled_class.instructor}</td>
-                  <td>
-                    {c.attendence == "Present" ? (
-                      <span className="bg-green-400 text-black px-3 py-2 rounded-full font-bold">
-                        Present
-                      </span>
-                    ) : (
-                      <span className="bg-red-400 text-black px-3 py-2 rounded-full font-bold">
-                        Absent
-                      </span>
-                    )}
-                  </td>
+          {loading ? (
+            <div className="w-full my-20 flex justify-center items-center">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          ) : classes.length ? (
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Email</th>
+                  <th>Class Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Instructor</th>
+                  <th>Attendence</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {classes.map((c, index) => (
+                  <tr key={c.id}>
+                    <th>{index + 1}</th>
+                    <td>{c.user.email}</td>
+                    <td>{c.scheduled_class.fitness_class.name}</td>
+                    <td>
+                      {format(
+                        parseISO(c.scheduled_class.date_time),
+                        "MMMM dd, yyyy"
+                      )}
+                    </td>
+                    <td>
+                      {format(
+                        parseISO(c.scheduled_class.date_time),
+                        "hh:mm aa"
+                      )}
+                    </td>
+                    <td>{c.scheduled_class.instructor}</td>
+                    <td>
+                      {c.attendence == "Present" ? (
+                        <span className="bg-green-400 text-black px-3 py-2 rounded-full font-bold">
+                          Present
+                        </span>
+                      ) : (
+                        <span className="bg-red-400 text-black px-3 py-2 rounded-full font-bold">
+                          Absent
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div>
+              <p className="my-20 text-center font-bold">No classes found.</p>
+            </div>
+          )}
         </div>
       </DashboardLayout>
     </AuthUser>
