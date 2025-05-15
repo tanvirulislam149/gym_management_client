@@ -23,6 +23,7 @@ const Available_class = ({ id }) => {
 
   const handleBookClass = (cid) => {
     setError("");
+    document.getElementById("bookClassLoading").showModal();
     api_client
       .post("https://gym-management-henna.vercel.app/book_classes/", {
         scheduled_class: cid,
@@ -30,6 +31,7 @@ const Available_class = ({ id }) => {
       .then((res) => {
         console.log(res);
         if (res.status === 201) {
+          document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassSuccess").showModal();
         }
       })
@@ -37,9 +39,11 @@ const Available_class = ({ id }) => {
         console.log(err);
         if (err?.response?.data?.scheduled_class?.message) {
           setError(err?.response?.data?.scheduled_class?.message);
+          document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassError").showModal();
         } else if (err?.response?.data?.message) {
           setError(err?.response?.data?.message);
+          document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassError").showModal();
         }
       });
@@ -123,6 +127,22 @@ const Available_class = ({ id }) => {
             </button>
           </form>
           <h3 className="font-bold text-lg">{error}.</h3>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+      <dialog id="bookClassLoading" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <div className="w-full my-20 flex justify-center items-center">
+            <span className="loading loading-spinner loading-xl"></span>
+          </div>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
