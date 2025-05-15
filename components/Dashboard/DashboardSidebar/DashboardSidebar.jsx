@@ -60,6 +60,10 @@ const DashboardSidebar = () => {
                   <Link href={"/dashboard/my_classes"}>My Classes</Link>
                   <hr />
                 </li>
+                <li>
+                  <Link href={"/dashboard/book_class"}>Book Class</Link>
+                  <hr />
+                </li>
               </>
             )}
           </ul>

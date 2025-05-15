@@ -17,6 +17,7 @@ const Schedule_classes = () => {
   const [updateId, setUpdateId] = useState(null);
   const [attendenceId, setAttendenceId] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -28,6 +29,7 @@ const Schedule_classes = () => {
   }, []);
 
   const fetchClasses = () => {
+    setLoading(true);
     axios
       .get(
         `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}`
@@ -35,7 +37,8 @@ const Schedule_classes = () => {
       .then((res) => {
         setScheduledClasses(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   const handleDelete = (id) => {
@@ -85,77 +88,89 @@ const Schedule_classes = () => {
           </button>
         </div>
         <div className="overflow-x-auto rounded-box border border-gray-800 bg-base-100">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Class Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Instructor</th>
-                <th>
-                  Total <br />
-                  Seats
-                </th>
-                <th>
-                  Booked <br /> Seats
-                </th>
-                <th>
-                  Present <br /> Students
-                </th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {scheduledClasses.map((p, index) => (
-                <tr key={p.id}>
-                  <th>{index + 1}</th>
-                  <td>{p.fitness_class.name}</td>
-                  <td>{format(parseISO(p.date_time), "MMMM dd, yyyy")}</td>
-                  <td>{format(parseISO(p.date_time), "hh:mm aa")}</td>
-                  <td>{p.instructor}</td>
-                  <td>{p.total_seats}</td>
-                  <td>{p.booked_seats}</td>
-                  <td>{p.present_students}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        document.getElementById("attendenceModal").showModal();
-                        setAttendenceId(p.id);
-                      }}
-                      className="btn bg-green-400 text-black btn-sm"
-                    >
-                      Attendence
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        document
-                          .getElementById("updateScheduledClassModal")
-                          .showModal();
-                        setUpdateId(p.id);
-                      }}
-                      className="btn bg-green-400 text-black btn-sm"
-                    >
-                      Update
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(p.id)}
-                      className="btn bg-red-400 text-black btn-sm"
-                    >
-                      {deleteLoading ? "Deleting..." : "Delete"}
-                    </button>
-                  </td>
+          {loading ? (
+            <div className="w-full my-20 flex justify-center items-center">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          ) : scheduledClasses.length ? (
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Class Name</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Instructor</th>
+                  <th>
+                    Total <br />
+                    Seats
+                  </th>
+                  <th>
+                    Booked <br /> Seats
+                  </th>
+                  <th>
+                    Present <br /> Students
+                  </th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {scheduledClasses.map((p, index) => (
+                  <tr key={p.id}>
+                    <th>{index + 1}</th>
+                    <td>{p.fitness_class.name}</td>
+                    <td>{format(parseISO(p.date_time), "MMMM dd, yyyy")}</td>
+                    <td>{format(parseISO(p.date_time), "hh:mm aa")}</td>
+                    <td>{p.instructor}</td>
+                    <td>{p.total_seats}</td>
+                    <td>{p.booked_seats}</td>
+                    <td>{p.present_students}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          document
+                            .getElementById("attendenceModal")
+                            .showModal();
+                          setAttendenceId(p.id);
+                        }}
+                        className="btn bg-green-400 text-black btn-sm"
+                      >
+                        Attendence
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          document
+                            .getElementById("updateScheduledClassModal")
+                            .showModal();
+                          setUpdateId(p.id);
+                        }}
+                        className="btn bg-green-400 text-black btn-sm"
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(p.id)}
+                        className="btn bg-red-400 text-black btn-sm"
+                      >
+                        {deleteLoading ? "Deleting..." : "Delete"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="w-full h-screen mt-20">
+              <p className="text-center font-bold text-2xl">No classes found</p>
+            </div>
+          )}
         </div>
         <Modal text={"Class deleted."} />
         <CreateClassModal fetchClasses={fetchClasses} classes={classes} />

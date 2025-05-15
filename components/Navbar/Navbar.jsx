@@ -37,6 +37,7 @@ const Navbar = () => {
   };
 
   const user = useSelector((state) => state?.user?.user);
+  console.log(user);
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 md:px-20 z-10 sticky top-0 border-b-1 border-green-400">
       <div className="navbar-start">
@@ -88,12 +89,27 @@ const Navbar = () => {
                     </div>
                     <ul
                       tabIndex={0}
-                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 w-52 p-2 shadow text-center"
+                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 shadow"
                     >
-                      <p className="my-3">{user.email}</p>
+                      <p className="font-bold">Email:</p>
+                      <p className="">{user.email ? user.email : "N/A"}</p>
+                      <p className="font-bold">First Name:</p>
+                      <p className="">
+                        {user.first_name ? user.first_name : "N/A"}
+                      </p>
+                      <p className="font-bold">Last Name:</p>
+                      <p className="">
+                        {user.last_name ? user.last_name : "N/A"}
+                      </p>
+                      <p className="font-bold">Phone Number:</p>
+                      <p className="">
+                        {user.phone_number ? user.phone_number : "N/A"}
+                      </p>
+                      <p className="font-bold">Address:</p>
+                      <p className="">{user.address ? user.address : "N/A"}</p>
                       <button
                         onClick={handleLogout}
-                        className="btn bg-green-400 text-black mx-3 border-0"
+                        className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
                       >
                         Log out
                       </button>

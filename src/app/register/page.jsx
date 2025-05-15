@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "@/Redux/services/userApi";
 import { useRouter } from "next/navigation";
 import Modal from "../../../components/Modal/Modal";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const register = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,9 @@ const register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
+
   const router = useRouter();
 
   const [registerUser, { isLoading, isSuccess, isError, error }] =
@@ -23,12 +27,12 @@ const register = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setInterval(
-        alert(
-          `Registration Successfull. Please login. Redirecting to login...`
-        ),
-        3000
-      );
+      setInterval(() => {
+        setErrorMsg(
+          `Registrations successful. Please login. Redirecting to login...`
+        );
+        document.getElementById(`my_modal_3`).showModal();
+      }, 3000);
       router.push("/login");
     }
     if (isError) {
@@ -120,24 +124,50 @@ const register = () => {
             />
             <label htmlFor="password">Password</label>
             <br />
-            <input
-              type="password"
-              name="password"
-              required
-              placeholder="Enter your password"
-              className="input bg-white mt-1 mb-3 w-full text-black"
-              onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="flex justify-center items-center relative">
+              <input
+                type={showPass ? "text" : "password"}
+                name="password"
+                required
+                placeholder="Enter your password"
+                className="input bg-white mt-1 mb-3 w-full text-black"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {showPass ? (
+                <FaRegEyeSlash
+                  onClick={() => setShowPass(false)}
+                  className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+                />
+              ) : (
+                <FaRegEye
+                  onClick={() => setShowPass(true)}
+                  className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+                />
+              )}
+            </div>
             <label htmlFor="password">Confirm Password</label>
             <br />
-            <input
-              type="password"
-              name="confirmPassword"
-              required
-              placeholder="Confirm your password"
-              className="input bg-white mt-1 w-full text-black"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="flex justify-center items-center relative">
+              <input
+                type={showConfirmPass ? "text" : "password"}
+                name="confirmPassword"
+                required
+                placeholder="Confirm your password"
+                className="input bg-white mt-1 w-full text-black"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+              {showConfirmPass ? (
+                <FaRegEyeSlash
+                  onClick={() => setShowConfirmPass(false)}
+                  className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+                />
+              ) : (
+                <FaRegEye
+                  onClick={() => setShowConfirmPass(true)}
+                  className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+                />
+              )}
+            </div>
             <Button>
               <input
                 type="submit"

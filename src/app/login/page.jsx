@@ -7,15 +7,20 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "@/Redux/features/userSlice";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
-  const [loginUser, { isLoading, isSuccess, isError }] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
 
   const dispatch = useDispatch();
   const handleLogin = async () => {
+    setLoading(true);
     const result = await loginUser({ email, password });
     localStorage.setItem("token", result?.data?.access);
     axios
@@ -30,7 +35,8 @@ const login = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => setLoading(false));
   };
   return (
     <div className={`${styles.container} flex justify-center items-center`}>
@@ -51,23 +57,34 @@ const login = () => {
           />
           <label htmlFor="password">Password</label>
           <br />
-          <input
-            type="password"
-            name="password"
-            required
-            placeholder="Enter your password"
-            className="input bg-white mt-1 w-full text-black"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button>
+          <div className="flex justify-center items-center relative">
             <input
-              onClick={handleLogin}
-              type="submit"
-              disabled={isLoading}
-              className="text-base"
-              value={`${isLoading ? "Logging in..." : "Login"}`}
+              type={showPass ? "text" : "password"}
+              name="password"
+              required
+              placeholder="Enter your password"
+              className="input bg-white mt-1 w-full text-black"
+              onChange={(e) => setPassword(e.target.value)}
             />
-          </Button>
+            {showPass ? (
+              <FaRegEyeSlash
+                onClick={() => setShowPass(false)}
+                className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+              />
+            ) : (
+              <FaRegEye
+                onClick={() => setShowPass(true)}
+                className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
+              />
+            )}
+          </div>
+          <input
+            onClick={handleLogin}
+            type="submit"
+            disabled={loading}
+            className="text-base btn bg-green-400 hover:bg-white my-3 text-black border-none"
+            value={`${loading ? "Logging in..." : "Login"}`}
+          />
         </div>
       </div>
     </div>

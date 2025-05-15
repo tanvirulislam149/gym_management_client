@@ -11,12 +11,15 @@ const Manage_classes = () => {
   const [classes, setClasses] = useState([]);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [updateId, setUpdateId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchClasses = () => {
+    setLoading(true);
     axios
       .get("https://gym-management-henna.vercel.app/fitness_classes/")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -41,52 +44,62 @@ const Manage_classes = () => {
       <DashboardLayout>
         <p className="text-3xl font-bold text-center mb-4">Manage Classes</p>
         <div className="overflow-x-auto rounded-box border border-gray-800 bg-base-100">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {classes.map((p, index) => (
-                <tr key={p.id}>
-                  <th>{index + 1}</th>
-                  <td>
-                    <img className="w-30" src={p.image} alt="" />
-                  </td>
-                  <td>{p.name}</td>
-                  <td className="w-96">{p.description}</td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        document
-                          .getElementById("UpdateClassesModal")
-                          .showModal();
-                        setUpdateId(p.id);
-                      }}
-                      className="btn bg-green-400 text-black btn-sm"
-                    >
-                      Update
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(p.id)}
-                      className="btn bg-red-400 text-black btn-sm"
-                    >
-                      {deleteLoading ? "Deleting..." : "Delete"}
-                    </button>
-                  </td>
+          {loading ? (
+            <div className="w-full h-30 flex justify-center items-center">
+              <span className="loading loading-spinner loading-xl"></span>
+            </div>
+          ) : classes.length ? (
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th></th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {classes.map((p, index) => (
+                  <tr key={p.id}>
+                    <th>{index + 1}</th>
+                    <td>
+                      <img className="w-30" src={p.image} alt="" />
+                    </td>
+                    <td>{p.name}</td>
+                    <td className="w-96">{p.description}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          document
+                            .getElementById("UpdateClassesModal")
+                            .showModal();
+                          setUpdateId(p.id);
+                        }}
+                        className="btn bg-green-400 text-black btn-sm"
+                      >
+                        Update
+                      </button>
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(p.id)}
+                        className="btn bg-red-400 text-black btn-sm"
+                      >
+                        {deleteLoading ? "Deleting..." : "Delete"}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className="h-30 flex justify-center items-center">
+              <p className="text-lg font-bold">No classes found.</p>
+            </div>
+          )}
         </div>
         <Modal text={"Plan deleted successfully"} />
         <UpdateClassesModal id={updateId} fetchClasses={fetchClasses} />
