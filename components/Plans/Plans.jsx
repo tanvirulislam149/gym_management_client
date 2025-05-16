@@ -9,14 +9,15 @@ const Plans = async () => {
   const plans = await data.json();
   return (
     <div id="plans" className="max-w-[1200px] mx-auto mb-10">
-      <p className="text-primary font-bold text-5xl mb-10">-Membership Plans</p>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 place-items-center">
+      <p className="text-primary font-bold text-3xl lg:text-5xl mb-10 ml-10">
+        -Membership Plans
+      </p>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
         {plans?.map((p) => (
           <div
             key={p.id}
-            className="card bg-base-100 image-full w-65 my-4 hover:border border-green-400 rounded-none shadow-sm"
+            className="card bg-base-100 image-full px-5 my-4 hover:border border-green-400 rounded-none shadow-sm"
           >
-            <p>{p.type}</p>
             <figure>
               <Image
                 className="w-full"

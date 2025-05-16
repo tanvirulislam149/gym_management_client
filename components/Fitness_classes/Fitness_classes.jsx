@@ -11,10 +11,15 @@ const Fitness_classes = async () => {
   const classes = await data.json();
   return (
     <div id="classes" className="max-w-[1200px] mx-auto my-20">
-      <p className="text-primary font-bold text-5xl mb-10">-Fitness Classes</p>
+      <p className="text-primary font-bold text-3xl lg:text-5xl ml-10 mb-10">
+        -Fitness Classes
+      </p>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
         {classes?.map((c) => (
-          <div key={c.id} className="card w-66 shadow-sm h-100 bg-base-200">
+          <div
+            key={c.id}
+            className="card mx-5 lg:mx-0 shadow-sm h-100 bg-base-200"
+          >
             <figure className="">
               <Image
                 className="h-40"

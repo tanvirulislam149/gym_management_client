@@ -150,26 +150,33 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-32 items-center p-2 shadow"
           >
-            <li>
+            <li className="my-1 text-5xl">
               <Link href={"/#plans"}>Plans</Link>
             </li>
-            <li>
+            <li className="my-1 text-5xl">
               <Link href={"/#classes"}>Classes</Link>
             </li>
             {user && (
-              <li>
-                <Link
-                  href={
-                    user?.is_staff
-                      ? "/dashboard/schedule_classes"
-                      : "/dashboard/my_plans"
-                  }
-                >
-                  Dashboard
-                </Link>
-              </li>
+              <>
+                <li className="my-1 text-5xl">
+                  <Link
+                    href={
+                      user?.is_staff
+                        ? "/dashboard/schedule_classes"
+                        : "/dashboard/my_plans"
+                    }
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <img
+                  className="w-10 rounded-full my-2"
+                  alt="Tailwind CSS Navbar component"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                />
+              </>
             )}
-            <li>
+            <li className="my-1 text-5xl">
               {user ? (
                 <button
                   onClick={handleLogout}
@@ -178,14 +185,14 @@ const Navbar = () => {
                   Log out
                 </button>
               ) : (
-                <Link href={"/login"}>Login</Link>
+                <Link
+                  className="btn bg-green-400 text-black mx-3"
+                  href={"/login"}
+                >
+                  Login
+                </Link>
               )}
             </li>
-            <img
-              className="w-10 rounded-full my-2"
-              alt="Tailwind CSS Navbar component"
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-            />
           </ul>
         </div>
       </div>
