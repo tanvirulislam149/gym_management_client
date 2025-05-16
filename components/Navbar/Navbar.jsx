@@ -169,21 +169,51 @@ const Navbar = () => {
                     Dashboard
                   </Link>
                 </li>
-                <img
-                  className="w-10 rounded-full my-2"
-                  alt="Tailwind CSS Navbar component"
-                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                />
               </>
             )}
             <li className="my-1 text-5xl">
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  className="btn bg-green-400 text-black mx-3"
-                >
-                  Log out
-                </button>
+                <div className="dropdown dropdown-end">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-10 rounded-full">
+                      <img
+                        alt="Tailwind CSS Navbar component"
+                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                      />
+                    </div>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 shadow"
+                  >
+                    <p className="font-bold">Email:</p>
+                    <p className="">{user.email ? user.email : "N/A"}</p>
+                    <p className="font-bold">First Name:</p>
+                    <p className="">
+                      {user.first_name ? user.first_name : "N/A"}
+                    </p>
+                    <p className="font-bold">Last Name:</p>
+                    <p className="">
+                      {user.last_name ? user.last_name : "N/A"}
+                    </p>
+                    <p className="font-bold">Phone Number:</p>
+                    <p className="">
+                      {user.phone_number ? user.phone_number : "N/A"}
+                    </p>
+                    <p className="font-bold">Address:</p>
+                    <p className="">{user.address ? user.address : "N/A"}</p>
+                    <button
+                      onClick={handleLogout}
+                      className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
+                    >
+                      Log out
+                    </button>
+                  </ul>
+                </div>
               ) : (
                 <Link
                   className="btn bg-green-400 text-black mx-3"

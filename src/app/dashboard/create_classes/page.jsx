@@ -43,7 +43,7 @@ const Create_classes = () => {
           Create Classes Category
         </p>
         <div className="flex justify-center">
-          <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form className="w-11/12 md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Name :</legend>

@@ -66,7 +66,7 @@ const Manage_classes = () => {
                   <tr key={p.id}>
                     <th>{index + 1}</th>
                     <td>
-                      <img className="w-30" src={p.image} alt="" />
+                      <img className="min-w-30 max-w-30" src={p.image} alt="" />
                     </td>
                     <td>{p.name}</td>
                     <td className="w-96">{p.description}</td>
