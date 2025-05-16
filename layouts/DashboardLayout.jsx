@@ -7,7 +7,7 @@ const DashboardLayout = ({ children }) => {
       <div className="lg:bg-green-400">
         <DashboardSidebar />
       </div>
-      <div className="m-5 w-full">{children}</div>
+      <div className="p-3 lg:p-10 w-full">{children}</div>
     </div>
   );
 };

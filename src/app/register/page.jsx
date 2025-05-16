@@ -72,9 +72,12 @@ const register = () => {
     <div>
       <div className={`${styles.container} flex justify-center items-center`}>
         <div
-          className={`${styles.inputCont} w-full lg:w-3/6 flex justify-center`}
+          className={`${styles.inputCont} w-full m-2 lg:w-3/6 flex justify-center`}
         >
-          <form onSubmit={(e) => handleRegister(e)} className="w-3/4 mb-5">
+          <form
+            onSubmit={(e) => handleRegister(e)}
+            className="w-full p-3 lg:w-3/4 mb-5"
+          >
             <p className="text-3xl my-5 mb-5 text-center">Register</p>
             <label htmlFor="email">Email: </label>
             <br />

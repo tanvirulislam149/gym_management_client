@@ -74,7 +74,7 @@ const Create_plan = () => {
       <DashboardLayout>
         <p className="text-3xl font-bold text-center mb-4">Create Plan</p>
         <div className="flex justify-center">
-          <form className="w-1/2" onSubmit={handleSubmit(onSubmit)}>
+          <form className="w-11/12 md:w-1/2" onSubmit={handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}
             <fieldset className="fieldset">
               <legend className="fieldset-legend">Plan type :</legend>

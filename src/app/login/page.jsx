@@ -41,9 +41,9 @@ const login = () => {
   return (
     <div className={`${styles.container} flex justify-center items-center`}>
       <div
-        className={`${styles.inputCont} w-full lg:w-3/6 h-96 flex justify-center`}
+        className={`${styles.inputCont} w-full m-2 lg:w-3/6 h-96 flex justify-center`}
       >
-        <div className="w-3/4">
+        <div className="w-full m-4 lg:w-3/4">
           <p className="text-3xl my-5 mb-5 text-center">LOGIN</p>
           <label htmlFor="email">Email: </label>
           <br />

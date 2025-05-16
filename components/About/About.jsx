@@ -7,7 +7,7 @@ const About = () => {
     <div className="md:flex justify-evenly items-center my-20 md:my-30">
       <div className="md:w-2/5 mb-5">
         <p className="text-primary font-bold text-3xl mb-10">-ABOUT OUR GYM</p>
-        <p className="text-5xl mb-10 font-bold">
+        <p className="text-3xl lg:text-5xl mb-10 font-bold">
           SAFE BODYBUILDING PROPER SOLUTIONS THAT SAVE OUR VALUABLE TIME!
         </p>
         <p>
