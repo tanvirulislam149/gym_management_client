@@ -49,7 +49,7 @@ const Available_class = ({ id }) => {
       });
   };
   return (
-    <div className="px-4 overflow-y-auto h-[500px]">
+    <div className="px-4 overflow-y-auto lg:h-[500px]">
       <p className="text-center text-2xl font-bold my-3 border-b-2">
         Available Classes
       </p>
@@ -59,7 +59,7 @@ const Available_class = ({ id }) => {
         </div>
       ) : classes.length ? (
         classes.map((c) => (
-          <div key={c.id} className="card bg-base-200 my-4 w-90">
+          <div key={c.id} className="card bg-base-200 my-4 w-full lg:w-90">
             <div className="card-body">
               <h2 className="text-lg">
                 <span className="font-bold">Time: </span>

@@ -10,8 +10,8 @@ const ClassDetails = async ({ params }) => {
   const fitness_class = await data.json();
   return (
     <div className="min-h-screen mx-5 lg:mx-20 p-2 lg:p-10">
-      <div className="flex">
-        <div className="w-4/6">
+      <div className="lg:flex">
+        <div className="lg:w-4/6">
           <Image
             className="w-full"
             src={fitness_class.image}
@@ -20,7 +20,7 @@ const ClassDetails = async ({ params }) => {
             alt="Picture of the author"
           />
         </div>
-        <div className="w-2/6 border border-gray-700 mx-10">
+        <div className="lg:w-2/6 w-full border border-gray-700 lg:mx-10 mt-5 lg:mt-0">
           <Available_class id={fitness_class.id} />
         </div>
       </div>
