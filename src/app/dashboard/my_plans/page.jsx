@@ -50,8 +50,8 @@ const My_plans = () => {
         <div>
           <p className="text-3xl font-bold text-center mb-8">My plan</p>
           <div className="lg:flex justify-between">
-            <div className="w-8/12">
-              <div className="flex justify-between">
+            <div className="lg:w-8/12">
+              <div className="lg:flex justify-between">
                 <div className="bg-white p-2 w-full text-black mb-4 rounded-lg">
                   <p>
                     <span className="font-bold">Current Plan Dates : </span>
@@ -72,7 +72,7 @@ const My_plans = () => {
                     )}
                   </p>
                 </div>
-                <div className="w-2/12 flex justify-end">
+                <div className="lg:w-2/12 flex justify-end mb-3">
                   <button
                     onClick={() =>
                       document.getElementById("payment_modal").showModal()
@@ -131,7 +131,7 @@ const My_plans = () => {
                 )}
               </div>
             </div>
-            <div className="w-4/12">
+            <div className="lg:w-4/12 mt-10 lg:mt-0">
               <div className="card mx-auto bg-base-200 image-full w-65 rounded-none shadow-sm">
                 <p className="text-right -mt-3">
                   {active !== "No active plan" ? (

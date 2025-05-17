@@ -8,6 +8,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "@/Redux/features/userSlice";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Link from "next/link";
 
 const login = () => {
   const [email, setEmail] = useState("");
@@ -77,6 +78,11 @@ const login = () => {
                 className="w-6 h-6 absolute top-2.5 right-2.5 z-10"
               />
             )}
+          </div>
+          <div className="text-right">
+            <Link className="pt-2 underline" href={"/register"}>
+              Go to Register
+            </Link>{" "}
           </div>
           <input
             onClick={handleLogin}
