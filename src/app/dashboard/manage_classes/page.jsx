@@ -42,7 +42,7 @@ const Manage_classes = () => {
   return (
     <AuthComp>
       <DashboardLayout>
-        <p className="text-3xl font-bold text-center mb-4">Manage Classes</p>
+        <p className="text-3xl font-bold text-center mb-8">Manage Classes</p>
         <div className="overflow-x-auto rounded-box border border-gray-800 bg-base-100">
           {loading ? (
             <div className="w-full h-30 flex justify-center items-center">
@@ -51,7 +51,7 @@ const Manage_classes = () => {
           ) : classes.length ? (
             <table className="table">
               {/* head */}
-              <thead>
+              <thead className="bg-base-200 text-base">
                 <tr>
                   <th>#</th>
                   <th>Image</th>

@@ -43,7 +43,7 @@ const Manage_plan = () => {
   return (
     <AuthComp>
       <DashboardLayout>
-        <p className="text-3xl font-bold text-center mb-4">Manage Plan</p>
+        <p className="text-3xl font-bold text-center mb-10">Manage Plan</p>
         <div className="overflow-x-auto rounded-box border border-gray-800 bg-base-100">
           {loading ? (
             <div className="w-full h-30 flex justify-center items-center">
@@ -52,7 +52,7 @@ const Manage_plan = () => {
           ) : (
             <table className="table">
               {/* head */}
-              <thead>
+              <thead className="bg-base-200 text-base">
                 <tr>
                   <th>#</th>
                   <th>Type</th>

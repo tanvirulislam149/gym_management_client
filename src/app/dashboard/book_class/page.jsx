@@ -55,7 +55,7 @@ const book_class = () => {
     <AuthUser>
       <DashboardLayout>
         <div className="px-4">
-          <p className="text-center text-3xl font-bold my-4">
+          <p className="text-center text-3xl font-bold my-4 mb-10">
             Available Classes
           </p>
           {loading ? (
@@ -63,11 +63,11 @@ const book_class = () => {
               <span className="loading loading-spinner loading-xl"></span>
             </div>
           ) : classes.length ? (
-            <table className="table bg-base-200">
+            <table className="table bg-base-200 border border-base-200">
               {/* head */}
-              <thead>
+              <thead className="text-base">
                 <tr>
-                  <th></th>
+                  <th>#</th>
                   <th>Class Name</th>
                   <th>Date</th>
                   <th>Time</th>
@@ -77,7 +77,7 @@ const book_class = () => {
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-black">
                 {classes.map((c, index) => (
                   <tr key={c.id}>
                     <th>{index + 1}</th>

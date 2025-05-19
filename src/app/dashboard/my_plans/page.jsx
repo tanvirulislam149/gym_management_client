@@ -54,7 +54,7 @@ const My_plans = () => {
               <div className="lg:flex justify-between">
                 <div className="bg-white p-2 w-full text-black mb-4 rounded-lg">
                   <p>
-                    <span className="font-bold">Current Plan Dates : </span>
+                    <span className="font-bold">Current Plan Duration : </span>
                     {active != "No active plan" ? (
                       <span>
                         {format(
