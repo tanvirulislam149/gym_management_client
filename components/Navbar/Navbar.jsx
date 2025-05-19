@@ -39,8 +39,8 @@ const Navbar = () => {
   const user = useSelector((state) => state?.user?.user);
   console.log(user);
   return (
-    <div className="navbar bg-base-100 shadow-sm py-5 md:px-20 z-10 sticky top-0 border-b-1 border-green-400">
-      <div className="navbar-start">
+    <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
+      <div className="navbar-start w-4/12">
         <Link
           href={"/"}
           className="font-bold text-xl text-green-400 sm:text-3xl"
@@ -49,28 +49,24 @@ const Navbar = () => {
         </Link>
       </div>
       {/*   -------------------------desktop view---------------------  */}
-      <div className="navbar-end">
+      <div className="navbar-end w-8/12">
         <div className="hidden sm:flex items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
+            <li>
+              <Link href={"/"}>Home</Link>
+            </li>
             <li>
               <Link href={"/#plans"}>Plans</Link>
             </li>
             <li>
               <Link href={"/#classes"}>Classes</Link>
             </li>
-            {user && (
-              <li>
-                <Link
-                  href={
-                    user?.is_staff
-                      ? "/dashboard/schedule_classes"
-                      : "/dashboard/my_plans"
-                  }
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link href={"/"}>Contact</Link>
+            </li>
+            <li>
+              <Link href={"/"}>About</Link>
+            </li>
             <li>
               {user ? (
                 <>
@@ -89,24 +85,26 @@ const Navbar = () => {
                     </div>
                     <ul
                       tabIndex={0}
-                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 shadow"
+                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 my-14 shadow text-center text-base cursor-auto"
                     >
-                      <p className="font-bold">Email:</p>
-                      <p className="">{user.email ? user.email : "N/A"}</p>
-                      <p className="font-bold">First Name:</p>
-                      <p className="">
-                        {user.first_name ? user.first_name : "N/A"}
-                      </p>
-                      <p className="font-bold">Last Name:</p>
-                      <p className="">
-                        {user.last_name ? user.last_name : "N/A"}
-                      </p>
-                      <p className="font-bold">Phone Number:</p>
-                      <p className="">
-                        {user.phone_number ? user.phone_number : "N/A"}
-                      </p>
-                      <p className="font-bold">Address:</p>
-                      <p className="">{user.address ? user.address : "N/A"}</p>
+                      <div className="w-15 mt-2 rounded-full mx-auto">
+                        <img
+                          className="rounded-full"
+                          alt="Tailwind CSS Navbar component"
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        />
+                      </div>
+                      <p className="my-2">{user.email}</p>
+                      <Link
+                        className="hover:bg-gray-200 py-2"
+                        href={
+                          user?.is_staff
+                            ? "/dashboard/schedule_classes"
+                            : "/dashboard/my_plans"
+                        }
+                      >
+                        Dashboard
+                      </Link>
                       <button
                         onClick={handleLogout}
                         className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
@@ -150,73 +148,71 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-32 items-center p-2 shadow"
           >
+            <li>
+              <Link href={"/"}>Home</Link>
+            </li>
             <li className="my-1 text-5xl">
               <Link href={"/#plans"}>Plans</Link>
             </li>
             <li className="my-1 text-5xl">
               <Link href={"/#classes"}>Classes</Link>
             </li>
-            {user && (
-              <>
-                <li className="my-1 text-5xl">
-                  <Link
-                    href={
-                      user?.is_staff
-                        ? "/dashboard/schedule_classes"
-                        : "/dashboard/my_plans"
-                    }
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-              </>
-            )}
+            <li>
+              <Link href={"/"}>Contact</Link>
+            </li>
+            <li>
+              <Link href={"/"}>About</Link>
+            </li>
             <li className="my-1 text-5xl">
               {user ? (
-                <div className="dropdown dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost btn-circle avatar"
-                  >
-                    <div className="w-10 rounded-full">
-                      <img
-                        alt="Tailwind CSS Navbar component"
-                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                      />
-                    </div>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 shadow"
-                  >
-                    <p className="font-bold">Email:</p>
-                    <p className="">{user.email ? user.email : "N/A"}</p>
-                    <p className="font-bold">First Name:</p>
-                    <p className="">
-                      {user.first_name ? user.first_name : "N/A"}
-                    </p>
-                    <p className="font-bold">Last Name:</p>
-                    <p className="">
-                      {user.last_name ? user.last_name : "N/A"}
-                    </p>
-                    <p className="font-bold">Phone Number:</p>
-                    <p className="">
-                      {user.phone_number ? user.phone_number : "N/A"}
-                    </p>
-                    <p className="font-bold">Address:</p>
-                    <p className="">{user.address ? user.address : "N/A"}</p>
-                    <button
-                      onClick={handleLogout}
-                      className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
+                <>
+                  <div className="dropdown dropdown-end">
+                    <div
+                      tabIndex={0}
+                      role="button"
+                      className="btn btn-ghost btn-circle avatar"
                     >
-                      Log out
-                    </button>
-                  </ul>
-                </div>
+                      <div className="w-10 rounded-full">
+                        <img
+                          alt="Tailwind CSS Navbar component"
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        />
+                      </div>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 my-14 shadow text-center text-base cursor-auto"
+                    >
+                      <div className="w-15 mt-2 rounded-full mx-auto">
+                        <img
+                          className="rounded-full"
+                          alt="Tailwind CSS Navbar component"
+                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        />
+                      </div>
+                      <p className="my-2">{user.email}</p>
+                      <Link
+                        className="hover:bg-gray-200 py-2"
+                        href={
+                          user?.is_staff
+                            ? "/dashboard/schedule_classes"
+                            : "/dashboard/my_plans"
+                        }
+                      >
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
+                      >
+                        Log out
+                      </button>
+                    </ul>
+                  </div>
+                </>
               ) : (
                 <Link
-                  className="btn bg-green-400 text-black mx-3"
+                  className="btn bg-green-400 text-black mx-2"
                   href={"/login"}
                 >
                   Login
