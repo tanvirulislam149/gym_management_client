@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "../Button/Button";
+import { MdEmail } from "react-icons/md";
+import { IoCall } from "react-icons/io5";
 
 const Contact = () => {
   return (
@@ -11,10 +13,14 @@ const Contact = () => {
           trainers seeking to improve their health and fitness through effective
           training and nutritional strategies.
         </p>
-        <p className="mt-10 text-lg">
-          House- 5, Lavel -5, Lake Drive Road, Sector-7,Uttara, Dhaka 1230.
-        </p>
-        <p>+8801712-345678</p>
+        <div className="flex items-center mb-5">
+          <MdEmail className="w-8 h-8 mr-4" />
+          <p>muscle_gain@gmail.com</p>
+        </div>
+        <div className="flex items-center mb-5">
+          <IoCall className="w-8 h-8 mr-4" />
+          <p>+8801712-345678</p>
+        </div>
       </div>
       <div className="md:w-1/2 w-full md:p-5">
         <p className="text-3xl mb-5 font-bold">SEND US EMAIL</p>
@@ -24,13 +30,13 @@ const Contact = () => {
           className="input w-full bg-white text-black my-3"
         />
         <input
-          type="text"
+          type="email"
           placeholder="Enter email"
           className="input w-full bg-white text-black my-3"
         />
         <textarea
           className="textarea h-24 w-full bg-white text-black my-3"
-          placeholder="Bio"
+          placeholder="Enter your message"
         ></textarea>
         <Button>Send</Button>
       </div>

@@ -70,7 +70,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={pathname === "about" ? "border-b-1" : ""}
+                className={pathname === "/about" ? "border-b-1" : ""}
                 href={"/about"}
               >
                 About
