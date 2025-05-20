@@ -3,6 +3,7 @@ import About from "../../components/About/About";
 import Plans from "../../components/Plans/Plans";
 import Fitness_classes from "../../components/Fitness_classes/Fitness_classes";
 import Navbar from "../../components/Navbar/Navbar";
+import Contact from "../../components/Contact/Contact";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <About />
       <Plans />
       <Fitness_classes />
+      <Contact />
     </>
   );
 }
