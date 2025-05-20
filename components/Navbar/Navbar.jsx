@@ -105,7 +105,13 @@ const Navbar = () => {
                       </div>
                       <p className="my-2">{user.email}</p>
                       <Link
-                        className="hover:bg-gray-200 py-2"
+                        className="bg-gray-200 py-2 my-1"
+                        href="/dashboard/my_profile"
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        className="bg-gray-200 py-2 my-1"
                         href={
                           user?.is_staff
                             ? "/dashboard/schedule_classes"
@@ -114,9 +120,10 @@ const Navbar = () => {
                       >
                         Dashboard
                       </Link>
+
                       <button
                         onClick={handleLogout}
-                        className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
+                        className="btn bg-green-400 my-1 text-black border-0 w-full text-base"
                       >
                         Log out
                       </button>
@@ -208,7 +215,13 @@ const Navbar = () => {
                       </div>
                       <p className="my-2">{user.email}</p>
                       <Link
-                        className="hover:bg-gray-200 py-2"
+                        className="bg-gray-200 py-2 my-1"
+                        href="/dashboard/my_profile"
+                      >
+                        Profile
+                      </Link>
+                      <Link
+                        className="bg-gray-200 py-2 my-1"
                         href={
                           user?.is_staff
                             ? "/dashboard/schedule_classes"
@@ -217,9 +230,10 @@ const Navbar = () => {
                       >
                         Dashboard
                       </Link>
+
                       <button
                         onClick={handleLogout}
-                        className="btn bg-green-400 mt-3 text-black border-0 w-20 mx-auto"
+                        className="btn bg-green-400 my-1 text-black border-0 w-full text-base"
                       >
                         Log out
                       </button>

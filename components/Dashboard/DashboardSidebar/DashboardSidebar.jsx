@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -131,6 +132,18 @@ const DashboardSidebar = () => {
                 </li>
               </>
             )}
+            <li>
+              <Link
+                className={
+                  pathname === "/dashboard/my_profile"
+                    ? "bg-white text-black"
+                    : "border-b-2 border-white py-2 my-2"
+                }
+                href={"/dashboard/my_profile"}
+              >
+                My Profile
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
