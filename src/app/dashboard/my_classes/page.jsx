@@ -30,9 +30,9 @@ const My_classes = () => {
           ) : classes.length ? (
             <table className="table">
               {/* head */}
-              <thead>
+              <thead className="text-base">
                 <tr>
-                  <th></th>
+                  <th>#</th>
                   <th>Email</th>
                   <th>Class Name</th>
                   <th>Date</th>
@@ -41,7 +41,7 @@ const My_classes = () => {
                   <th>Attendence</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-black">
                 {classes.map((c, index) => (
                   <tr key={c.id}>
                     <th>{index + 1}</th>

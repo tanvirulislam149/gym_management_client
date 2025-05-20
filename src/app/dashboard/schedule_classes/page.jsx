@@ -87,7 +87,7 @@ const Schedule_classes = () => {
             Schedule A Class
           </button>
         </div>
-        <div className="overflow-x-auto rounded-box border border-gray-800 bg-base-100">
+        <div className="overflow-x-auto rounded-box border border-gray-800">
           {loading ? (
             <div className="w-full my-20 flex justify-center items-center">
               <span className="loading loading-spinner loading-xl"></span>
@@ -95,7 +95,7 @@ const Schedule_classes = () => {
           ) : scheduledClasses.length ? (
             <table className="table">
               {/* head */}
-              <thead>
+              <thead className="bg-base-200">
                 <tr>
                   <th>#</th>
                   <th>Class Name</th>

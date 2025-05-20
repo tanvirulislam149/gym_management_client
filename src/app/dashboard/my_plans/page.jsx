@@ -48,13 +48,13 @@ const My_plans = () => {
     <AuthUser>
       <DashboardLayout>
         <div>
-          <p className="text-3xl font-bold text-center mb-8">My plan</p>
+          <p className="text-3xl font-bold text-center mb-8">My Plan</p>
           <div className="lg:flex justify-between">
             <div className="lg:w-8/12">
               <div className="lg:flex justify-between">
                 <div className="bg-white p-2 w-full text-black mb-4 rounded-lg">
                   <p>
-                    <span className="font-bold">Current Plan Dates : </span>
+                    <span className="font-bold">Current Plan Duration : </span>
                     {active != "No active plan" ? (
                       <span>
                         {format(

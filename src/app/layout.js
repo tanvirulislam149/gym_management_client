@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import ReduxProvider from "@/Redux/ReduxProvider";
 import "react-datepicker/dist/react-datepicker.css";
+import "leaflet/dist/leaflet.css";
 
 const poppins = Poppins({
   variable: "font-poppins",
