@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 
 const Contact = () => {
   return (
-    <div className="max-w-[1200px] my-10 mx-3 md:mx-auto md:flex">
+    <div id="contact" className="max-w-[1200px] my-10 mx-3 md:mx-auto md:flex">
       <div className="md:w-1/2 w-full md:p-5 md:pr-15">
         <p className="text-3xl mb-10 font-bold">CONTACT US</p>
         <p className="my-10 text-lg">

@@ -8,9 +8,11 @@ import {
   getUser,
   removeUser,
 } from "@/Redux/features/userSlice";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const pathname = usePathname();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -53,7 +55,9 @@ const Navbar = () => {
         <div className="hidden sm:flex items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
-              <Link href={"/"}>Home</Link>
+              <Link className={pathname === "/" ? "border-b-1" : ""} href={"/"}>
+                Home
+              </Link>
             </li>
             <li>
               <Link href={"/#plans"}>Plans</Link>
@@ -62,10 +66,15 @@ const Navbar = () => {
               <Link href={"/#classes"}>Classes</Link>
             </li>
             <li>
-              <Link href={"/"}>Contact</Link>
+              <Link href={"/#contact"}>Contact</Link>
             </li>
             <li>
-              <Link href={"/"}>About</Link>
+              <Link
+                className={pathname === "about" ? "border-b-1" : ""}
+                href={"/about"}
+              >
+                About
+              </Link>
             </li>
             <li>
               {user ? (
@@ -149,7 +158,9 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-32 items-center p-2 shadow"
           >
             <li>
-              <Link href={"/"}>Home</Link>
+              <Link className={pathname === "/" ? "border-b-1" : ""} href={"/"}>
+                Home
+              </Link>
             </li>
             <li className="my-1 text-5xl">
               <Link href={"/#plans"}>Plans</Link>
@@ -158,10 +169,15 @@ const Navbar = () => {
               <Link href={"/#classes"}>Classes</Link>
             </li>
             <li>
-              <Link href={"/"}>Contact</Link>
+              <Link href={"/#contact"}>Contact</Link>
             </li>
             <li>
-              <Link href={"/"}>About</Link>
+              <Link
+                className={pathname === "about" ? "border-b-1" : ""}
+                href={"/about"}
+              >
+                About
+              </Link>
             </li>
             <li className="my-1 text-5xl">
               {user ? (
