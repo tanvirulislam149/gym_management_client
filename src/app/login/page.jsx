@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getUser } from "@/Redux/features/userSlice";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Link from "next/link";
+import Modal from "../../../components/Modal/Modal";
 
 const login = () => {
   const [email, setEmail] = useState("");
@@ -31,11 +32,15 @@ const login = () => {
         },
       })
       .then((res) => {
+        console.log("object");
         dispatch(getUser(res.data));
         router.push("/");
       })
       .catch((err) => {
         console.log(err);
+        if (err.status === 401) {
+          document.getElementById(`my_modal_3`).showModal();
+        }
       })
       .finally(() => setLoading(false));
   };
@@ -93,6 +98,7 @@ const login = () => {
           />
         </div>
       </div>
+      <Modal text={"Wrong password"} />
     </div>
   );
 };
