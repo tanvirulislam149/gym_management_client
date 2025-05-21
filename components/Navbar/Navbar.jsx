@@ -88,7 +88,11 @@ const Navbar = () => {
                       <div className="w-10 rounded-full">
                         <img
                           alt="Tailwind CSS Navbar component"
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          src={
+                            user?.image
+                              ? user?.image
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          }
                         />
                       </div>
                     </div>
@@ -96,11 +100,15 @@ const Navbar = () => {
                       tabIndex={0}
                       className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 my-14 shadow text-center text-base cursor-auto"
                     >
-                      <div className="w-15 mt-2 rounded-full mx-auto">
+                      <div className="w-25 mt-2 rounded-full mx-auto">
                         <img
-                          className="rounded-full"
+                          className="rounded-lg w-25"
                           alt="Tailwind CSS Navbar component"
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          src={
+                            user?.image
+                              ? user?.image
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          }
                         />
                       </div>
                       <p className="my-2">{user.email}</p>
@@ -198,7 +206,11 @@ const Navbar = () => {
                       <div className="w-10 rounded-full">
                         <img
                           alt="Tailwind CSS Navbar component"
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          src={
+                            user?.image
+                              ? user?.image
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          }
                         />
                       </div>
                     </div>
@@ -210,7 +222,11 @@ const Navbar = () => {
                         <img
                           className="rounded-full"
                           alt="Tailwind CSS Navbar component"
-                          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          src={
+                            user?.image
+                              ? user?.image
+                              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                          }
                         />
                       </div>
                       <p className="my-2">{user.email}</p>

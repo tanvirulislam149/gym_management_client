@@ -19,6 +19,7 @@ const register = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+  const [image, setImage] = useState(null);
 
   const router = useRouter();
 
@@ -27,13 +28,13 @@ const register = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      setErrorMsg(
+        `Registrations successful. Please login. Redirecting to login...`
+      );
+      document.getElementById(`my_modal_3`).showModal();
       setInterval(() => {
-        setErrorMsg(
-          `Registrations successful. Please login. Redirecting to login...`
-        );
-        document.getElementById(`my_modal_3`).showModal();
+        router.push("/login");
       }, 3000);
-      router.push("/login");
     }
     if (isError) {
       setErrorMsg(`${Object.values(error?.data)[0]}`);
@@ -54,14 +55,15 @@ const register = () => {
       confirmPassword,
     });
     if (password === confirmPassword) {
-      const result = await registerUser({
-        email,
-        first_name: f_name,
-        last_name: l_name,
-        address,
-        phone_number: number,
-        password,
-      });
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("email", email);
+      formData.append("first_name", f_name);
+      formData.append("last_name", l_name);
+      formData.append("address", address);
+      formData.append("phone_number", number);
+      formData.append("password", password);
+      const result = await registerUser(formData);
       console.log(result);
     } else {
       setErrorMsg(`Password didn't matched`);
@@ -106,6 +108,14 @@ const register = () => {
               placeholder="Enter your last name"
               onChange={(e) => setL_name(e.target.value)}
               className="input bg-white mt-1 mb-3 w-full text-black"
+            />
+            <label htmlFor="email">Image: </label>
+            <br />
+            <input
+              type="file"
+              name="image"
+              className="file-input w-full bg-white text-black"
+              onChange={(e) => setImage(e.target.files[0])}
             />
             <label htmlFor="email">Address: </label>
             <br />

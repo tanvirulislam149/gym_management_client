@@ -15,7 +15,11 @@ const page = () => {
             <img
               className="rounded-full md:w-35 md:h-35 w-25 h-25"
               alt="Tailwind CSS Navbar component"
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              src={
+                user?.image
+                  ? user?.image
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
             />
           </div>
           <div className="md:ml-10 ml-5">
