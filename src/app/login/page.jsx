@@ -10,12 +10,14 @@ import { getUser } from "@/Redux/features/userSlice";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import Modal from "../../../components/Modal/Modal";
+import api_client from "@/api_client";
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [msg, setMsg] = useState("");
 
   const router = useRouter();
   const [loginUser] = useLoginUserMutation();
@@ -39,11 +41,32 @@ const login = () => {
       .catch((err) => {
         console.log(err);
         if (err.status === 401) {
+          setMsg("Wrong Password");
           document.getElementById(`my_modal_3`).showModal();
         }
       })
       .finally(() => setLoading(false));
   };
+
+  const handleSendEmail = (e) => {
+    e.preventDefault();
+    console.log(e.target.email.value);
+    axios
+      .post(
+        "https://gym-management-henna.vercel.app/auth/users/reset_password/",
+        {
+          email: e.target.email.value,
+        }
+      )
+      .then((res) => {
+        if (res.status === 204) {
+          setMsg("Email Sent. Please check your email.");
+          document.getElementById(`my_modal_3`).showModal();
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className={`${styles.container} flex justify-center items-center`}>
       <div
@@ -84,7 +107,15 @@ const login = () => {
               />
             )}
           </div>
-          <div className="text-right">
+          <div className="flex justify-between">
+            <button
+              className="underline cursor-pointer"
+              onClick={() => {
+                document.getElementById(`forgot_pass`).showModal();
+              }}
+            >
+              Forgot Password?
+            </button>{" "}
             <Link className="pt-2 underline" href={"/register"}>
               Go to Register
             </Link>{" "}
@@ -98,7 +129,37 @@ const login = () => {
           />
         </div>
       </div>
-      <Modal text={"Wrong password"} />
+      <Modal text={msg} />
+      <dialog id="forgot_pass" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <p className="mb-2">Enter your email:</p>
+          <form onSubmit={(e) => handleSendEmail(e)}>
+            <input
+              type="email"
+              name="email"
+              id=""
+              required
+              placeholder="Enter email"
+              className="input bg-white border border-black text-black mb-3"
+            />{" "}
+            <br />
+            <input
+              type="submit"
+              className="btn btn-primary text-black"
+              value="Send Email"
+            />
+          </form>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import React from "react";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import AuthUser from "../../../../components/AuthUser/AuthUser";
 import { useSelector } from "react-redux";
+import Button from "../../../../components/Button/Button";
+import UpdateProfile from "../../../../components/UpdateProfile/UpdateProfile";
 
 const page = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -10,26 +12,38 @@ const page = () => {
     <AuthUser>
       <DashboardLayout>
         <p className="text-3xl font-bold text-center mb-8">My Profile</p>
-        <div className="bg-base-200 p-5 rounded-lg flex items-center mb-2">
-          <div>
-            <img
-              className="rounded-full md:w-35 md:h-35 w-25 h-25"
-              alt="Tailwind CSS Navbar component"
-              src={
-                user?.image
-                  ? user?.image
-                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              }
-            />
+        <div className="bg-base-200 p-5 rounded-lg mb-2 md:flex justify-between">
+          <div className="flex items-center">
+            <div>
+              <img
+                className="rounded-full md:w-35 md:h-35 w-25 h-25"
+                alt="Tailwind CSS Navbar component"
+                src={
+                  user?.image
+                    ? user?.image
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
+              />
+            </div>
+            <div className="md:ml-10 ml-5">
+              <p className="font-bold text-3xl my-2">
+                {user?.first_name} {user?.last_name}
+              </p>
+              <p className="font-bold text-base my-1">{user?.email}</p>
+              <p className="font-bold text-base my-1">
+                {user?.is_staff ? "Admin" : "Member"}
+              </p>
+            </div>
           </div>
-          <div className="md:ml-10 ml-5">
-            <p className="font-bold text-3xl my-2">
-              {user?.first_name} {user?.last_name}
-            </p>
-            <p className="font-bold text-base my-1">{user?.email}</p>
-            <p className="font-bold text-base my-1">
-              {user?.is_staff ? "Admin" : "Member"}
-            </p>
+          <div className="flex justify-end">
+            <button
+              className="btn btn-primary text-black"
+              onClick={() => {
+                document.getElementById(`update_profile`).showModal();
+              }}
+            >
+              Update Profile
+            </button>
           </div>
         </div>
         <div className="bg-base-200 p-5 rounded-lg ">
@@ -61,6 +75,7 @@ const page = () => {
             </div>
           </div>
         </div>
+        <UpdateProfile />
       </DashboardLayout>
     </AuthUser>
   );

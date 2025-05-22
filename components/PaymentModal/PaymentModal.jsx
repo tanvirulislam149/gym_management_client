@@ -17,7 +17,7 @@ const PaymentModal = ({ booked_plan }) => {
       timeZone,
     });
     const finalData = {
-      booked_plans: booked_plan[0].id,
+      booked_plans: booked_plan[0]?.id,
       start_date: date_time,
       status: "Not Paid",
     };
@@ -43,6 +43,7 @@ const PaymentModal = ({ booked_plan }) => {
       })
       .catch((err) => console.log(err));
   };
+  console.log(booked_plan);
   return (
     <dialog id="payment_modal" className="modal">
       <div className="modal-box h-90 bg-white text-black">
@@ -73,7 +74,21 @@ const PaymentModal = ({ booked_plan }) => {
               )}
             />
             <br />
-            <button className="btn btn-primary text-black mt-3" type="submit">
+            {!booked_plan?.length && (
+              <p className="text-red-500 mt-3">
+                You haven't booked any membership plan. Please go to home page
+                to book a membership plan
+              </p>
+            )}
+            <button
+              disabled={booked_plan?.length ? false : true}
+              className={
+                booked_plan?.length
+                  ? "btn btn-primary text-black mt-3"
+                  : "bg-gray-300 disabled:text-gray-500 px-4 my-3 py-2"
+              }
+              type="submit"
+            >
               {loading ? "Submitting..." : "Submit"}
             </button>
           </form>
