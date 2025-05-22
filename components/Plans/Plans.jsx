@@ -12,11 +12,11 @@ const Plans = async () => {
       <p className="text-primary font-bold text-3xl lg:text-5xl mb-10 ml-10">
         -Membership Plans
       </p>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 place-items-center">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 place-items-center">
         {plans?.map((p) => (
           <div
             key={p.id}
-            className="card bg-base-100 image-full px-5 my-4 hover:border border-green-400 rounded-none shadow-sm"
+            className="card bg-base-100 image-full px-5 md:px-0 my-4 hover:border border-green-400 rounded-none shadow-sm"
           >
             <figure>
               <Image
