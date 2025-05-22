@@ -15,11 +15,11 @@ const register = () => {
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  const [image, setImage] = useState(null);
 
   const router = useRouter();
 
