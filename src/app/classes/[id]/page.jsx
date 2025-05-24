@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import Available_class from "../../../../components/Available_class/Available_class";
+import Reviews from "../../../../components/Reviews/Reviews";
 
 const ClassDetails = async ({ params }) => {
   const { id } = await params;
@@ -28,6 +29,7 @@ const ClassDetails = async ({ params }) => {
         <p className="text-3xl font-bold my-4">{fitness_class.name}</p>
         <hr />
         <p className="pt-5">{fitness_class.description}</p>
+        <Reviews id={fitness_class.id} />
       </div>
     </div>
   );
