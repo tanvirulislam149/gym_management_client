@@ -56,7 +56,7 @@ body {
   font-weight: 900;
 }
 
-.rating :where(*) {
+.rating :where(input[name="post_rating"]) {
   opacity: 0.5;
 }
 
