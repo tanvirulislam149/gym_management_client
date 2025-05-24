@@ -55,3 +55,14 @@ body {
   font-size: 25px !important;
   font-weight: 900;
 }
+
+.rating :where(*) {
+  opacity: 0.5;
+}
+
+.rating *:checked,
+.rating *[aria-checked="true"],
+.rating *[aria-current="true"],
+.rating *:has(~ :checked, ~ [aria-checked="true"], ~ [aria-current="true"]) {
+  opacity: 1;
+}
