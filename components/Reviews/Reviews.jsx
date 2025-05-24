@@ -13,7 +13,9 @@ const Reviews = ({ id }) => {
   const fetchReview = () => {
     setLoading(true);
     axios
-      .get(`http://127.0.0.1:8000/fitness_classes/${id}/reviews/`)
+      .get(
+        `https://gym-management-henna.vercel.app/fitness_classes/${id}/reviews/`
+      )
       .then((res) => setReviews(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));

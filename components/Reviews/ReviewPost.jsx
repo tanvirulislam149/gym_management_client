@@ -10,7 +10,7 @@ const ReviewPost = ({ id, fetchReview }) => {
     e.preventDefault();
     setLoading(true);
     api_client
-      .post(`http://127.0.0.1:8000/fitness_classes/${id}/reviews/`, {
+      .post(`/fitness_classes/${id}/reviews/`, {
         rating: parseInt(e.target.post_rating.value),
         comment: e.target.comment.value,
       })
