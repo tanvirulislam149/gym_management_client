@@ -122,7 +122,7 @@ const Navbar = () => {
                         className="bg-gray-200 py-2 my-1"
                         href={
                           user?.is_staff
-                            ? "/dashboard/schedule_classes"
+                            ? "/dashboard/summary"
                             : "/dashboard/my_plans"
                         }
                       >
@@ -240,7 +240,7 @@ const Navbar = () => {
                         className="bg-gray-200 py-2 my-1"
                         href={
                           user?.is_staff
-                            ? "/dashboard/schedule_classes"
+                            ? "/dashboard/summary"
                             : "/dashboard/my_plans"
                         }
                       >
