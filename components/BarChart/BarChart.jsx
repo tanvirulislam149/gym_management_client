@@ -20,21 +20,6 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: "top",
-  //     },
-  //     title: {
-  //       display: false,
-  //       text: "Chart.js Bar Chart",
-  //     },
-  //   },
-};
-
-// const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
 const BarChart = ({ chartData }) => {
   const data = {
     labels: chartData?.earning_data?.map((d) => {
@@ -44,29 +29,14 @@ const BarChart = ({ chartData }) => {
       {
         label: "Total Earnings",
         data: chartData?.earning_data?.map((d) => d.total_amount),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "#7bf1a8",
       },
     ],
-    // datasets: chartData?.earning_data?.map((d) => {
-    //   console.log(d.total_amount);
-    //   return {
-    //     label: "Dataset 1",
-    //     data: [d?.total_amount],
-    //     backgroundColor: "rgba(255, 99, 132, 0.5)",
-    //   };
-    // }),
-    // datasets: [
-    //   {
-    //     label: "Dataset 1",
-    //     data: [200, 700],
-    //     backgroundColor: "rgba(255, 99, 132, 0.5)",
-    //   },
-    // ],
   };
 
   return (
     <div className="w-full">
-      <Bar className="w-full" options={options} data={data} />
+      <Bar className="w-full" data={data} />
     </div>
   );
 };
