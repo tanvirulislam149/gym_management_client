@@ -119,7 +119,7 @@ const Schedule_classes = () => {
               </thead>
               <tbody>
                 {scheduledClasses.map((p, index) => (
-                  <tr key={p.id}>
+                  <tr className="border-b-gray-700" key={p.id}>
                     <th>{index + 1}</th>
                     <td>{p.fitness_class.name}</td>
                     <td>{format(parseISO(p.date_time), "MMMM dd, yyyy")}</td>
@@ -136,12 +136,11 @@ const Schedule_classes = () => {
                             .showModal();
                           setAttendenceId(p.id);
                         }}
-                        className="btn bg-green-400 text-black btn-sm"
+                        className="btn bg-green-400 text-black btn-sm w-full text-sm"
                       >
                         Attendence
                       </button>
-                    </td>
-                    <td>
+                      <br />
                       <button
                         onClick={() => {
                           document
@@ -149,19 +148,20 @@ const Schedule_classes = () => {
                             .showModal();
                           setUpdateId(p.id);
                         }}
-                        className="btn bg-green-400 text-black btn-sm"
+                        className="btn bg-green-400 text-black btn-sm w-full text-sm my-1"
                       >
                         Update
                       </button>
-                    </td>
-                    <td>
+                      <br />
                       <button
                         onClick={() => handleDelete(p.id)}
-                        className="btn bg-red-400 text-black btn-sm"
+                        className="btn bg-red-400 text-black btn-sm w-full text-sm"
                       >
                         {deleteLoading ? "Deleting..." : "Delete"}
                       </button>
                     </td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 ))}
               </tbody>

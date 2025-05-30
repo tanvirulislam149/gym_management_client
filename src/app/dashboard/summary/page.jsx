@@ -29,7 +29,9 @@ const Summary = () => {
     <AuthComp>
       <DashboardLayout>
         {loading ? (
-          <p>Loading...</p>
+          <div className="w-full my-20 flex justify-center items-center">
+            <span className="loading loading-spinner loading-xl"></span>
+          </div>
         ) : (
           <>
             <div className="grid md:grid-cols-3 grid-cols-1 gap-10">
