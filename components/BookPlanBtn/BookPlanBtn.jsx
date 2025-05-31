@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const BookPlanBtn = ({ id }) => {
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state?.user?.user);
   const handleBookPlan = () => {
+    setLoading(true);
     api_client
       .post("https://gym-management-henna.vercel.app/book_plans/", {
         plans: id,
@@ -18,7 +20,8 @@ const BookPlanBtn = ({ id }) => {
       .catch((err) => {
         console.log(err);
         document.getElementById("bookPlanError").showModal();
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -54,10 +57,11 @@ const BookPlanBtn = ({ id }) => {
                   </button>
                 </form>
                 <button
+                  disabled={loading}
                   onClick={handleBookPlan}
                   className="btn text-base w-30 btn-success text-black"
                 >
-                  Yes
+                  {loading ? "Processing..." : "Yes"}
                 </button>
               </div>
             </div>

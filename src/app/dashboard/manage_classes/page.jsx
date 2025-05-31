@@ -9,7 +9,7 @@ import UpdateClassesModal from "../../../../components/UpdateClassesModal/Update
 
 const Manage_classes = () => {
   const [classes, setClasses] = useState([]);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(0);
   const [updateId, setUpdateId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,17 +27,17 @@ const Manage_classes = () => {
   }, []);
 
   const handleDelete = (id) => {
-    setDeleteLoading(true);
+    setDeleteLoading(id);
     api_client
       .delete(`/fitness_classes/${id}`)
       .then((res) => {
         if (res.status === 204) {
-          setDeleteLoading(false);
           fetchClasses();
           document.getElementById("my_modal_3").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setDeleteLoading(0));
   };
   return (
     <AuthComp>
@@ -86,9 +86,9 @@ const Manage_classes = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(p.id)}
-                        className="btn bg-red-400 text-black btn-sm"
+                        className="btn bg-red-400 text-black btn-sm w-20"
                       >
-                        {deleteLoading ? "Deleting..." : "Delete"}
+                        {deleteLoading === p.id ? "Deleting..." : "Delete"}
                       </button>
                     </td>
                   </tr>
