@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const BookPlanBtn = ({ id }) => {
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state?.user?.user);
   const handleBookPlan = () => {
+    setLoading(true);
     api_client
       .post("https://gym-management-henna.vercel.app/book_plans/", {
         plans: id,
@@ -18,7 +20,8 @@ const BookPlanBtn = ({ id }) => {
       .catch((err) => {
         console.log(err);
         document.getElementById("bookPlanError").showModal();
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -40,25 +43,28 @@ const BookPlanBtn = ({ id }) => {
             </button>
           </form>
           {user ? (
-            <>
+            <div className="text-center mt-1">
               <h3 className="font-bold text-lg">
                 Are you sure you want to book this plan?
               </h3>
               <p className="text-sm">
                 [N.B: You can only select the plan for once.]
               </p>
-              <div className="flex justify-around mt-6">
-                <button
-                  onClick={handleBookPlan}
-                  className="btn text-base btn-success text-black"
-                >
-                  Yes
-                </button>
+              <div className="flex justify-end mt-6">
                 <form method="dialog">
-                  <button className="btn text-base btn-error">No</button>
+                  <button className="btn text-base w-30 mr-5 btn-error">
+                    No
+                  </button>
                 </form>
+                <button
+                  disabled={loading}
+                  onClick={handleBookPlan}
+                  className="btn text-base w-30 btn-success text-black"
+                >
+                  {loading ? "Processing..." : "Yes"}
+                </button>
               </div>
-            </>
+            </div>
           ) : (
             <p className="font-bold text-center">
               Please login first to book a plan

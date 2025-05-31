@@ -34,6 +34,18 @@ const DashboardSidebar = () => {
                 <li>
                   <Link
                     className={
+                      pathname === "/dashboard/summary"
+                        ? "bg-white text-black"
+                        : "border-b-2 border-white py-2 my-2"
+                    }
+                    href={"/dashboard/summary"}
+                  >
+                    Summary
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={
                       pathname === "/dashboard/schedule_classes"
                         ? "bg-white text-black"
                         : "border-b-2 border-white py-2 my-2"

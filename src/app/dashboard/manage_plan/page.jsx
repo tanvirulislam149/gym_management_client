@@ -9,7 +9,7 @@ import UpdatePlanModal from "../../../../components/UpdatePlan/UpdatePlan";
 
 const Manage_plan = () => {
   const [plans, setPlans] = useState([]);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(0);
   const [updateId, setUpdateId] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -27,17 +27,17 @@ const Manage_plan = () => {
   };
 
   const handleDelete = (id) => {
-    setDeleteLoading(true);
+    setDeleteLoading(id);
     api_client
       .delete(`/plans/${id}`)
       .then((res) => {
         if (res.status === 204) {
-          setDeleteLoading(false);
           fetchPlans();
           document.getElementById("my_modal_3").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setDeleteLoading(0));
   };
 
   return (
@@ -89,9 +89,9 @@ const Manage_plan = () => {
                     <td>
                       <button
                         onClick={() => handleDelete(p.id)}
-                        className="btn bg-red-400 text-black btn-sm"
+                        className="btn bg-red-400 w-20 text-black btn-sm"
                       >
-                        {deleteLoading ? "Deleting..." : "Delete"}
+                        {deleteLoading === p.id ? "Deleting..." : "Delete"}
                       </button>
                     </td>
                   </tr>
