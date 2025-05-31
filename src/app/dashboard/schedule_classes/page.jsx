@@ -34,7 +34,7 @@ const Schedule_classes = () => {
     setLoading(true);
     axios
       .get(
-        `http://127.0.0.1:8000/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
+        `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
           (page - 1) * limit
         }`
       )
@@ -192,7 +192,14 @@ const Schedule_classes = () => {
           )}
         </div>
         <div className="join mt-3">
-          <button className="join-item btn">«</button>
+          <button
+            onClick={() => {
+              page !== 1 ? setPage(page - 1) : "";
+            }}
+            className="join-item btn"
+          >
+            «
+          </button>
           {Array.from(
             { length: scheduledClasses.count / limit + 1 },
             (_, i) => i + 1
@@ -207,7 +214,16 @@ const Schedule_classes = () => {
               {e}
             </button>
           ))}
-          <button className="join-item btn">»</button>
+          <button
+            onClick={() => {
+              page !== parseInt(scheduledClasses.count / limit) + 1
+                ? setPage(page + 1)
+                : "";
+            }}
+            className="join-item btn"
+          >
+            »
+          </button>
         </div>
         <Modal text={"Class deleted."} />
         <CreateClassModal fetchClasses={fetchClasses} classes={classes} />

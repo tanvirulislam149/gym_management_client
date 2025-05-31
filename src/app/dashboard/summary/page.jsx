@@ -19,7 +19,7 @@ const Summary = () => {
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("http://127.0.0.1:8000/dashboard/")
+      .get("https://gym-management-henna.vercel.app/dashboard/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
