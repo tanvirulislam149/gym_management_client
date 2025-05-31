@@ -18,6 +18,8 @@ const Schedule_classes = () => {
   const [attendenceId, setAttendenceId] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [limit, setLimit] = useState(5);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     axios
@@ -32,9 +34,12 @@ const Schedule_classes = () => {
     setLoading(true);
     axios
       .get(
-        `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}`
+        `http://127.0.0.1:8000/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
+          (page - 1) * limit
+        }`
       )
       .then((res) => {
+        console.log(res.data);
         setScheduledClasses(res.data);
       })
       .catch((err) => console.log(err))
@@ -60,31 +65,45 @@ const Schedule_classes = () => {
 
   useEffect(() => {
     fetchClasses();
-  }, [id]);
+  }, [id, limit, page]);
   return (
     <AuthComp>
       <DashboardLayout>
         <p className="text-3xl font-bold text-center mb-4">Schedule Classes</p>
-        <div className="flex justify-between my-3">
-          <select
-            defaultValue="Pick a class"
-            onChange={(e) => setId(e.target.value)}
-            className="select bg-white text-black border border-black"
-          >
-            <option value="">Filter by class</option>
-            {classes.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+        <div className="md:flex justify-between my-3">
+          <div className="sm:flex w-full">
+            <select
+              defaultValue="Pick a class"
+              onChange={(e) => setId(e.target.value)}
+              className="select bg-white text-black border border-black sm:w-60 w-full"
+            >
+              <option value="">Filter by class</option>
+              {classes.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+            <select
+              onChange={(e) => {
+                setPage(1);
+                setLimit(e.target.value);
+              }}
+              className="select bg-white text-black border border-black sm:w-60 w-full"
+            >
+              <option value={5}>Show 5 items</option>
+              <option value={10}>Show 10 items</option>
+              <option value={25}>Show 25 items</option>
+              <option value={50}>Show 50 items</option>
+            </select>
+          </div>
           <button
             onClick={() =>
               document.getElementById("CreateClassModal").showModal()
             }
             className="btn bg-green-400 text-black"
           >
-            Schedule A Class
+            Create a class schedule
           </button>
         </div>
         <div className="overflow-x-auto rounded-box border border-gray-800">
@@ -92,7 +111,7 @@ const Schedule_classes = () => {
             <div className="w-full my-20 flex justify-center items-center">
               <span className="loading loading-spinner loading-xl"></span>
             </div>
-          ) : scheduledClasses.length ? (
+          ) : scheduledClasses.results?.length ? (
             <table className="table">
               {/* head */}
               <thead className="bg-base-200">
@@ -118,7 +137,7 @@ const Schedule_classes = () => {
                 </tr>
               </thead>
               <tbody>
-                {scheduledClasses.map((p, index) => (
+                {scheduledClasses?.results?.map((p, index) => (
                   <tr className="border-b-gray-700" key={p.id}>
                     <th>{index + 1}</th>
                     <td>{p.fitness_class.name}</td>
@@ -171,6 +190,24 @@ const Schedule_classes = () => {
               <p className="text-center font-bold text-2xl">No classes found</p>
             </div>
           )}
+        </div>
+        <div className="join mt-3">
+          <button className="join-item btn">«</button>
+          {Array.from(
+            { length: scheduledClasses.count / limit + 1 },
+            (_, i) => i + 1
+          ).map((e) => (
+            <button
+              key={e}
+              onClick={() => setPage(e)}
+              className={`join-item btn ${
+                page === e ? "bg-green-400 text-black" : ""
+              }`}
+            >
+              {e}
+            </button>
+          ))}
+          <button className="join-item btn">»</button>
         </div>
         <Modal text={"Class deleted."} />
         <CreateClassModal fetchClasses={fetchClasses} classes={classes} />
