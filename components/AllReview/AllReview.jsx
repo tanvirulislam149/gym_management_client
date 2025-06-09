@@ -27,7 +27,7 @@ const AllReview = () => {
       .finally(() => setLoading(false));
   }, []);
   return (
-    <div className="m-20">
+    <div className="m-5 sm:m-20">
       <p className="text-primary font-bold text-3xl lg:text-5xl ml-10 mb-10">
         -Reviews
       </p>
@@ -38,7 +38,6 @@ const AllReview = () => {
       ) : (
         <Swiper
           // install Swiper modules
-          slidesPerView={3}
           spaceBetween={30}
           navigation
           breakpoints={{
