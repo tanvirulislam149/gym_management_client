@@ -60,8 +60,8 @@ const AllReview = () => {
           }}
           pagination={{ clickable: true }}
           modules={[Navigation, Pagination, Autoplay]}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
         >
           {reviews?.map((r) => (
             <SwiperSlide key={r.id}>

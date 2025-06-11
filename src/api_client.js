@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an Axios instance (optional but recommended)
 const api_client = axios.create({
-  baseURL: "https://gym-management-henna.vercel.app",
+  baseURL: "http://127.0.0.1:8000",
 });
 
 // Add a request interceptor

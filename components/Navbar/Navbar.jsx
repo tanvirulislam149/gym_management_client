@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
+  const socketRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -39,6 +40,19 @@ const Navbar = () => {
   };
 
   const user = useSelector((state) => state?.user?.user);
+  useEffect(() => {
+    if (user) {
+      socketRef.current = new WebSocket(
+        `ws://127.0.0.1:8000/ws/notifications/public/`
+      );
+      socketRef.current.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        console.log(data);
+      };
+
+      return () => socketRef.current.close();
+    }
+  }, [user]);
   console.log(user);
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
