@@ -34,7 +34,6 @@ const Available_class = ({ id }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err?.response?.data?.scheduled_class?.message) {
           setError(err?.response?.data?.scheduled_class?.message);
           document.getElementById("bookClassLoading").close();

@@ -9,11 +9,11 @@ import {
   removeUser,
 } from "@/Redux/features/userSlice";
 import { usePathname } from "next/navigation";
+import Notification from "../Notification/Notification";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const pathname = usePathname();
-  const socketRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -40,22 +40,10 @@ const Navbar = () => {
   };
 
   const user = useSelector((state) => state?.user?.user);
-  useEffect(() => {
-    if (user) {
-      socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/notifications/public/`
-      );
-      socketRef.current.onmessage = (e) => {
-        const data = JSON.parse(e.data);
-        console.log(data);
-      };
 
-      return () => socketRef.current.close();
-    }
-  }, [user]);
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
-      <div className="navbar-start w-4/12">
+      <div className="navbar-start w-6/12 sm:w-4/12">
         <Link
           href={"/"}
           className="font-bold text-xl text-green-400 sm:text-3xl"
@@ -64,8 +52,8 @@ const Navbar = () => {
         </Link>
       </div>
       {/*   -------------------------desktop view---------------------  */}
-      <div className="navbar-end w-8/12">
-        <div className="hidden sm:flex items-center">
+      <div className="navbar-end w-6/12 sm:w-8/12">
+        <div className="hidden md:flex items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
               <Link className={pathname === "/" ? "border-b-1" : ""} href={"/"}>
@@ -89,6 +77,7 @@ const Navbar = () => {
                 About
               </Link>
             </li>
+            <li>{user && <Notification />}</li>
             <li>
               {user ? (
                 <>
@@ -96,9 +85,9 @@ const Navbar = () => {
                     <div
                       tabIndex={0}
                       role="button"
-                      className="btn btn-ghost btn-circle avatar"
+                      className="btn btn-ghost btn-circle avatar w-13"
                     >
-                      <div className="w-10 rounded-full">
+                      <div className="rounded-full border-3 border-green-400">
                         <img
                           alt="Tailwind CSS Navbar component"
                           src={
@@ -163,8 +152,9 @@ const Navbar = () => {
           </ul>
         </div>
         {/* -----------------Mobile view----------------  */}
+        <div className="md:hidden">{user && <Notification />}</div>
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost sm:hidden">
+          <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"

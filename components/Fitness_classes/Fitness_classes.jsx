@@ -5,10 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Fitness_classes = async () => {
-  const data = await fetch(
-    "https://gym-management-henna.vercel.app/fitness_classes/"
-  );
-  const classes = await data.json();
+  let classes = [];
+  try {
+    const data = await fetch(
+      "https://gym-management-henna.vercel.app/fitness_classes/"
+    );
+    classes = await data.json();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <div id="classes" className="max-w-[1200px] mx-auto my-20">
       <p className="text-primary font-bold text-3xl lg:text-5xl ml-10 mb-10">

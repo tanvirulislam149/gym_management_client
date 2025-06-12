@@ -5,8 +5,13 @@ import Button from "../Button/Button";
 import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 
 const Plans = async () => {
-  const data = await fetch("https://gym-management-henna.vercel.app/plans/");
-  const plans = await data.json();
+  let plans = [];
+  try {
+    const data = await fetch("https://gym-management-henna.vercel.app/plans/");
+    plans = await data.json();
+  } catch (error) {
+    console.log(error);
+  }
   return (
     <div id="plans" className="max-w-[1200px] mx-auto mb-10">
       <p className="text-primary font-bold text-3xl lg:text-5xl mb-10 ml-10">
