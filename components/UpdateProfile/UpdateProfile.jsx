@@ -65,14 +65,9 @@ const UpdateProfile = () => {
     formData.append("address", data.address);
     formData.append("phone_number", data.phone_number);
 
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     api_client
       .put("/auth/users/me/", formData)
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           api_client
             .get("/auth/users/me/")
@@ -102,14 +97,13 @@ const UpdateProfile = () => {
         new_password: e.target.new_password.value,
       })
       .then((res) => {
-        console.log(res);
         if (res.status === 204) {
           setMsg("Updated successfully.");
           document.getElementById(`my_modal_3`).showModal();
         }
       })
       .catch((err) => {
-        console.log(res);
+        console.log(err);
       })
       .finally(() => setPasswordLoading(false));
   };

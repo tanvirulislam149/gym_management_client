@@ -39,7 +39,6 @@ const Schedule_classes = () => {
         }`
       )
       .then((res) => {
-        console.log(res.data);
         setScheduledClasses(res.data);
       })
       .catch((err) => console.log(err))
@@ -54,7 +53,6 @@ const Schedule_classes = () => {
       )
       .then((res) => {
         if (res.status === 204) {
-          console.log(res);
           setDeleteLoading(false);
           fetchClasses();
           document.getElementById("my_modal_3").showModal();

@@ -53,7 +53,6 @@ const Navbar = () => {
       return () => socketRef.current.close();
     }
   }, [user]);
-  console.log(user);
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
       <div className="navbar-start w-4/12">

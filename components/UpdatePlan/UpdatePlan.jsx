@@ -57,12 +57,6 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
   const onSubmit = (data) => {
     setLoading(true);
     setShowError(true);
-    console.log({
-      ...data,
-      price: parseInt(data.price),
-      months: parseInt(data.months),
-      fitness_classes: selectedClasses,
-    });
     if (selectedClasses.length) {
       const token = localStorage.getItem("token");
       axios
@@ -81,7 +75,6 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
           }
         )
         .then((res) => {
-          console.log(res);
           if (res.status === 200) {
             setLoading(false);
             fetchPlans();

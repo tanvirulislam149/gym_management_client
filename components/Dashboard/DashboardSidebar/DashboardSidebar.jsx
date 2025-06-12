@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const DashboardSidebar = () => {
   const { user, loading } = useSelector((state) => state?.user);
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div>
       <div className="drawer lg:drawer-open">

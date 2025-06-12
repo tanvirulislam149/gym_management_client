@@ -25,7 +25,6 @@ const PaymentModal = ({ booked_plan }) => {
     api_client
       .post(`/payment/`, finalData)
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           api_client
             .post("/makePayment/initiate/", {
@@ -43,7 +42,6 @@ const PaymentModal = ({ booked_plan }) => {
       })
       .catch((err) => console.log(err));
   };
-  console.log(booked_plan);
   return (
     <dialog id="payment_modal" className="modal">
       <div className="modal-box h-90 bg-white text-black">

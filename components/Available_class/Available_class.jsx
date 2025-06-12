@@ -9,7 +9,6 @@ const Available_class = ({ id }) => {
   const [classes, setClasses] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log(error);
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +28,6 @@ const Available_class = ({ id }) => {
         scheduled_class: cid,
       })
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassSuccess").showModal();

@@ -36,7 +36,6 @@ const book_class = () => {
         }`
       )
       .then((res) => {
-        console.log(res.data);
         setScheduledClasses(res.data);
       })
       .catch((err) => console.log(err))

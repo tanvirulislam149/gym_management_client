@@ -45,15 +45,6 @@ const register = () => {
   const dispatch = useDispatch();
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log({
-      email,
-      f_name,
-      l_name,
-      address,
-      number,
-      password,
-      confirmPassword,
-    });
     if (password === confirmPassword) {
       const formData = new FormData();
       formData.append("image", image);
@@ -64,7 +55,6 @@ const register = () => {
       formData.append("phone_number", number);
       formData.append("password", password);
       const result = await registerUser(formData);
-      console.log(result);
     } else {
       setErrorMsg(`Password didn't matched`);
       document.getElementById(`my_modal_3`).showModal();

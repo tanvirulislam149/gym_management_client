@@ -14,7 +14,6 @@ import DoughnutChart from "../../../../components/Doughnut/DoughnutChart";
 const Summary = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(data, loading);
 
   useEffect(() => {
     setLoading(true);

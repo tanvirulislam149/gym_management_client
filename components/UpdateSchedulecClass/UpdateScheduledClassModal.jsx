@@ -51,7 +51,6 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
         finalData
       )
       .then((res) => {
-        console.log(res);
         if (res.status === 200) {
           fetchClasses();
           setLoading(false);

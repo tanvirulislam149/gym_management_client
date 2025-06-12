@@ -18,7 +18,6 @@ const BookPlanBtn = ({ id }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         document.getElementById("bookPlanError").showModal();
       })
       .finally(() => setLoading(false));

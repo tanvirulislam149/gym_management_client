@@ -23,7 +23,6 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
       date_time: date_time,
       total_seats: parseInt(data.total_seats),
     };
-    console.log(finalData);
 
     api_client
       .post(`/scheduled_classes/`, finalData)

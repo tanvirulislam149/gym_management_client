@@ -34,12 +34,10 @@ const login = () => {
         },
       })
       .then((res) => {
-        console.log("object");
         dispatch(getUser(res.data));
         router.push("/");
       })
       .catch((err) => {
-        console.log(err);
         if (err.status === 401) {
           setMsg("Wrong Password");
           document.getElementById(`my_modal_3`).showModal();
@@ -50,7 +48,6 @@ const login = () => {
 
   const handleSendEmail = (e) => {
     e.preventDefault();
-    console.log(e.target.email.value);
     axios
       .post(
         "https://gym-management-henna.vercel.app/auth/users/reset_password/",

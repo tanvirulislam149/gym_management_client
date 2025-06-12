@@ -13,7 +13,6 @@ const My_plans = () => {
   const [active, setActive] = useState("No active plan");
   const [cardLoading, setCardLoading] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
-  console.log(plan, booked_plan, active);
 
   useEffect(() => {
     setPaymentLoading(true);
@@ -34,7 +33,6 @@ const My_plans = () => {
           setActive(res?.data[0]?.current_plan_days);
         }
         if (res?.data[0]?.plans?.id) {
-          console.log("entered");
           api_client
             .get(
               `https://gym-management-henna.vercel.app/plans/${res.data[0].plans.id}`
