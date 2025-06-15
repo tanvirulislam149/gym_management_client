@@ -77,7 +77,11 @@ const Navbar = () => {
                 About
               </Link>
             </li>
-            <li>{user && <Notification />}</li>
+            {user && (
+              <li>
+                <Notification />
+              </li>
+            )}
             <li>
               {user ? (
                 <>

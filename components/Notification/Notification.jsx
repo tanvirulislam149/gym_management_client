@@ -58,17 +58,21 @@ const Notification = () => {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-white rounded-box text-black z-1 w-52 p-2 shadow-sm"
+          className="dropdown-content menu bg-white rounded-box text-black z-1 w-96 h-96 overflow-y-scroll p-2 shadow-sm"
         >
-          {data?.length ? (
-            data.map((d) => (
-              <li key={d.id} className="w-52">
-                {d.message.message_text}
-              </li>
-            ))
-          ) : (
-            <p>No notification found</p>
-          )}
+          <div>
+            {data?.length ? (
+              data.map((d) => (
+                <li key={d.id} className="">
+                  <p className="text-base border-b-1">
+                    {d.message.message_text}
+                  </p>
+                </li>
+              ))
+            ) : (
+              <p>No notification found</p>
+            )}
+          </div>
         </ul>
       </div>
     </div>
