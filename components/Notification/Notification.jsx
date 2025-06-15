@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 
 const Notification = () => {
   const socketRef = useRef(null);
+  const socketRef2 = useRef(null);
   const user = useSelector((state) => state?.user?.user);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  console.log(data);
 
   useEffect(() => {
     setLoading(true);
@@ -20,15 +22,27 @@ const Notification = () => {
 
   useEffect(() => {
     if (user) {
+      socketRef2.current = new WebSocket(
+        `ws://127.0.0.1:8000/ws/notifications/${user.id}/`
+      );
       socketRef.current = new WebSocket(
         `ws://127.0.0.1:8000/ws/notifications/public_notification/`
       );
       socketRef.current.onmessage = (e) => {
-        const data = JSON.parse(e.data);
-        console.log(data);
+        const newData = JSON.parse(e.data);
+        setData((prev) => [newData, ...prev]);
+        console.log(newData);
+      };
+      socketRef2.current.onmessage = (e) => {
+        const newData = JSON.parse(e.data);
+        setData((prev) => [newData, ...prev]);
+        console.log(newData);
       };
 
-      return () => socketRef.current.close();
+      return () => {
+        socketRef.current.close();
+        socketRef2.current.close();
+      };
     }
   }, [user]);
   return (
