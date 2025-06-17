@@ -14,7 +14,7 @@ const Notification = () => {
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("http://127.0.0.1:8000/notification/")
+      .get("http://127.0.0.1:8000/notification/notifications/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
