@@ -23,9 +23,8 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
     if (id) {
       setFetchLoading(true);
       axios
-        .get(`https://gym-management-henna.vercel.app/fitness_classes/${id}`)
+        .get(`https://gym-management-0fmi.onrender.com/fitness_classes/${id}`)
         .then((res) => {
-          console.log(res.data);
           reset({
             name: res.data.name,
             description: res.data.description,
@@ -66,7 +65,6 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
     formData.append("description", data.description);
 
     api_client.put(`/fitness_classes/${id}`, formData).then((res) => {
-      console.log(res);
       if (res.status === 200) {
         setLoading(false);
         fetchClasses();

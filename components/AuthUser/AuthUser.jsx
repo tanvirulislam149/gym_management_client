@@ -9,7 +9,6 @@ const AuthUser = ({ children }) => {
 
   useEffect(() => {
     if (!user && !loading) {
-      console.log("object");
       router.push("/login");
     }
   }, [user, router]);

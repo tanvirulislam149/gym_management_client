@@ -16,7 +16,7 @@ const Manage_classes = () => {
   const fetchClasses = () => {
     setLoading(true);
     axios
-      .get("https://gym-management-henna.vercel.app/fitness_classes/")
+      .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));

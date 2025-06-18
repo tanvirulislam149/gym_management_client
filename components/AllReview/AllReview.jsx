@@ -16,12 +16,10 @@ const AllReview = () => {
   const [reviews, setReviews] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log(reviews);
-
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://gym-management-henna.vercel.app/all_reviews/")
+      .get("https://gym-management-0fmi.onrender.com/all_reviews/")
       .then((res) => setReviews(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -60,8 +58,8 @@ const AllReview = () => {
           }}
           pagination={{ clickable: true }}
           modules={[Navigation, Pagination, Autoplay]}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
         >
           {reviews?.map((r) => (
             <SwiperSlide key={r.id}>

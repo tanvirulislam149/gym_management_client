@@ -13,12 +13,11 @@ const My_plans = () => {
   const [active, setActive] = useState("No active plan");
   const [cardLoading, setCardLoading] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
-  console.log(plan, booked_plan, active);
 
   useEffect(() => {
     setPaymentLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/payment/")
+      .get("https://gym-management-0fmi.onrender.com/payment/")
       .then((res) => setPayments(res.data))
       .catch((err) => console.log(err))
       .finally(() => setPaymentLoading(false));
@@ -27,17 +26,16 @@ const My_plans = () => {
   useEffect(() => {
     setCardLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/book_plans/")
+      .get("https://gym-management-0fmi.onrender.com/book_plans/")
       .then((res) => {
         setBooked_plan(res.data);
         if (res?.data[0]?.current_plan_days) {
           setActive(res?.data[0]?.current_plan_days);
         }
         if (res?.data[0]?.plans?.id) {
-          console.log("entered");
           api_client
             .get(
-              `https://gym-management-henna.vercel.app/plans/${res.data[0].plans.id}`
+              `https://gym-management-0fmi.onrender.com/plans/${res.data[0].plans.id}`
             )
             .then((res) => setPlan(res.data))
             .catch((err) => console.log(err))

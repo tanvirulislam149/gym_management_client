@@ -15,7 +15,6 @@ const ReviewPost = ({ id, fetchReview }) => {
         comment: e.target.comment.value,
       })
       .then((res) => {
-        console.log(res.data);
         fetchReview();
         document.getElementById("myForm").reset();
       })

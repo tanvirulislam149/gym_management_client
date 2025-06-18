@@ -14,12 +14,11 @@ import DoughnutChart from "../../../../components/Doughnut/DoughnutChart";
 const Summary = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log(data, loading);
 
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/dashboard/")
+      .get("https://gym-management-0fmi.onrender.com/dashboard/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));

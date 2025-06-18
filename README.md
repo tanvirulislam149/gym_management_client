@@ -6,7 +6,7 @@ A modern web application for managing gym memberships, classes, schedules, and m
 
 [Click here to visit the FRONTEND live site](https://gym-management-client-lilac.vercel.app/)
 
-[Click here to visit the BACKEND live site](https://gym-management-henna.vercel.app/)
+[Click here to visit the BACKEND live site](https://gym-management-0fmi.onrender.com/)
 
 ## 🚀 Features
 

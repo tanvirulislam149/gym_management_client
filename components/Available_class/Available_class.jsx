@@ -9,12 +9,11 @@ const Available_class = ({ id }) => {
   const [classes, setClasses] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log(error);
 
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}`
+      `https://gym-management-0fmi.onrender.com/scheduled_classes/?fitness_class_id=${id}`
     )
       .then((response) => response.json())
       .then((data) => setClasses(data))
@@ -25,18 +24,16 @@ const Available_class = ({ id }) => {
     setError("");
     document.getElementById("bookClassLoading").showModal();
     api_client
-      .post("https://gym-management-henna.vercel.app/book_classes/", {
+      .post("https://gym-management-0fmi.onrender.com/book_classes/", {
         scheduled_class: cid,
       })
       .then((res) => {
-        console.log(res);
         if (res.status === 201) {
           document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassSuccess").showModal();
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err?.response?.data?.scheduled_class?.message) {
           setError(err?.response?.data?.scheduled_class?.message);
           document.getElementById("bookClassLoading").close();
