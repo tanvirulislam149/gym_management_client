@@ -15,7 +15,7 @@ const passwordReset = () => {
     setLoading(true);
     axios
       .post(
-        "https://gym-management-henna.vercel.app/auth/users/reset_password_confirm/",
+        "https://gym-management-0fmi.onrender.com/auth/users/reset_password_confirm/",
         {
           uid: urlArray[2],
           token: urlArray[3],

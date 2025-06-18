@@ -19,7 +19,7 @@ const AllReview = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://gym-management-henna.vercel.app/all_reviews/")
+      .get("https://gym-management-0fmi.onrender.com/all_reviews/")
       .then((res) => setReviews(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));

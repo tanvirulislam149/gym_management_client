@@ -9,34 +9,43 @@ const Notification = () => {
   const user = useSelector((state) => state?.user?.user);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log(data);
+  const [newNotification, setNewNotification] = useState(0);
 
-  useEffect(() => {
+  const fetch_notification = () => {
     setLoading(true);
     api_client
-      .get("http://127.0.0.1:8000/notification/notifications/")
+      .get("https://gym-management-0fmi.onrender.com/notification/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetch_notification();
   }, []);
+
+  useEffect(() => {
+    const newData = data.filter((d) => d.is_read == false);
+    if (newData.length) {
+      setNewNotification(newData.length);
+    }
+  }, [data.length]);
 
   useEffect(() => {
     if (user) {
       socketRef2.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/notifications/${user.id}/`
+        `wss://gym-management-0fmi.onrender.com/ws/notifications/${user.id}/`
       );
       socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/notifications/public_notification/`
+        `wss://gym-management-0fmi.onrender.com/ws/notifications/public_notification/`
       );
       socketRef.current.onmessage = (e) => {
         const newData = JSON.parse(e.data);
         setData((prev) => [newData, ...prev]);
-        console.log(newData);
       };
       socketRef2.current.onmessage = (e) => {
         const newData = JSON.parse(e.data);
         setData((prev) => [newData, ...prev]);
-        console.log(newData);
       };
 
       return () => {
@@ -45,9 +54,27 @@ const Notification = () => {
       };
     }
   }, [user]);
+
+  const handleReadNotification = () => {
+    if (newNotification) {
+      api_client
+        .post(
+          "https://gym-management-0fmi.onrender.com/notification/read_notification/"
+        )
+        .then((res) => {
+          setNewNotification(0);
+          fetch_notification();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   return (
     <div>
-      <div className="dropdown dropdown-end">
+      <div
+        onClick={() => handleReadNotification()}
+        className="dropdown dropdown-end"
+      >
         <div tabIndex={0} role="button" className="">
           <button className="btn btn-ghost btn-circle">
             <div className="indicator">
@@ -66,19 +93,25 @@ const Notification = () => {
                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                 />{" "}
               </svg>
-              <span className="status status-lg status-primary animate-bounce indicator-item"></span>
+              <span className=" text-white indicator-item">
+                {newNotification !== 0 && newNotification}
+              </span>
             </div>
           </button>
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-white rounded-box text-black z-1 w-96 h-96 overflow-y-scroll p-2 shadow-sm"
+          className="dropdown-content menu bg-white rounded-box text-black z-1 w-96 max-h-96 overflow-y-scroll p-2 shadow-sm"
         >
           <div>
             {data?.length ? (
-              data.map((d) => (
-                <li key={d.id} className="">
-                  <p className="text-base border-b-1">
+              data.map((d, index) => (
+                <li key={index} className="">
+                  <p
+                    className={`text-base border-b-1 ${
+                      d.is_read ? "" : "bg-gray-200"
+                    } my-0.5`}
+                  >
                     {d.message.message_text}
                   </p>
                 </li>

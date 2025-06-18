@@ -13,7 +13,7 @@ const Reviews = ({ id }) => {
     setLoading(true);
     axios
       .get(
-        `https://gym-management-henna.vercel.app/fitness_classes/${id}/reviews/`
+        `https://gym-management-0fmi.onrender.com/fitness_classes/${id}/reviews/`
       )
       .then((res) => setReviews(res.data))
       .catch((err) => console.log(err))

@@ -9,7 +9,7 @@ const BookPlanBtn = ({ id }) => {
   const handleBookPlan = () => {
     setLoading(true);
     api_client
-      .post("https://gym-management-henna.vercel.app/book_plans/", {
+      .post("https://gym-management-0fmi.onrender.com/book_plans/", {
         plans: id,
       })
       .then((res) => {

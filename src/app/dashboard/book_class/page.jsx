@@ -20,7 +20,7 @@ const book_class = () => {
 
   useEffect(() => {
     axios
-      .get("https://gym-management-henna.vercel.app/fitness_classes/")
+      .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
         console.log(err);
@@ -31,7 +31,7 @@ const book_class = () => {
     setLoading(true);
     axios
       .get(
-        `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
+        `https://gym-management-0fmi.onrender.com/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
           (page - 1) * limit
         }`
       )
@@ -50,7 +50,7 @@ const book_class = () => {
     setError("");
     document.getElementById("bookClassLoading").showModal();
     api_client
-      .post("https://gym-management-henna.vercel.app/book_classes/", {
+      .post("https://gym-management-0fmi.onrender.com/book_classes/", {
         scheduled_class: cid,
       })
       .then((res) => {

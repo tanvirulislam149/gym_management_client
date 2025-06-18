@@ -7,7 +7,7 @@ import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 const Plans = async () => {
   let plans = [];
   try {
-    const data = await fetch("https://gym-management-henna.vercel.app/plans/");
+    const data = await fetch("https://gym-management-0fmi.onrender.com/plans/");
     plans = await data.json();
   } catch (error) {
     console.log(error);

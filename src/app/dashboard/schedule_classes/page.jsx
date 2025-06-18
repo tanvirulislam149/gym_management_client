@@ -23,7 +23,7 @@ const Schedule_classes = () => {
 
   useEffect(() => {
     axios
-      .get("https://gym-management-henna.vercel.app/fitness_classes/")
+      .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
         console.log(err);
@@ -34,7 +34,7 @@ const Schedule_classes = () => {
     setLoading(true);
     axios
       .get(
-        `https://gym-management-henna.vercel.app/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
+        `https://gym-management-0fmi.onrender.com/scheduled_classes/?fitness_class_id=${id}&limit=${limit}&offset=${
           (page - 1) * limit
         }`
       )
@@ -49,7 +49,7 @@ const Schedule_classes = () => {
     setDeleteLoading(true);
     api_client
       .delete(
-        `https://gym-management-henna.vercel.app/scheduled_classes/${id}/`
+        `https://gym-management-0fmi.onrender.com/scheduled_classes/${id}/`
       )
       .then((res) => {
         if (res.status === 204) {

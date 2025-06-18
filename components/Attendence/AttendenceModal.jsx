@@ -11,7 +11,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
     setLoading(true);
     api_client
       .get(
-        `https://gym-management-henna.vercel.app/attendence/?scheduled_class_id=${id}`
+        `https://gym-management-0fmi.onrender.com/attendence/?scheduled_class_id=${id}`
       )
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err))
