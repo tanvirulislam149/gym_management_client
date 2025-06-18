@@ -27,7 +27,10 @@ const AttendenceModal = ({ id, fetchClasses }) => {
   const handleAttendence = (scheduled_class, value) => {
     const data = { ...scheduled_class, attendence: value };
     api_client
-      .put(`http://127.0.0.1:8000/attendence/${scheduled_class.id}/`, data)
+      .put(
+        `https://gym-management-0fmi.onrender.com/attendence/${scheduled_class.id}/`,
+        data
+      )
       .then((res) => {
         fetchClasses();
         fetchAttendenceClass();
