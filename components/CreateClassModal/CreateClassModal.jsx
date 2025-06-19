@@ -7,7 +7,7 @@ import Modal from "../Modal/Modal";
 import { format } from "date-fns-tz";
 
 const CreateClassModal = ({ fetchClasses, classes }) => {
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
   const [loading, setLoading] = useState(false);
 
   const timeZone = "Asia/Dhaka";
@@ -28,6 +28,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
       .post(`/scheduled_classes/`, finalData)
       .then((res) => {
         if (res.status === 201) {
+          reset();
           fetchClasses();
           setLoading(false);
           document.getElementById("createScheduledClass").showModal();

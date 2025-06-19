@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const Notification = () => {
   const socketRef = useRef(null);
-  const socketRef2 = useRef(null);
+  // const socketRef2 = useRef(null);
   const user = useSelector((state) => state?.user?.user);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -33,24 +33,26 @@ const Notification = () => {
 
   useEffect(() => {
     if (user) {
-      socketRef2.current = new WebSocket(
+      socketRef.current = new WebSocket(
         `wss://gym-management-0fmi.onrender.com/ws/notifications/${user.id}/`
       );
-      socketRef.current = new WebSocket(
-        `wss://gym-management-0fmi.onrender.com/ws/notifications/public_notification/`
-      );
+      // socketRef.current = new WebSocket(
+      //   `wss://gym-management-0fmi.onrender.com/ws/notifications/public_notification/`
+      // );
       socketRef.current.onmessage = (e) => {
         const newData = JSON.parse(e.data);
+        console.log(newData);
         setData((prev) => [newData, ...prev]);
       };
-      socketRef2.current.onmessage = (e) => {
-        const newData = JSON.parse(e.data);
-        setData((prev) => [newData, ...prev]);
-      };
+      // socketRef2.current.onmessage = (e) => {
+      //   const newData = JSON.parse(e.data);
+      //   console.log(newData);
+      //   setData((prev) => [newData, ...prev]);
+      // };
 
       return () => {
         socketRef.current.close();
-        socketRef2.current.close();
+        // socketRef2.current.close();
       };
     }
   }, [user]);
