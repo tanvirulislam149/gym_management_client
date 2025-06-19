@@ -1,5 +1,6 @@
 "use client";
 import api_client from "@/api_client";
+import { format, parseISO } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -95,7 +96,7 @@ const Notification = () => {
                   d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
                 />{" "}
               </svg>
-              <span className=" text-white indicator-item">
+              <span className=" text-white font-normal indicator-item">
                 {newNotification !== 0 && newNotification}
               </span>
             </div>
@@ -110,11 +111,21 @@ const Notification = () => {
               data.map((d, index) => (
                 <li key={index} className="">
                   <p
-                    className={`text-base border-b-1 ${
+                    className={`text-base border-b-1 cursor-auto ${
                       d.is_read ? "" : "bg-gray-200"
                     } my-0.5`}
                   >
-                    {d.message.message_text}
+                    {d.message.message_text.split("at ")[0]}
+                    {d.message.message_text.split("at ")[1]
+                      ? ` at ${format(
+                          parseISO(
+                            d.message.message_text
+                              .split("at ")[1]
+                              ?.split(" class")[0]
+                          ),
+                          "hh:mm aa, MMMM dd, yyyy"
+                        )}`
+                      : ""}
                   </p>
                 </li>
               ))
