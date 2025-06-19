@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import AuthUser from "../../../../components/AuthUser/AuthUser";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import { format, parseISO } from "date-fns";
+import Modal from "../../../../components/Modal/Modal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const My_classes = () => {
   const [classes, setClasses] = useState([]);
@@ -14,7 +16,7 @@ const My_classes = () => {
     api_client
       .get("https://gym-management-0fmi.onrender.com/attendence/")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   }, []);
 
@@ -81,6 +83,7 @@ const My_classes = () => {
             </div>
           )}
         </div>
+        <ErrorModal />
       </DashboardLayout>
     </AuthUser>
   );

@@ -5,6 +5,7 @@ import DashboardLayout from "../../../../layouts/DashboardLayout";
 import { useForm } from "react-hook-form";
 import api_client from "@/api_client";
 import Modal from "../../../../components/Modal/Modal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const Create_classes = () => {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,7 @@ const Create_classes = () => {
           document.getElementById("my_modal_3").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
   return (
     <AuthComp>
@@ -82,6 +83,7 @@ const Create_classes = () => {
           </form>
         </div>
         <Modal text={"Class created."} />
+        <ErrorModal />
       </DashboardLayout>
     </AuthComp>
   );

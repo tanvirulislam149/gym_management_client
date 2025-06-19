@@ -10,6 +10,8 @@ import {
 } from "@/Redux/features/userSlice";
 import { usePathname } from "next/navigation";
 import Notification from "../Notification/Notification";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const Navbar = () => {
           dispatch(getUser(res.data));
         })
         .catch((err) => {
-          console.log(err);
+          document.getElementById("errorModal").showModal();
         });
     }
   }, []);
@@ -275,6 +277,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
+      <ErrorModal />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import axios from "axios";
 import api_client from "@/api_client";
 import Modal from "../../../../components/Modal/Modal";
 import UpdateClassesModal from "../../../../components/UpdateClassesModal/UpdateClassesModal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const Manage_classes = () => {
   const [classes, setClasses] = useState([]);
@@ -18,7 +19,7 @@ const Manage_classes = () => {
     axios
       .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -36,7 +37,7 @@ const Manage_classes = () => {
           document.getElementById("my_modal_3").showModal();
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setDeleteLoading(0));
   };
   return (
@@ -103,6 +104,7 @@ const Manage_classes = () => {
         </div>
         <Modal text={"Plan deleted successfully"} />
         <UpdateClassesModal id={updateId} fetchClasses={fetchClasses} />
+        <ErrorModal />
       </DashboardLayout>
     </AuthComp>
   );

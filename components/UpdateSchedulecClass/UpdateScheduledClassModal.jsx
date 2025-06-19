@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import Modal from "../Modal/Modal";
 import { format } from "date-fns-tz";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
   const { register, handleSubmit, control, reset } = useForm();
@@ -28,7 +29,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
             total_seats: res.data.total_seats,
           });
         })
-        .catch((err) => console.log(err))
+        .catch((err) => document.getElementById("errorModal").showModal())
         .finally(() => setFetchLoading(false));
     }
   }, [updateId]);
@@ -57,7 +58,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
           document.getElementById("updateScheduledClass").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
 
   return (
@@ -147,6 +148,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
           <button>close</button>
         </form>
       </dialog>
+      <ErrorModal />
     </dialog>
   );
 };

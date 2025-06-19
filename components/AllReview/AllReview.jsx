@@ -11,6 +11,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import axios from "axios";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const AllReview = () => {
   const [reviews, setReviews] = useState();
@@ -21,7 +23,7 @@ const AllReview = () => {
     axios
       .get("https://gym-management-0fmi.onrender.com/all_reviews/")
       .then((res) => setReviews(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   }, []);
   return (
@@ -108,6 +110,7 @@ const AllReview = () => {
           ))}
         </Swiper>
       )}
+      <ErrorModal />
     </div>
   );
 };

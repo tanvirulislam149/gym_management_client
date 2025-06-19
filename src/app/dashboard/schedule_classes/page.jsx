@@ -9,6 +9,7 @@ import UpdateScheduledClassModal from "../../../../components/UpdateSchedulecCla
 import api_client from "@/api_client";
 import Modal from "../../../../components/Modal/Modal";
 import AttendenceModal from "../../../../components/Attendence/AttendenceModal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const Schedule_classes = () => {
   const [scheduledClasses, setScheduledClasses] = useState([]);
@@ -26,7 +27,7 @@ const Schedule_classes = () => {
       .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
-        console.log(err);
+        document.getElementById("errorModal").showModal();
       });
   }, []);
 
@@ -41,7 +42,7 @@ const Schedule_classes = () => {
       .then((res) => {
         setScheduledClasses(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -58,7 +59,7 @@ const Schedule_classes = () => {
           document.getElementById("my_modal_3").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
 
   useEffect(() => {
@@ -231,6 +232,7 @@ const Schedule_classes = () => {
           updateId={updateId}
         />
         <AttendenceModal id={attendenceId} fetchClasses={fetchClasses} />
+        <ErrorModal />
       </DashboardLayout>
     </AuthComp>
   );

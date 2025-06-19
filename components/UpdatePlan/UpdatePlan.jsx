@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const UpdatePlanModal = ({ id, fetchPlans }) => {
   const [classes, setClasses] = useState([]);
@@ -23,7 +24,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
     axios
       .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   }, []);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
             setSelectedClasses((prev) => [...prev, c.id]);
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => document.getElementById("errorModal").showModal());
     }
   }, [id]);
 
@@ -81,7 +82,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
             document.getElementById("update_modal").showModal();
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => document.getElementById("errorModal").showModal());
     }
   };
   return (
@@ -178,6 +179,7 @@ const UpdatePlanModal = ({ id, fetchPlans }) => {
           <button>close</button>
         </form>
       </dialog>
+      <ErrorModal />
     </dialog>
   );
 };

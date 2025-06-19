@@ -2,6 +2,8 @@
 import api_client from "@/api_client";
 import { format, parseISO } from "date-fns";
 import React, { useEffect, useState } from "react";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const AttendenceModal = ({ id, fetchClasses }) => {
   const [classes, setClasses] = useState([]);
@@ -14,7 +16,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
         `https://gym-management-0fmi.onrender.com/attendence/?scheduled_class_id=${id}`
       )
       .then((res) => setClasses(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -35,7 +37,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
         fetchClasses();
         fetchAttendenceClass();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
 
   return (
@@ -110,6 +112,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>
+      <ErrorModal />
     </dialog>
   );
 };

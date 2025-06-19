@@ -3,6 +3,8 @@ import api_client from "@/api_client";
 import { format, parseISO } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const Notification = () => {
   const socketRef = useRef(null);
@@ -16,7 +18,7 @@ const Notification = () => {
     api_client
       .get("https://gym-management-0fmi.onrender.com/notification/")
       .then((res) => setData(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -58,7 +60,7 @@ const Notification = () => {
           setNewNotification(0);
           fetch_notification();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => document.getElementById("errorModal").showModal());
     }
   };
 
@@ -125,6 +127,7 @@ const Notification = () => {
           </div>
         </ul>
       </div>
+      <ErrorModal />
     </div>
   );
 };

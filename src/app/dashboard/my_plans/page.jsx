@@ -5,6 +5,8 @@ import DashboardLayout from "../../../../layouts/DashboardLayout";
 import api_client from "@/api_client";
 import { format, parseISO } from "date-fns";
 import PaymentModal from "../../../../components/PaymentModal/PaymentModal";
+import Modal from "../../../../components/Modal/Modal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const My_plans = () => {
   const [payments, setPayments] = useState([]);
@@ -19,7 +21,7 @@ const My_plans = () => {
     api_client
       .get("https://gym-management-0fmi.onrender.com/payment/")
       .then((res) => setPayments(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setPaymentLoading(false));
   }, []);
 
@@ -38,13 +40,13 @@ const My_plans = () => {
               `https://gym-management-0fmi.onrender.com/plans/${res.data[0].plans.id}`
             )
             .then((res) => setPlan(res.data))
-            .catch((err) => console.log(err))
+            .catch((err) => document.getElementById("errorModal").showModal())
             .finally(() => setCardLoading(false));
         } else {
           setCardLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   }, []);
   return (
     <AuthUser>
@@ -180,6 +182,7 @@ const My_plans = () => {
           </div>
         </div>
         <PaymentModal booked_plan={booked_plan} />
+        <ErrorModal />
       </DashboardLayout>
     </AuthUser>
   );
