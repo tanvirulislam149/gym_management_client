@@ -96,7 +96,7 @@ const Notification = () => {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content menu bg-white rounded-box text-black z-1 w-96 max-h-96 overflow-y-scroll p-2 shadow-sm"
+          className="dropdown-content menu bg-white rounded-box text-black z-1 w-70 sm:w-96 max-h-96 overflow-y-scroll p-2 shadow-sm"
         >
           <div>
             {data?.length ? (

@@ -1,14 +1,26 @@
-# 🏋️‍♂️ Muscle Gain - Gym Management Website
+# Muscle Gain - Gym Management Website
 
 A modern web application for managing gym memberships, classes, schedules, and more. Designed for gym owners, staff, and members to seamlessly interact and manage gym operations.
 
-## 🌐 Live Website
+## Live Website
 
 [Click here to visit the FRONTEND live site](https://gym-management-client-lilac.vercel.app/)
 
 [Click here to visit the BACKEND live site](https://gym-management-0fmi.onrender.com/)
 
-## 🚀 Features
+## Credentials
+
+- User Credentials
+
+        Email: tanvirulislam149@gmail.com
+        password: asdfasdf12
+
+- Admin Credentials
+
+        Email: admin@gmail.com
+        password: admin
+
+## Features
 
 - Member registration and login
 - Admin dashboard for gym management
@@ -17,7 +29,7 @@ A modern web application for managing gym memberships, classes, schedules, and m
 - Attendance tracking
 - Mobile-responsive UI
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Frontend:**
 
