@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import Modal from "../Modal/Modal";
 import { format } from "date-fns-tz";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const CreateClassModal = ({ fetchClasses, classes }) => {
   const { register, handleSubmit, control, reset } = useForm();
@@ -34,7 +35,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
           document.getElementById("createScheduledClass").showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
 
   return (
@@ -118,6 +119,7 @@ const CreateClassModal = ({ fetchClasses, classes }) => {
           <button>close</button>
         </form>
       </dialog>
+      <ErrorModal />
     </dialog>
   );
 };

@@ -1,6 +1,8 @@
 import api_client from "@/api_client";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const ReviewPost = ({ id, fetchReview }) => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +20,7 @@ const ReviewPost = ({ id, fetchReview }) => {
         fetchReview();
         document.getElementById("myForm").reset();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
   return (
@@ -62,6 +64,7 @@ const ReviewPost = ({ id, fetchReview }) => {
         value={loading ? "Submitting..." : "Submit"}
         className="btn btn-primary mt-2 text-black disabled:text-gray-400"
       />
+      <ErrorModal />
     </form>
   );
 };

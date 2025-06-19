@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import api_client from "@/api_client";
 import Modal from "../Modal/Modal";
 import axios from "axios";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const UpdateClassesModal = ({ id, fetchClasses }) => {
   const [loading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
           });
           setImageUrl(res.data.image);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => document.getElementById("errorModal").showModal())
         .finally(() => setFetchLoading(false));
     }
   }, [id]);
@@ -145,6 +146,7 @@ const UpdateClassesModal = ({ id, fetchClasses }) => {
           <button>close</button>
         </form>
       </dialog>
+      <ErrorModal />
     </>
   );
 };

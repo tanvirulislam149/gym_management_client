@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const PaymentModal = ({ booked_plan }) => {
   const { register, handleSubmit, control } = useForm();
@@ -37,10 +39,10 @@ const PaymentModal = ({ booked_plan }) => {
                 window.location.href = res.data.payment_url;
               }
             })
-            .catch((err) => console.log(err));
+            .catch((err) => document.getElementById("errorModal").showModal());
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
   return (
     <dialog id="payment_modal" className="modal">
@@ -92,6 +94,7 @@ const PaymentModal = ({ booked_plan }) => {
           </form>
         </div>
       </div>
+      <ErrorModal />
     </dialog>
   );
 };

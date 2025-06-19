@@ -3,10 +3,11 @@ import api_client from "@/api_client";
 import { format, parseISO } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const Notification = () => {
   const socketRef = useRef(null);
-  // const socketRef2 = useRef(null);
   const user = useSelector((state) => state?.user?.user);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ const Notification = () => {
     api_client
       .get("https://gym-management-0fmi.onrender.com/notification/")
       .then((res) => setData(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -37,23 +38,14 @@ const Notification = () => {
       socketRef.current = new WebSocket(
         `wss://gym-management-0fmi.onrender.com/ws/notifications/${user.id}/`
       );
-      // socketRef.current = new WebSocket(
-      //   `wss://gym-management-0fmi.onrender.com/ws/notifications/public_notification/`
-      // );
       socketRef.current.onmessage = (e) => {
         const newData = JSON.parse(e.data);
         console.log(newData);
         setData((prev) => [newData, ...prev]);
       };
-      // socketRef2.current.onmessage = (e) => {
-      //   const newData = JSON.parse(e.data);
-      //   console.log(newData);
-      //   setData((prev) => [newData, ...prev]);
-      // };
 
       return () => {
         socketRef.current.close();
-        // socketRef2.current.close();
       };
     }
   }, [user]);
@@ -68,7 +60,7 @@ const Notification = () => {
           setNewNotification(0);
           fetch_notification();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => document.getElementById("errorModal").showModal());
     }
   };
 
@@ -135,6 +127,7 @@ const Notification = () => {
           </div>
         </ul>
       </div>
+      <ErrorModal />
     </div>
   );
 };

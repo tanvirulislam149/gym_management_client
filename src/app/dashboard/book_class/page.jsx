@@ -7,6 +7,7 @@ import AuthUser from "../../../../components/AuthUser/AuthUser";
 import DashboardLayout from "../../../../layouts/DashboardLayout";
 import { format, parseISO } from "date-fns";
 import axios from "axios";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const book_class = () => {
   const user = useSelector((state) => state?.user?.user);
@@ -23,7 +24,7 @@ const book_class = () => {
       .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
-        console.log(err);
+        document.getElementById("errorModal").showModal();
       });
   }, []);
 
@@ -38,7 +39,7 @@ const book_class = () => {
       .then((res) => {
         setScheduledClasses(res.data);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -61,7 +62,6 @@ const book_class = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err?.response?.data?.scheduled_class?.message) {
           setError(err?.response?.data?.scheduled_class?.message);
           document.getElementById("bookClassLoading").close();
@@ -70,6 +70,8 @@ const book_class = () => {
           setError(err?.response?.data?.message);
           document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassError").showModal();
+        } else {
+          document.getElementById("errorModal").showModal();
         }
       });
   };
@@ -244,6 +246,7 @@ const book_class = () => {
               <button>close</button>
             </form>
           </dialog>
+          <ErrorModal />
         </div>
       </DashboardLayout>
     </AuthUser>

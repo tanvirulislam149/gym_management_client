@@ -10,6 +10,8 @@ import BarChart from "../../../../components/BarChart/BarChart";
 import LineChart from "../../../../components/LineChart/LineChart";
 import LineChartClass from "../../../../components/LineChartClass/LineChartClass";
 import DoughnutChart from "../../../../components/Doughnut/DoughnutChart";
+import Modal from "../../../../components/Modal/Modal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const Summary = () => {
   const [data, setData] = useState([]);
@@ -20,7 +22,7 @@ const Summary = () => {
     api_client
       .get("https://gym-management-0fmi.onrender.com/dashboard/")
       .then((res) => setData(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   }, []);
 
@@ -92,6 +94,7 @@ const Summary = () => {
             </div>
           </>
         )}
+        <ErrorModal />
       </DashboardLayout>
     </AuthComp>
   );

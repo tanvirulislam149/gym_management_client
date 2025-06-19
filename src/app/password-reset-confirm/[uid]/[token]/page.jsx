@@ -3,6 +3,7 @@ import axios from "axios";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Modal from "../../../../../components/Modal/Modal";
+import ErrorModal from "../../../../../components/ErrorModal/ErrorModal";
 
 const passwordReset = () => {
   const [msg, setMsg] = useState("");
@@ -28,7 +29,7 @@ const passwordReset = () => {
           document.getElementById(`my_modal_3`).showModal();
         }
       })
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
   return (
@@ -56,6 +57,7 @@ const passwordReset = () => {
         {/* </div> */}
       </form>
       <Modal text={msg} />
+      <ErrorModal />
     </div>
   );
 };

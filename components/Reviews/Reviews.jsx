@@ -4,6 +4,8 @@ import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import api_client from "@/api_client";
 import axios from "axios";
 import ReviewPost from "./ReviewPost";
+import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const Reviews = ({ id }) => {
   const [reviews, setReviews] = useState();
@@ -16,7 +18,7 @@ const Reviews = ({ id }) => {
         `https://gym-management-0fmi.onrender.com/fitness_classes/${id}/reviews/`
       )
       .then((res) => setReviews(res.data))
-      .catch((err) => console.log(err))
+      .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
   };
 
@@ -90,6 +92,7 @@ const Reviews = ({ id }) => {
           <p className="font-bold text-xl">No reviews found</p>
         </div>
       )}
+      <ErrorModal />
     </div>
   );
 };

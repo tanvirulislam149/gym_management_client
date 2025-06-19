@@ -5,6 +5,7 @@ import DashboardLayout from "../../../../layouts/DashboardLayout";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Modal from "../../../../components/Modal/Modal";
+import ErrorModal from "../../../../components/ErrorModal/ErrorModal";
 
 const Create_plan = () => {
   const [classes, setClasses] = useState([]);
@@ -25,7 +26,7 @@ const Create_plan = () => {
       .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
-        console.log(err);
+        document.getElementById("errorModal").showModal();
       });
   }, []);
 
@@ -65,7 +66,7 @@ const Create_plan = () => {
           }
         })
         .catch((err) => {
-          console.log(err);
+          document.getElementById("errorModal").showModal();
         });
     }
   };
@@ -145,6 +146,7 @@ const Create_plan = () => {
           </form>
         </div>
         <Modal text={"Plan Created Successfully."} />
+        <ErrorModal />
       </DashboardLayout>
     </AuthComp>
   );

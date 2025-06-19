@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import api_client from "@/api_client";
 import { getUser } from "@/Redux/features/userSlice";
 import Modal from "../Modal/Modal";
+import ErrorModal from "../ErrorModal/ErrorModal";
 
 const UpdateProfile = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -77,14 +78,14 @@ const UpdateProfile = () => {
               document.getElementById(`my_modal_3`).showModal();
             })
             .catch((err) => {
-              console.log(err);
+              document.getElementById("errorModal").showModal();
             })
             .finally(() => {
               setIsLoading(false);
             });
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
     //   document.getElementById(`my_modal_3`).showModal();
   };
 
@@ -103,7 +104,7 @@ const UpdateProfile = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        document.getElementById("errorModal").showModal();
       })
       .finally(() => setPasswordLoading(false));
   };
@@ -232,6 +233,7 @@ const UpdateProfile = () => {
       <form method="dialog" className="modal-backdrop">
         <button>close</button>
       </form>
+      <ErrorModal />
     </dialog>
   );
 };

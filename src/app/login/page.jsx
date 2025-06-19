@@ -11,6 +11,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import Modal from "../../../components/Modal/Modal";
 import api_client from "@/api_client";
+import ErrorModal from "../../../components/ErrorModal/ErrorModal";
 
 const login = () => {
   const [email, setEmail] = useState("");
@@ -61,7 +62,7 @@ const login = () => {
           document.getElementById(`my_modal_3`).showModal();
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => document.getElementById("errorModal").showModal());
   };
 
   return (
@@ -157,6 +158,7 @@ const login = () => {
           <button>close</button>
         </form>
       </dialog>
+      <ErrorModal />
     </div>
   );
 };
