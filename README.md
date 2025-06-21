@@ -23,7 +23,8 @@ A modern web application for managing gym memberships, classes, schedules, and m
 ## Features
 
 - Member registration and login
-- Admin dashboard for gym management
+- User and Admin dashboard for gym management
+- Real time notification for user
 - Class scheduling and booking
 - Membership plans and payments
 - Attendance tracking
@@ -45,4 +46,5 @@ A modern web application for managing gym memberships, classes, schedules, and m
 
 **Deployment:**
 
-- Vercel (Frontend & Backend)
+- Vercel (Frontend)
+- Render (Backend)
