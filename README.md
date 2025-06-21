@@ -41,8 +41,10 @@ A modern web application for managing gym memberships, classes, schedules, and m
 **Backend:**
 
 - Django Rest Framework
+- Django channels, Redis
 - PostgreSQL
 - JWT for authentication
+- WebSockets for notification
 
 **Deployment:**
 
