@@ -66,3 +66,21 @@ body {
 .rating *:has(~ :checked, ~ [aria-checked="true"], ~ [aria-current="true"]) {
   opacity: 1;
 }
+
+.swiper-container {
+  height: 100% !important; /* Or any fixed height you want */
+}
+
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+  height: auto !important;
+}
+
+.slide-content {
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lightblue;
+}

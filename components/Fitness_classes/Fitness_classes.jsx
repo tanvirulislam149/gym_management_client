@@ -8,7 +8,10 @@ const Fitness_classes = async () => {
   // let classes = [];
   // try {
   const data = await fetch(
-    "https://gym-management-0fmi.onrender.com/fitness_classes/"
+    "https://gym-management-0fmi.onrender.com/fitness_classes/",
+    {
+      cache: "no-store",
+    }
   );
   const classes = await data.json();
   // } catch (error) {

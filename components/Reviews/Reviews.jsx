@@ -72,10 +72,6 @@ const Reviews = ({ id }) => {
                   </div>
                   <FaQuoteLeft />
                   <p>{r.comment}</p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    consectetur adipisicing
-                  </p>
                   <div className="flex justify-end">
                     <FaQuoteRight />
                   </div>

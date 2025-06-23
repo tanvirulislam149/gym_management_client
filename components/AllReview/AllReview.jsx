@@ -23,7 +23,7 @@ const AllReview = () => {
     axios
       .get("https://gym-management-0fmi.onrender.com/all_reviews/")
       .then((res) => setReviews(res.data))
-      .catch((err) => document.getElementById("errorModal").showModal())
+      .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
   return (
@@ -97,10 +97,6 @@ const AllReview = () => {
                   <p className="text-center font-bold">{r.user.email}</p>
                   <FaQuoteLeft />
                   <p>{r.comment}</p>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    consectetur adipisicing
-                  </p>
                   <div className="flex justify-end">
                     <FaQuoteRight />
                   </div>
