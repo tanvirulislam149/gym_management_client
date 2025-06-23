@@ -7,7 +7,9 @@ import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 const Plans = async () => {
   // let plans = [];
   // try {
-  const data = await fetch("https://gym-management-0fmi.onrender.com/plans/");
+  const data = await fetch("https://gym-management-0fmi.onrender.com/plans/", {
+    cache: "no-store",
+  });
   const plans = await data.json();
   // } catch (error) {
   //   console.log(error);
