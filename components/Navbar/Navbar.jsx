@@ -31,7 +31,8 @@ const Navbar = () => {
           dispatch(getUser(res.data));
         })
         .catch((err) => {
-          document.getElementById("errorModal").showModal();
+          // document.getElementById("errorModal").showModal();
+          console.log(err);
         });
     }
   }, []);
