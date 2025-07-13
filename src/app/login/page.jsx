@@ -68,7 +68,7 @@ const login = () => {
   return (
     <div className={`${styles.container} flex justify-center items-center`}>
       <div
-        className={`${styles.inputCont} w-full m-2 lg:w-3/6 h-96 flex justify-center`}
+        className={`${styles.inputCont} w-full m-2 lg:w-3/6 flex justify-center`}
       >
         <div className="w-full m-4 lg:w-3/4">
           <p className="text-3xl my-5 mb-5 text-center">LOGIN</p>
@@ -77,6 +77,7 @@ const login = () => {
           <input
             type="email"
             name="email"
+            value={email}
             required
             placeholder="Enter your email"
             onChange={(e) => setEmail(e.target.value)}
@@ -88,6 +89,7 @@ const login = () => {
             <input
               type={showPass ? "text" : "password"}
               name="password"
+              value={password}
               required
               placeholder="Enter your password"
               className="input bg-white mt-1 w-full text-black"
@@ -125,6 +127,26 @@ const login = () => {
             className="text-base btn bg-green-400 hover:bg-white my-3 text-black border-none"
             value={`${loading ? "Logging in..." : "Login"}`}
           />
+          <div className="mb-4">
+            <button
+              onClick={() => {
+                setEmail("tanvirulislam149@gmail.com");
+                setPassword("asdfasdf12");
+              }}
+              className="btn bg-white text-black border-none mr-3"
+            >
+              User credentials
+            </button>
+            <button
+              onClick={() => {
+                setEmail("admin@gmail.com");
+                setPassword("admin");
+              }}
+              className="btn bg-white text-black border-none"
+            >
+              Admin credentials
+            </button>
+          </div>
         </div>
       </div>
       <Modal text={msg} />
