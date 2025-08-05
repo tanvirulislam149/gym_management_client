@@ -5,12 +5,14 @@ import Fitness_classes from "../../components/Fitness_classes/Fitness_classes";
 import Navbar from "../../components/Navbar/Navbar";
 import Contact from "../../components/Contact/Contact";
 import AllReview from "../../components/AllReview/AllReview";
+import Message from "../../components/Message/Message";
 
 export default function Home() {
   return (
     <>
       {/* <Navbar /> */}
       <Banner />
+      <Message />
       <About />
       <Plans />
       <Fitness_classes />
