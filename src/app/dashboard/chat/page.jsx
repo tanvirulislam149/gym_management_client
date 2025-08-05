@@ -37,7 +37,7 @@ const page = () => {
           </div>
           <div>
             {receiver != 0 ? (
-              <Message receiver={receiver} />
+              <Message receiver={receiver} admin={true} />
             ) : (
               <p>Click on conversation</p>
             )}

@@ -12,7 +12,7 @@ export default function Home() {
     <>
       {/* <Navbar /> */}
       <Banner />
-      <Message receiver={1} />
+      <Message receiver={1} admin={false} />
       <About />
       <Plans />
       <Fitness_classes />
