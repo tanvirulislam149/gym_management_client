@@ -2,26 +2,26 @@
 import api_client from "@/api_client";
 import React, { useEffect, useState } from "react";
 
-const Message = () => {
+const Message = ({ receiver }) => {
   const [messages, setMessages] = useState([]);
+  console.log(receiver, messages);
 
   const getMessages = () => {
     api_client
-      .get("http://127.0.0.1:8000/message/?receiver=1")
+      .get(`http://127.0.0.1:8000/message/?receiver=${receiver}`)
       .then((res) => setMessages(res.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getMessages();
-  }, []);
+  }, [receiver]);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
-    console.log(e.target.msg_text.value);
     api_client
       .post("http://127.0.0.1:8000/message/", {
-        receiver: 1, // id of admin is 1
+        receiver: receiver, // id of admin is 1
         message_text: e.target.msg_text.value,
       })
       .then((res) => getMessages())
