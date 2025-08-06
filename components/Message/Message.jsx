@@ -63,17 +63,23 @@ const Message = ({ receiver, admin }) => {
   }, [user, receiver]);
 
   return (
-    <div>
-      <div>
-        <p>sender: {messages[0]?.sender?.email}</p>
-        <p>receiver: {messages[0]?.receiver?.email}</p>
+    <div className="cursor-default relative">
+      <div className="p-2.5 text-xl w-full z-100 sticky top-0 left-0 rounded-t-lg bg-green-400">
+        <p>Admin</p>
       </div>
-      <div>
+      <div className="mt-1">
         {messages.map((m) => (
-          <li key={m.id}>{m.message_text}</li>
+          <div
+            key={m.id}
+            className={`chat ${
+              m.sender.id === user.id ? "chat-start" : "chat-end"
+            }`}
+          >
+            <div className="chat-bubble font-normal">{m.message_text}</div>
+          </div>
         ))}
       </div>
-      <form onSubmit={sendMessageHandler}>
+      <form className="sticky bottom-0 left-0" onSubmit={sendMessageHandler}>
         <input className="border" type="text" name="msg_text" id="" />
         <input className="border" type="submit" value="Submit" />
       </form>

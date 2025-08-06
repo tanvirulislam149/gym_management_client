@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Banner.module.css";
 import Button from "../Button/Button";
 import Link from "next/link";
+import MessageCont from "../MessageCont/MessageCont";
 
 const Banner = () => {
   return (
@@ -23,6 +24,9 @@ const Banner = () => {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="text-base fixed right-10 cursor-pointer bottom-5">
+        <MessageCont />
       </div>
     </div>
   );
