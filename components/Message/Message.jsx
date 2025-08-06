@@ -64,7 +64,7 @@ const Message = ({ receiver, admin }) => {
 
   return (
     <div className="cursor-default">
-      <div className="p-2.5 text-xl w-full z-1000 sticky top-0 left-0 rounded-t-lg bg-green-400">
+      <div className="p-2.5 text-xl w-full sticky top-0 left-0 rounded-t-lg bg-green-400">
         <p>Admin</p>
       </div>
       <div className="mt-1 overflow-y-auto h-[400px]">

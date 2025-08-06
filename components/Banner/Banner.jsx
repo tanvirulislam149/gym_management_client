@@ -25,7 +25,7 @@ const Banner = () => {
           </div>
         </div>
       </div>
-      <div className="text-base fixed right-10 cursor-pointer bottom-5">
+      <div className="text-base fixed right-10 z-50 cursor-pointer bottom-5">
         <MessageCont />
       </div>
     </div>
