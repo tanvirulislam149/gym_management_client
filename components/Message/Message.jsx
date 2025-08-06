@@ -38,8 +38,9 @@ const Message = ({ receiver, admin }) => {
   const socketRef = useRef(null);
   useEffect(() => {
     if (user) {
+      const room = [receiver, user.id].sort();
       socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/messages/${admin ? receiver : user.id}/`
+        `ws://127.0.0.1:8000/ws/messages/${`${room[0]}and${room[1]}`}/`
       );
 
       socketRef.current.onopen = () => {
@@ -52,7 +53,7 @@ const Message = ({ receiver, admin }) => {
         // receiving msg from BE
         const newData = JSON.parse(e.data);
         console.log(newData);
-        setMessages((prev) => [newData, ...prev]);
+        setMessages((prev) => [...prev, newData]);
       };
 
       return () => {
