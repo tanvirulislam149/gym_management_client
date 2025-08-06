@@ -32,7 +32,7 @@ const Message = ({ receiver, admin }) => {
         getMessages();
       })
       .catch((err) => console.log(err))
-      .finally(() => (e.target.msg_text.value = " "));
+      .finally(() => (e.target.msg_text.value = ""));
   };
 
   const socketRef = useRef(null);
@@ -63,7 +63,7 @@ const Message = ({ receiver, admin }) => {
   }, [user, receiver]);
 
   return (
-    <div className="cursor-default">
+    <div className="cursor-default bg-white rounded-2xl">
       <div className="p-2.5 text-xl w-full sticky top-0 left-0 rounded-t-lg bg-green-400">
         <p>Admin</p>
       </div>
@@ -72,7 +72,7 @@ const Message = ({ receiver, admin }) => {
           <div
             key={m.id}
             className={`chat ${
-              m.sender.id === user.id ? "chat-start" : "chat-end"
+              m.sender.id === user.id ? "chat-end" : "chat-start"
             }`}
           >
             <div className="chat-bubble font-normal">{m.message_text}</div>
@@ -80,12 +80,12 @@ const Message = ({ receiver, admin }) => {
         ))}
       </div>
       <form
-        className="flex border fixed bottom-0 left-0 w-full"
+        className="flex border text-black w-full"
         onSubmit={sendMessageHandler}
       >
         <input
           type="text"
-          className="input bg-white"
+          className="input bg-white w-full"
           name="msg_text"
           placeholder="Type here"
         />
