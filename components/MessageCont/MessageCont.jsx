@@ -22,7 +22,7 @@ const MessageCont = () => {
         </div>
         <div
           tabIndex={0}
-          className="dropdown-content menu p-0 rounded-2xl text-black bg-white rounded-box z-1 w-[400px] h-[500px] overflow-auto shadow-sm"
+          className="dropdown-content menu p-0 rounded-2xl text-black bg-white rounded-box z-1 w-[400px] h-[500px] shadow-sm"
         >
           {user ? (
             <Message receiver={1} admin={false} />

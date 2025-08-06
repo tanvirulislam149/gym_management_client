@@ -63,11 +63,11 @@ const Message = ({ receiver, admin }) => {
   }, [user, receiver]);
 
   return (
-    <div className="cursor-default relative">
-      <div className="p-2.5 text-xl w-full z-100 sticky top-0 left-0 rounded-t-lg bg-green-400">
+    <div className="cursor-default">
+      <div className="p-2.5 text-xl w-full z-1000 sticky top-0 left-0 rounded-t-lg bg-green-400">
         <p>Admin</p>
       </div>
-      <div className="mt-1">
+      <div className="mt-1 overflow-y-auto h-[400px]">
         {messages.map((m) => (
           <div
             key={m.id}
@@ -79,9 +79,22 @@ const Message = ({ receiver, admin }) => {
           </div>
         ))}
       </div>
-      <form className="sticky bottom-0 left-0" onSubmit={sendMessageHandler}>
-        <input className="border" type="text" name="msg_text" id="" />
-        <input className="border" type="submit" value="Submit" />
+      <form
+        className="flex border fixed bottom-0 left-0 w-full"
+        onSubmit={sendMessageHandler}
+      >
+        <input
+          type="text"
+          className="input bg-white"
+          name="msg_text"
+          placeholder="Type here"
+        />
+        {/* <input className="border" type="text"  id="" /> */}
+        <input
+          className="border-0 btn bg-green-400 text-black"
+          type="submit"
+          value="Submit"
+        />
       </form>
     </div>
   );
