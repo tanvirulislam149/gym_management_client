@@ -73,13 +73,17 @@ const Message = ({ receiver, admin }) => {
       };
     }
   }, [user, receiver]);
+  console.log(admin);
 
   return (
     <div className="cursor-default bg-white rounded-2xl">
-      <div className="p-2.5 text-xl w-full sticky top-0 left-0 rounded-t-lg bg-green-400">
-        <p>Admin</p>
+      <div className="p-2.5 text-xl w-full sticky text-black top-0 left-0 rounded-t-lg bg-green-400">
+        {admin ? messages[0]?.sender?.email : <p>Admin</p>}
       </div>
-      <div ref={messageContainerRef} className="mt-1 overflow-y-auto h-[400px]">
+      <div
+        ref={messageContainerRef}
+        className="mt-1 overflow-y-auto w-[400px] h-[400px]"
+      >
         {messages.map((m) => (
           <div
             key={m.id}
