@@ -7,6 +7,18 @@ const Message = ({ receiver, admin }) => {
   const [messages, setMessages] = useState([]);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
+  const messageContainerRef = useRef(null); // 👉 ref on the scrollable box
+
+  const scrollToBottom = () => {
+    const container = messageContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const getMessages = () => {
     api_client
@@ -67,7 +79,7 @@ const Message = ({ receiver, admin }) => {
       <div className="p-2.5 text-xl w-full sticky top-0 left-0 rounded-t-lg bg-green-400">
         <p>Admin</p>
       </div>
-      <div className="mt-1 overflow-y-auto h-[400px]">
+      <div ref={messageContainerRef} className="mt-1 overflow-y-auto h-[400px]">
         {messages.map((m) => (
           <div
             key={m.id}

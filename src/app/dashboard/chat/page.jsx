@@ -24,7 +24,7 @@ const page = () => {
           <div>
             <h1>Conversations</h1>
             {conversations.map((c) => (
-              <>
+              <div key={c.id}>
                 <button
                   onClick={() => setReceiver(c.id)}
                   className="px-5 py-2 my-2 border cursor-pointer"
@@ -32,7 +32,7 @@ const page = () => {
                   {c.email}
                 </button>
                 <br />
-              </>
+              </div>
             ))}
           </div>
           <div>
