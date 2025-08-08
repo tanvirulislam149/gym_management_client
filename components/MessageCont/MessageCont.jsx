@@ -12,17 +12,17 @@ const MessageCont = () => {
 
   return (
     <div>
-      <div className="dropdown dropdown-left dropdown-end dropdown-open">
+      <div className="dropdown dropdown-left dropdown-end">
         <div tabIndex={0} role="button" className="m-1">
           <Image
-            className="w-20 bg-white rounded-full"
+            className="md:w-18 w-14 bg-white rounded-full"
             src={msg}
             alt="Picture of the author"
           />
         </div>
         <div
           tabIndex={0}
-          className="dropdown-content menu p-0 rounded-2xl text-black bg-white rounded-box z-1 w-[400px] shadow-sm"
+          className="dropdown-content menu p-0 rounded-2xl text-black bg-white rounded-box z-1 md:w-[400px] w-[300px] shadow-sm"
         >
           {user ? (
             <Message receiver={1} admin={false} />

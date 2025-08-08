@@ -81,10 +81,10 @@ const Message = ({ receiver, admin }) => {
       <div className="p-2.5 text-xl w-full sticky text-black top-0 left-0 rounded-t-lg bg-green-400">
         {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
-      <div
-        ref={messageContainerRef}
-        className="mt-1 overflow-y-auto w-[400px] h-[400px]"
-      >
+      <div ref={messageContainerRef} className="mt-1 overflow-y-auto h-[400px]">
+        <div className="chat chat-start">
+          <div className="chat-bubble">How can I help you?</div>
+        </div>
         {messages.map((m) => (
           <div
             key={m.id}
@@ -105,6 +105,7 @@ const Message = ({ receiver, admin }) => {
           className="input bg-white w-full focus:outline-none focus:ring-0"
           name="msg_text"
           placeholder="Type here"
+          autoComplete="off"
         />
         <button
           type="submit"
