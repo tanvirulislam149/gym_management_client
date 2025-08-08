@@ -2,6 +2,7 @@
 import api_client from "@/api_client";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { IoSend } from "react-icons/io5";
 
 const Message = ({ receiver, admin }) => {
   const [messages, setMessages] = useState([]);
@@ -78,7 +79,7 @@ const Message = ({ receiver, admin }) => {
   return (
     <div className="cursor-default bg-white rounded-2xl">
       <div className="p-2.5 text-xl w-full sticky text-black top-0 left-0 rounded-t-lg bg-green-400">
-        {admin ? messages[0]?.sender?.email : <p>Admin</p>}
+        {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
       <div
         ref={messageContainerRef}
@@ -96,21 +97,21 @@ const Message = ({ receiver, admin }) => {
         ))}
       </div>
       <form
-        className="flex border text-black w-full"
+        className="flex border text-black w-full p-1"
         onSubmit={sendMessageHandler}
       >
         <input
           type="text"
-          className="input bg-white w-full"
+          className="input bg-white w-full focus:outline-none focus:ring-0"
           name="msg_text"
           placeholder="Type here"
         />
-        {/* <input className="border" type="text"  id="" /> */}
-        <input
-          className="border-0 btn bg-green-400 text-black"
+        <button
           type="submit"
-          value="Submit"
-        />
+          className="border-0 btn bg-green-400 text-black rounded-full"
+        >
+          <IoSend className="w-6 h-6 ml-1" />
+        </button>
       </form>
     </div>
   );
