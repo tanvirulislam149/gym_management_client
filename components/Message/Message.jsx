@@ -77,7 +77,7 @@ const Message = ({ receiver, admin }) => {
   console.log(admin);
 
   return (
-    <div className="cursor-default bg-white rounded-2xl">
+    <div className="cursor-default bg-white rounded-2xl w-full">
       <div className="p-2.5 text-xl w-full sticky text-black top-0 left-0 rounded-t-lg bg-green-400">
         {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
