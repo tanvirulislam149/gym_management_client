@@ -3,6 +3,7 @@ import api_client from "@/api_client";
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoSend } from "react-icons/io5";
+import MessageText from "./MessageText";
 
 const Message = ({ receiver, admin }) => {
   const [messages, setMessages] = useState([]);
@@ -86,13 +87,8 @@ const Message = ({ receiver, admin }) => {
           <div className="chat-bubble">How can I help you?</div>
         </div>
         {messages.map((m) => (
-          <div
-            key={m.id}
-            className={`chat ${
-              m.sender.id === user.id ? "chat-end" : "chat-start"
-            }`}
-          >
-            <div className="chat-bubble font-normal">{m.message_text}</div>
+          <div key={m.id}>
+            <MessageText m={m} />
           </div>
         ))}
       </div>

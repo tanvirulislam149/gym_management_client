@@ -5,15 +5,19 @@ import Button from "../Button/Button";
 import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 
 const Plans = async () => {
-  // let plans = [];
-  // try {
-  const data = await fetch("https://gym-management-0fmi.onrender.com/plans/", {
-    cache: "no-store",
-  });
-  const plans = await data.json();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  let plans = [];
+  try {
+    const data = await fetch(
+      "https://gym-management-0fmi.onrender.com/plans/",
+      {
+        cache: "no-store",
+      }
+    );
+    plans = await data.json();
+  } catch (error) {
+    console.log(error);
+    console.warn("Could not fetch plans:", error.message);
+  }
   return (
     <div id="plans" className="max-w-[1200px] mx-auto mb-10">
       <p className="text-primary font-bold text-3xl lg:text-5xl mb-10 ml-10">
