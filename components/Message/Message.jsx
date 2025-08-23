@@ -9,7 +9,7 @@ const Message = ({ receiver, admin }) => {
   const [messages, setMessages] = useState([]);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
-  const messageContainerRef = useRef(null); // 👉 ref on the scrollable box
+  const messageContainerRef = useRef(null); //  ref on the scrollable box
 
   const scrollToBottom = () => {
     const container = messageContainerRef.current;
@@ -88,7 +88,7 @@ const Message = ({ receiver, admin }) => {
         </div>
         {messages.map((m) => (
           <div key={m.id}>
-            <MessageText m={m} />
+            <MessageText message={m} />
           </div>
         ))}
       </div>
