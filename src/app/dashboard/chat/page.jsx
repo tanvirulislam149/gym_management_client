@@ -13,11 +13,19 @@ const page = () => {
   console.log(conversations);
 
   useEffect(() => {
+    console.log("changed reciever");
     api_client
       .get("http://127.0.0.1:8000/get_conversations/")
-      .then((res) => setConversations(res.data))
+      .then((res) => {
+        // Sort conversations: unread first
+        const sorted = res.data.sort((a, b) => {
+          if (a.has_unread === b.has_unread) return 0;
+          return a.has_unread ? -1 : 1;
+        });
+        setConversations(sorted);
+      })
       .catch((err) => console.log(err));
-  }, []);
+  }, [receiver]);
 
   const convoSocketRef = useRef(null);
   useEffect(() => {
@@ -53,9 +61,20 @@ const page = () => {
               <div key={c.id}>
                 <button
                   onClick={() => setReceiver(c.id)}
-                  className="px-5 py-2 my-2 border cursor-pointer"
+                  className={`px-5 py-2 my-2 border cursor-pointer ${
+                    c.has_unread ? "font-bold" : ""
+                  }`}
                 >
-                  {c.email}
+                  <div className="flex justify-between items-center">
+                    <div>{c.email}</div>
+                    <div>
+                      {c.has_unread ? (
+                        <div className="w-3 h-3 bg-white rounded-full ml-3"></div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
                 </button>
                 <br />
               </div>
