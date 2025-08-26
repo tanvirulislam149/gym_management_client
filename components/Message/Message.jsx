@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { IoSend } from "react-icons/io5";
 import MessageText from "./MessageText";
 
-const Message = ({ receiver, admin }) => {
+const Message = ({ receiver, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   console.log(receiver, messages);
@@ -71,6 +71,10 @@ const Message = ({ receiver, admin }) => {
         const newData = JSON.parse(e.data);
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
+
+        if (admin) {
+          handleMarkRead(newData.sender.id);
+        }
       };
 
       return () => {

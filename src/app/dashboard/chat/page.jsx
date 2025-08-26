@@ -13,14 +13,17 @@ const page = () => {
   console.log(conversations);
 
   const handleMarkRead = (id) => {
+    console.log("mark read");
     setReceiver(id);
-    conversations.filter((c) => {
+    const array = conversations.filter((c) => {
       if (c.id == id) {
+        console.log(c.id, id);
         c.has_unread = false;
         return c;
       }
       return c;
     });
+    setConversations(array);
   };
 
   useEffect(() => {
@@ -53,7 +56,10 @@ const page = () => {
       // receiving msg from BE
       const newData = JSON.parse(e.data);
       console.log(newData);
-      setConversations((prev) => [...prev, newData]);
+      setConversations((prev) => {
+        const data = prev.filter((e) => e.id !== newData.id);
+        return [newData, ...data];
+      });
     };
 
     return () => {
@@ -98,7 +104,11 @@ const page = () => {
           </div>
           <div className="md:w-1/2">
             {receiver != 0 ? (
-              <Message receiver={receiver} admin={true} />
+              <Message
+                receiver={receiver}
+                admin={true}
+                handleMarkRead={handleMarkRead}
+              />
             ) : (
               <p>Click on conversation</p>
             )}
