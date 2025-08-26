@@ -7,6 +7,7 @@ import MessageText from "./MessageText";
 
 const Message = ({ receiver, admin }) => {
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
   const messageContainerRef = useRef(null); //  ref on the scrollable box
@@ -23,10 +24,12 @@ const Message = ({ receiver, admin }) => {
   }, [messages]);
 
   const getMessages = () => {
+    setLoading(true);
     api_client
       .get(`http://127.0.0.1:8000/message/?receiver=${receiver}`)
       .then((res) => setMessages(res.data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {

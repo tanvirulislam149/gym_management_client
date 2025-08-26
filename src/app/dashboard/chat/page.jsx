@@ -12,8 +12,18 @@ const page = () => {
   const user = useSelector((state) => state?.user?.user);
   console.log(conversations);
 
+  const handleMarkRead = (id) => {
+    setReceiver(id);
+    conversations.filter((c) => {
+      if (c.id == id) {
+        c.has_unread = false;
+        return c;
+      }
+      return c;
+    });
+  };
+
   useEffect(() => {
-    console.log("changed reciever");
     api_client
       .get("http://127.0.0.1:8000/get_conversations/")
       .then((res) => {
@@ -25,7 +35,7 @@ const page = () => {
         setConversations(sorted);
       })
       .catch((err) => console.log(err));
-  }, [receiver]);
+  }, []);
 
   const convoSocketRef = useRef(null);
   useEffect(() => {
@@ -57,28 +67,34 @@ const page = () => {
         <div className="flex justify-between">
           <div className="md:w-1/2">
             <h1>Conversations</h1>
-            {conversations.map((c) => (
-              <div key={c.id}>
-                <button
-                  onClick={() => setReceiver(c.id)}
-                  className={`px-5 py-2 my-2 border cursor-pointer ${
-                    c.has_unread ? "font-bold" : ""
-                  }`}
-                >
-                  <div className="flex justify-between items-center">
-                    <div>{c.email}</div>
-                    <div>
-                      {c.has_unread ? (
-                        <div className="w-3 h-3 bg-white rounded-full ml-3"></div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+            {conversations.map((c) =>
+              c.id == 1 ? (
+                ""
+              ) : (
+                <>
+                  <div key={c.id}>
+                    <button
+                      onClick={() => handleMarkRead(c.id)}
+                      className={`px-5 py-2 my-2 border cursor-pointer ${
+                        c.has_unread ? "font-bold" : ""
+                      }`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div>{c.email}</div>
+                        <div>
+                          {c.has_unread ? (
+                            <div className="w-3 h-3 bg-white rounded-full ml-3"></div>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                    </button>
+                    <br />
                   </div>
-                </button>
-                <br />
-              </div>
-            ))}
+                </>
+              )
+            )}
           </div>
           <div className="md:w-1/2">
             {receiver != 0 ? (
