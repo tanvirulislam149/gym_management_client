@@ -24,12 +24,22 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   }, [messages]);
 
   const getMessages = () => {
-    setLoading(true);
-    api_client
-      .get(`http://127.0.0.1:8000/message/?receiver=${receiver}`)
-      .then((res) => setMessages(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
+    let timeoutId;
+    if (user) {
+      api_client
+        .get(`http://127.0.0.1:8000/message/?receiver=${receiver}`)
+        .then((res) => {
+          setMessages(res.data);
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        })
+        .catch((err) => {
+          if (err.response.status == 401) {
+            timeoutId = setTimeout(getMessages, 2000);
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -82,7 +92,6 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
       };
     }
   }, [user, receiver]);
-  console.log(admin);
 
   return (
     <div className="cursor-default bg-white rounded-2xl w-full">
