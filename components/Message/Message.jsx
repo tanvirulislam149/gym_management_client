@@ -94,13 +94,16 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   }, [user, receiver]);
 
   return (
-    <div className="cursor-default bg-white rounded-2xl w-full">
-      <div className="p-2.5 text-xl w-full sticky text-black top-0 left-0 rounded-t-lg bg-green-400">
+    <div className="cursor-default bg-black rounded-t-lg rounded-2xl w-full border-1 border-gray-800">
+      <div className="p-2.5 text-xl w-full sticky border-b-1 border-gray-800 text-white top-0 left-0 bg-black rounded-t-lg">
         {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
-      <div ref={messageContainerRef} className="mt-1 overflow-y-auto h-[400px]">
+      <div
+        ref={messageContainerRef}
+        className="mt-1 overflow-y-auto h-[400px] bg-black"
+      >
         <div className="chat chat-start">
-          <div className="chat-bubble">How can I help you?</div>
+          {!admin && <div className="chat-bubble">How can I help you?</div>}
         </div>
         {messages.map((m) => (
           <div key={m.id}>
@@ -109,12 +112,12 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         ))}
       </div>
       <form
-        className="flex border text-black w-full p-1"
+        className="flex text-white w-full p-1 border-t-1 border-gray-800"
         onSubmit={sendMessageHandler}
       >
         <input
           type="text"
-          className="input bg-white w-full focus:outline-none focus:ring-0"
+          className="input bg-black w-full focus:outline-none focus:shadow-none border-0 ring-0"
           name="msg_text"
           placeholder="Type here"
           autoComplete="off"
