@@ -48,10 +48,12 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
+    console.log(receiver);
     const data = {
       receiver: receiver, // id of admin is 1
       message_text: e.target.msg_text.value,
     };
+    console.log(data);
     api_client
       .post("http://127.0.0.1:8000/message/", data)
       .then((res) => {
@@ -82,7 +84,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
 
-        if (admin) {
+        if (admin && newData.receiver.id == 1) {
           handleMarkRead(newData.sender.id);
         }
       };

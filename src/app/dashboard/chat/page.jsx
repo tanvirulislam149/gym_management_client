@@ -130,7 +130,7 @@ const page = () => {
                               className="w-9 h-9 rounded-full mr-2"
                               src={`${
                                 c.image
-                                  ? `https://res.cloudinary.com/tanvirulislam149/${c.image}`
+                                  ? `${c.image}`
                                   : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                               }`}
                               alt=""
