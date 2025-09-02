@@ -3,10 +3,15 @@ import React, { useEffect, useState } from "react";
 import styles from "./register.module.css";
 import Button from "../../../components/Button/Button";
 import { useDispatch } from "react-redux";
-import { useRegisterUserMutation } from "@/Redux/services/userApi";
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from "@/Redux/services/userApi";
 import { useRouter } from "next/navigation";
 import Modal from "../../../components/Modal/Modal";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import { getUser } from "@/Redux/features/userSlice";
 
 const register = () => {
   const [email, setEmail] = useState("");
@@ -20,22 +25,15 @@ const register = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
-  const [registerUser, { isLoading, isSuccess, isError, error }] =
+  const [registerUser, { isSuccess, isError, error }] =
     useRegisterUserMutation();
+  const [loginUser] = useLoginUserMutation();
 
   useEffect(() => {
-    if (isSuccess) {
-      setErrorMsg(
-        `Registrations successful. Please login. Redirecting to login...`
-      );
-      document.getElementById(`my_modal_3`).showModal();
-      setInterval(() => {
-        router.push("/login");
-      }, 3000);
-    }
     if (isError) {
       setErrorMsg(`${Object.values(error?.data)[0]}`);
       document.getElementById(`my_modal_3`).showModal();
@@ -46,6 +44,7 @@ const register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
+      setLoading(true);
       const formData = new FormData();
       formData.append("image", image);
       formData.append("email", email);
@@ -55,6 +54,23 @@ const register = () => {
       formData.append("phone_number", number);
       formData.append("password", password);
       const result = await registerUser(formData);
+      // after registering, going for user login
+      const loginResult = await loginUser({ email, password });
+      localStorage.setItem("token", loginResult?.data?.access);
+      axios
+        .get("https://gym-management-0fmi.onrender.com/auth/users/me/", {
+          headers: {
+            Authorization: `JWT ${loginResult?.data?.access}`,
+          },
+        })
+        .then((res) => {
+          dispatch(getUser(res.data));
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
     } else {
       setErrorMsg(`Password didn't matched`);
       document.getElementById(`my_modal_3`).showModal();
@@ -175,8 +191,8 @@ const register = () => {
               <input
                 type="submit"
                 className="text-base"
-                disabled={isLoading ? true : ""}
-                value={`${isLoading ? "Processing..." : "Register"}`}
+                disabled={loading ? true : ""}
+                value={`${loading ? "Processing..." : "Register"}`}
               />
             </Button>
           </form>
