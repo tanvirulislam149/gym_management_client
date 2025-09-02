@@ -27,7 +27,9 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     let timeoutId;
     if (user) {
       api_client
-        .get(`http://127.0.0.1:8000/message/?receiver=${receiver}`)
+        .get(
+          `https://gym-management-0fmi.onrender.com/message/?receiver=${receiver}`
+        )
         .then((res) => {
           setMessages(res.data);
           if (timeoutId) {
@@ -55,7 +57,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     };
     console.log(data);
     api_client
-      .post("http://127.0.0.1:8000/message/", data)
+      .post("https://gym-management-0fmi.onrender.com/message/", data)
       .then((res) => {
         socketRef.current.send(JSON.stringify(data)); // sending msg to BE
         getMessages();
@@ -69,7 +71,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     if (user) {
       const room = [receiver, user.id].sort();
       socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/messages/${`${room[0]}and${room[1]}`}/`
+        `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`
       );
 
       socketRef.current.onopen = () => {
