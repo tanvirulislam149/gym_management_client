@@ -96,8 +96,8 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   }, [user, receiver]);
 
   return (
-    <div className="cursor-default bg-black rounded-t-lg rounded-2xl w-full border-1 border-gray-800">
-      <div className="p-2.5 text-xl w-full sticky border-b-1 border-gray-800 text-white top-0 left-0 bg-black rounded-t-lg">
+    <div className="cursor-default bg-black rounded-t-lg rounded-2xl w-full border-1 border-gray-600">
+      <div className="p-2.5 text-xl w-full sticky border-b-1 border-gray-600 text-white top-0 left-0 bg-black rounded-t-lg">
         {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
       <div
@@ -114,7 +114,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         ))}
       </div>
       <form
-        className="flex text-white w-full p-1 border-t-1 border-gray-800"
+        className="flex text-white w-full p-1 border-t-1 border-gray-600"
         onSubmit={sendMessageHandler}
       >
         <input

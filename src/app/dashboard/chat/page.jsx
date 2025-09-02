@@ -75,10 +75,18 @@ const page = () => {
 
         </div> */}
         <div className="drawer lg:drawer-open">
-          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center">
+          <input id="conversations" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
             {/* Page content here */}
-            <div className="md:w-full px-3">
+            <div className="">
+              <label
+                htmlFor="conversations"
+                className="btn btn-primary m-2 drawer-button lg:hidden text-black"
+              >
+                Conversations
+              </label>
+            </div>
+            <div className="w-full md:px-3">
               {receiver != 0 ? (
                 <Message
                   receiver={receiver}
@@ -87,28 +95,22 @@ const page = () => {
                 />
               ) : (
                 <div className="">
-                  <p className="text-lg mt-20 text-center">
+                  <p className="text-xl my-20 text-center">
                     Click on conversation
                   </p>
                 </div>
               )}
             </div>
-            <label
-              htmlFor="my-drawer-2"
-              className="btn btn-primary drawer-button lg:hidden"
-            >
-              Conversations
-            </label>
           </div>
           <div className="drawer-side">
             <label
-              htmlFor="my-drawer-2"
+              htmlFor="conversations"
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
-              <div className="">
+              <div className="mt-20 md:mt-0">
                 <h1 className="text-center text-xl underline">Conversations</h1>
                 {conversations.map((c) =>
                   c.id == 1 ? (
