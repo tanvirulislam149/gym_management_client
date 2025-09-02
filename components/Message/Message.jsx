@@ -62,7 +62,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
       .post("https://gym-management-0fmi.onrender.com/message/", data)
       .then((res) => {
         socketRef.current.send(JSON.stringify(data)); // sending msg to BE
-        getMessages();
+        // getMessages();
       })
       .catch((err) => console.log(err))
       .finally(() => (e.target.msg_text.value = ""));
