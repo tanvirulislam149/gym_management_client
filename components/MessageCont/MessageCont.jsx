@@ -45,10 +45,10 @@ const MessageCont = () => {
             <Message receiver={1} admin={false} />
           ) : (
             <>
-              <div className="flex h-96 justify-center w-full items-center">
+              <div className="flex h-96 justify-center w-full  items-center">
                 <div className="">
-                  <p className="text-3xl">Please login</p>
-                  <p>To chat with Admin</p>
+                  <p className="text-3xl text-white">Please login</p>
+                  <p className="text-white">To chat with Admin</p>
                   <Link href={"/login"}>
                     <Button>Member Login</Button>
                   </Link>

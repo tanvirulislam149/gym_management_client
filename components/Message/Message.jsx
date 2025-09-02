@@ -24,6 +24,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   }, [messages]);
 
   const getMessages = () => {
+    setLoading(true);
     let timeoutId;
     if (user) {
       api_client
@@ -32,6 +33,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         )
         .then((res) => {
           setMessages(res.data);
+          setLoading(false);
           if (timeoutId) {
             clearTimeout(timeoutId);
           }
@@ -102,19 +104,25 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
       <div className="p-2.5 text-xl w-full sticky border-b-1 border-gray-600 text-white top-0 left-0 bg-black rounded-t-lg">
         {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
       </div>
-      <div
-        ref={messageContainerRef}
-        className="mt-1 overflow-y-auto h-[400px] bg-black"
-      >
-        <div className="chat chat-start">
-          {!admin && <div className="chat-bubble">How can I help you?</div>}
+      {loading ? (
+        <div className="h-96 flex justify-center">
+          <span className="loading loading-spinner text-white my-40 loading-xl"></span>
         </div>
-        {messages.map((m) => (
-          <div key={m.id}>
-            <MessageText message={m} />
+      ) : (
+        <div
+          ref={messageContainerRef}
+          className="mt-1 overflow-y-auto h-[400px] bg-black"
+        >
+          <div className="chat chat-start">
+            {!admin && <div className="chat-bubble">How can I help you?</div>}
           </div>
-        ))}
-      </div>
+          {messages.map((m) => (
+            <div key={m.id}>
+              <MessageText message={m} />
+            </div>
+          ))}
+        </div>
+      )}
       <form
         className="flex text-white w-full p-1 border-t-1 border-gray-600"
         onSubmit={sendMessageHandler}
