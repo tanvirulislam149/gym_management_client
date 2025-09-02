@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Message from "../Message/Message";
 import { useSelector } from "react-redux";
 import Link from "next/link";
@@ -8,10 +8,27 @@ import msg from "../../images/msg.png";
 import Image from "next/image";
 
 const MessageCont = () => {
+  const [show, setShow] = useState(false);
   const user = useSelector((state) => state?.user?.user);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShow(true);
+    }, 2000);
+    setTimeout(() => {
+      setShow(false);
+    }, 6000);
+  }, []);
+
   return (
-    <div>
+    <div className="relative">
+      {show && (
+        <div className="chat chat-end absolute -top-14 -left-55">
+          <div className="chat-bubble text-black bg-white">
+            How can I help you, Sir?
+          </div>
+        </div>
+      )}
       <div className="dropdown dropdown-left dropdown-end">
         <div tabIndex={0} role="button" className="m-1">
           <Image
