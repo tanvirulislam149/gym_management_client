@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 const AuthUser = ({ children }) => {
   const { user, loading } = useSelector((state) => state?.user);
   const router = useRouter();
-  console.log(loading, user);
 
   useEffect(() => {
     if (!loading && !user) {
