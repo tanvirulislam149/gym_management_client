@@ -49,7 +49,7 @@ const DoughnutChart = ({ chartData }) => {
     labels: chartData?.map((d) => d.booked_plans__plans__type),
     datasets: [
       {
-        label: "Votes",
+        label: "Payments",
         data: chartData?.map((d) => d.count),
         backgroundColor: generateRandomColors(chartData?.length),
         borderWidth: 1,
