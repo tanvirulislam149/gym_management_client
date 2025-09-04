@@ -58,7 +58,8 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
           document.getElementById("updateScheduledClass").showModal();
         }
       })
-      .catch((err) => document.getElementById("errorModal").showModal());
+      .catch((err) => document.getElementById("errorModal").showModal())
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -89,8 +90,8 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
                   <DatePicker
                     wrapperClassName="w-full"
                     className="w-full px-3 py-2 border border-black rounded"
-                    selected={field.value}
-                    onChange={field.onChange}
+                    selected={field.value ? new Date(field.value) : null}
+                    onChange={(date) => field.onChange(date)}
                     showTimeSelect
                     timeFormat="hh:mm aa"
                     timeIntervals={15}
