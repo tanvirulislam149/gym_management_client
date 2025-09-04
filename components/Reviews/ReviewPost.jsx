@@ -6,10 +6,16 @@ import ErrorModal from "../ErrorModal/ErrorModal";
 
 const ReviewPost = ({ id, fetchReview }) => {
   const [loading, setLoading] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   const user = useSelector((state) => state?.user?.user);
 
   const handleReview = (e) => {
     e.preventDefault();
+    if (!e.target.comment.value || !e.target.post_rating.value) {
+      setErrMsg("Please enter ratings and comment properly.");
+      document.getElementById("reviewErr").showModal();
+      return;
+    }
     setLoading(true);
     api_client
       .post(`/fitness_classes/${id}/reviews/`, {
@@ -65,6 +71,23 @@ const ReviewPost = ({ id, fetchReview }) => {
         className="btn btn-primary mt-2 text-black disabled:text-gray-400"
       />
       <ErrorModal />
+      {/* Modal For review error */}
+      <dialog id="reviewErr" className="modal">
+        <div className="modal-box bg-white text-black">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 style={{ whiteSpace: "pre-line" }} className="font-bold text-lg">
+            {errMsg}
+          </h3>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </form>
   );
 };
