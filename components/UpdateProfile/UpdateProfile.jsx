@@ -58,7 +58,7 @@ const UpdateProfile = () => {
     if (image) {
       formData.append("image", image);
     } else {
-      formData.append("image", imageFile);
+      user?.image && formData.append("image", imageFile);
     }
     formData.append("password", user?.password);
     formData.append("first_name", data.first_name);
@@ -85,7 +85,10 @@ const UpdateProfile = () => {
             });
         }
       })
-      .catch((err) => document.getElementById("errorModal").showModal());
+      .catch((err) => document.getElementById("errorModal").showModal())
+      .finally(() => {
+        setIsLoading(false);
+      });
     //   document.getElementById(`my_modal_3`).showModal();
   };
 
@@ -127,6 +130,7 @@ const UpdateProfile = () => {
                 <br />
                 <input
                   type="text"
+                  required
                   name="f_name"
                   placeholder="Enter your first name"
                   {...register("first_name", { required: true })}
@@ -139,6 +143,7 @@ const UpdateProfile = () => {
                 <input
                   type="text"
                   name="l_name"
+                  required
                   placeholder="Enter your last name"
                   {...register("last_name", { required: true })}
                   className="input bg-white mt-1 mb-3 w-full text-black border border-black"
@@ -152,6 +157,7 @@ const UpdateProfile = () => {
                 <input
                   type="text"
                   name="address"
+                  required
                   placeholder="Enter your address"
                   {...register("address", { required: true })}
                   className="input bg-white mt-1 mb-3 w-full text-black border border-black"
@@ -163,6 +169,7 @@ const UpdateProfile = () => {
                 <input
                   type="number"
                   name="number"
+                  required
                   placeholder="Enter your number"
                   {...register("phone_number", { required: true })}
                   className="input bg-white mt-1 mb-3 w-full text-black border border-black"
