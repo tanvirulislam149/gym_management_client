@@ -20,7 +20,6 @@ const Navbar = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      dispatch(fetchUserInitial());
       axios
         .get("https://gym-management-0fmi.onrender.com/auth/users/me/", {
           headers: {
@@ -34,6 +33,8 @@ const Navbar = () => {
           // document.getElementById("errorModal").showModal();
           console.log(err);
         });
+    } else {
+      dispatch(removeUser()); // makes the loading false
     }
   }, []);
 

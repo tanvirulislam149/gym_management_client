@@ -2,16 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
-  loading: false,
+  loading: true,
 };
 
 const userSlice = createSlice({
   name: "getUser",
   initialState,
   reducers: {
-    fetchUserInitial: (state) => {
-      state.loading = true;
-    },
     getUser: (state, action) => {
       state.user = action.payload;
       state.loading = false;
