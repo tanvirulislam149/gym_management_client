@@ -56,6 +56,7 @@ const book_class = () => {
       })
       .then((res) => {
         console.log(res);
+        fetchClasses();
         if (res.status === 201) {
           document.getElementById("bookClassLoading").close();
           document.getElementById("bookClassSuccess").showModal();

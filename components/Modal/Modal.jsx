@@ -10,7 +10,9 @@ const Modal = ({ text }) => {
             ✕
           </button>
         </form>
-        <h3 className="font-bold text-lg">{text}</h3>
+        <h3 style={{ whiteSpace: "pre-line" }} className="font-bold text-lg">
+          {text}
+        </h3>
       </div>
       <form method="dialog" className="modal-backdrop">
         <button>close</button>

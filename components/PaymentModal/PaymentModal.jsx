@@ -6,10 +6,13 @@ import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import Modal from "../Modal/Modal";
 import ErrorModal from "../ErrorModal/ErrorModal";
+import { useSelector } from "react-redux";
 
 const PaymentModal = ({ booked_plan }) => {
+  const user = useSelector((state) => state?.user?.user);
   const { register, handleSubmit, control } = useForm();
   const [loading, setLoading] = useState(false);
+  const [canPay, setCanPay] = useState(false);
 
   const timeZone = "Asia/Dhaka";
 
@@ -42,7 +45,8 @@ const PaymentModal = ({ booked_plan }) => {
             .catch((err) => document.getElementById("errorModal").showModal());
         }
       })
-      .catch((err) => document.getElementById("errorModal").showModal());
+      .catch((err) => document.getElementById("errorModal").showModal())
+      .finally(() => setLoading(false));
   };
   return (
     <dialog id="payment_modal" className="modal">
@@ -80,12 +84,33 @@ const PaymentModal = ({ booked_plan }) => {
                 to book a membership plan
               </p>
             )}
+            {(!user?.first_name ||
+              !user?.last_name ||
+              !user?.address ||
+              !user?.phone_number) && (
+              <p className="text-red-500 mt-3">
+                You have to properly set your first name, last name, address and
+                phone number to pay for your selected plan.
+              </p>
+            )}
             <button
-              disabled={booked_plan?.length ? false : true}
+              disabled={
+                !booked_plan?.length ||
+                !user?.first_name ||
+                !user?.last_name ||
+                !user?.address ||
+                !user?.phone_number
+                  ? true
+                  : false
+              }
               className={
-                booked_plan?.length
-                  ? "btn btn-primary text-black mt-3"
-                  : "bg-gray-300 disabled:text-gray-500 px-4 my-3 py-2"
+                !booked_plan?.length ||
+                !user?.first_name ||
+                !user?.last_name ||
+                !user?.address ||
+                !user?.phone_number
+                  ? "bg-gray-300 disabled:text-gray-500 px-4 my-3 py-2"
+                  : "btn btn-primary text-black mt-3"
               }
               type="submit"
             >

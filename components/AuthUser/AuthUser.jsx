@@ -8,12 +8,12 @@ const AuthUser = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user && !loading) {
+    if (!loading && !user) {
       router.push("/login");
     }
   }, [user, router]);
 
-  if (!user) {
+  if (loading) {
     return (
       <p className="text-2xl text-center h-screen mt-20">
         {/* You don't have permission to see this page */}
@@ -22,7 +22,7 @@ const AuthUser = ({ children }) => {
     );
   }
 
-  return <div>{children}</div>;
+  if (user) return <div>{children}</div>;
 };
 
 export default AuthUser;

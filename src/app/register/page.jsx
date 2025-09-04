@@ -35,7 +35,13 @@ const register = () => {
 
   useEffect(() => {
     if (isError) {
-      setErrorMsg(`${Object.values(error?.data)[0]}`);
+      if (Object.keys(error?.data)[0] === "password") {
+        setErrorMsg(`${Object.values(error?.data)[0]}\n
+        Password should be at least 8 character, must include letters and numbers, Not too similar to your username, email, or other attributes, Not a common password.
+          `);
+      } else {
+        setErrorMsg(`${Object.values(error?.data)[0]}`);
+      }
       document.getElementById(`my_modal_3`).showModal();
     }
   }, [isError, isSuccess]);
@@ -46,7 +52,7 @@ const register = () => {
     if (password === confirmPassword) {
       setLoading(true);
       const formData = new FormData();
-      formData.append("image", image);
+      image && formData.append("image", image);
       formData.append("email", email);
       formData.append("first_name", f_name);
       formData.append("last_name", l_name);
@@ -54,8 +60,16 @@ const register = () => {
       formData.append("phone_number", number);
       formData.append("password", password);
       const result = await registerUser(formData);
+      if (result?.error) {
+        setLoading(false);
+        return;
+      }
       // after registering, going for user login
       const loginResult = await loginUser({ email, password });
+      if (!loginResult?.data?.access) {
+        setLoading(false);
+        return;
+      }
       localStorage.setItem("token", loginResult?.data?.access);
       axios
         .get("https://gym-management-0fmi.onrender.com/auth/users/me/", {
