@@ -93,7 +93,10 @@ const BookPlanBtn = ({ id }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Something went wrong.</h3>
+          <h3 className="font-bold text-lg">
+            You can't book multiple plans. Please renew your plan from
+            "Dashboard/My plans".
+          </h3>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
