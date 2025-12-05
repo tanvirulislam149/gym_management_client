@@ -88,7 +88,7 @@ const Fitness_classes = () => {
           {classes.map((classItem, index) => (
             <div
               key={index}
-              className="bg-gray-800/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-green-500/50 transition-all duration-300 hover:transform hover:-translate-y-2"
+              className="bg-gray-800/70 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-700 hover:border-green-500 transition-all duration-300 hover:transform hover:-translate-y-2"
             >
               <div
                 className={`h-48 bg-gradient-to-r flex items-center justify-center`}
