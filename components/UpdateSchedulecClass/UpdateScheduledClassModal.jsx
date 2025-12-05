@@ -19,7 +19,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
       setFetchLoading(true);
       axios
         .get(
-          `https://gym-management-0fmi.onrender.com/scheduled_classes/${updateId}/`
+          `https://gym-management-henna.vercel.app/scheduled_classes/${updateId}/`
         )
         .then((res) => {
           reset({
@@ -48,7 +48,7 @@ const UpdateScheduledClassModal = ({ fetchClasses, classes, updateId }) => {
 
     api_client
       .put(
-        `https://gym-management-0fmi.onrender.com/scheduled_classes/${updateId}/`,
+        `https://gym-management-henna.vercel.app/scheduled_classes/${updateId}/`,
         finalData
       )
       .then((res) => {

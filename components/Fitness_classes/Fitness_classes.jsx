@@ -14,7 +14,7 @@ const Fitness_classes = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
+      .get("https://gym-management-henna.vercel.app/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
@@ -23,7 +23,7 @@ const Fitness_classes = () => {
   // let classes = [];
   // try {
   //   const data = await fetch(
-  //     "https://gym-management-0fmi.onrender.com/fitness_classes/",
+  //     "https://gym-management-henna.vercel.app/fitness_classes/",
   //     {
   //       cache: "no-store",
   //     }

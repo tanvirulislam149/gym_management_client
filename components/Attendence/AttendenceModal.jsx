@@ -13,7 +13,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
     setLoading(true);
     api_client
       .get(
-        `https://gym-management-0fmi.onrender.com/attendence/?scheduled_class_id=${id}`
+        `https://gym-management-henna.vercel.app/attendence/?scheduled_class_id=${id}`
       )
       .then((res) => setClasses(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
@@ -30,7 +30,7 @@ const AttendenceModal = ({ id, fetchClasses }) => {
     const data = { ...scheduled_class, attendence: value };
     api_client
       .put(
-        `https://gym-management-0fmi.onrender.com/attendence/${scheduled_class.id}/`,
+        `https://gym-management-henna.vercel.app/attendence/${scheduled_class.id}/`,
         data
       )
       .then((res) => {
