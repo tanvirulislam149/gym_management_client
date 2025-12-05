@@ -107,7 +107,7 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         <div className="hidden md:flex">
-          <div className="mx-3">{user && <Notification />}</div>
+          {/* <div className="mx-3">{user && <Notification />}</div> */}
           {user ? (
             <>
               <div className="dropdown dropdown-end">
@@ -176,7 +176,7 @@ const Navbar = () => {
           )}
         </div>
         {/* -----------------Mobile view----------------  */}
-        <div className="md:hidden">{user && <Notification />}</div>
+        {/* <div className="md:hidden">{user && <Notification />}</div> */}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
             <svg
