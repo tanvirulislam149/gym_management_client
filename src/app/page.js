@@ -7,7 +7,7 @@ import AllReview from "../../components/AllReview/AllReview";
 
 export default function Home() {
   return (
-    <>
+    <div className="px-14">
       {/* <Navbar /> */}
       <Banner />
       <About />
@@ -15,6 +15,6 @@ export default function Home() {
       <Fitness_classes />
       <AllReview />
       <Contact />
-    </>
+    </div>
   );
 }
