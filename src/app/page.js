@@ -7,7 +7,7 @@ import AllReview from "../../components/AllReview/AllReview";
 
 export default function Home() {
   return (
-    <div className="px-14">
+    <div className="md:px-14">
       {/* <Navbar /> */}
       <Banner />
       <About />

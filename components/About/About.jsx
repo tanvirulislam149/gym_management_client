@@ -28,7 +28,7 @@ const About = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Why Choose <span className="text-green-500">PrimeFit</span>?
+            Why Choose <span className="text-green-500">MuscleGain</span>?
           </h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
             We offer not only a gym but also a comprehensive fitness ecosystem
