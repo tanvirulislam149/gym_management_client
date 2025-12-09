@@ -143,7 +143,7 @@ const Plans = () => {
                 ))}
               </ul>
 
-              <button
+              {/* <button
                 className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
                   plan.type === "Pro"
                     ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
@@ -151,7 +151,8 @@ const Plans = () => {
                 }`}
               >
                 Get Started
-              </button>
+              </button> */}
+              <BookPlanBtn id={plan.id} />
             </div>
           ))}
         </div>
