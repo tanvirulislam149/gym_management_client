@@ -1,42 +1,21 @@
-"use client";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import {
-  FaCheck,
-  FaTimes,
-  FaCrown,
-  FaUserShield,
-  FaStar,
-  FaFire,
-} from "react-icons/fa";
+import React from "react";
+import { FaCheck } from "react-icons/fa";
 import BookPlanBtn from "../BookPlanBtn/BookPlanBtn";
 
-const Plans = () => {
-  const [plans, setPlans] = useState([]);
-  const [loading, setLoading] = useState(false);
-  console.log(plans);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get("https://gym-management-0fmi.onrender.com/plans/")
-      .then((res) => setPlans(res.data))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, []);
-  // let plans = [];
-  // try {
-  //   const data = await fetch(
-  //     "https://gym-management-0fmi.onrender.com/plans/",
-  //     {
-  //       cache: "no-store",
-  //     }
-  //   );
-  //   plans = await data.json();
-  // } catch (error) {
-  //   console.log(error);
-  //   console.warn("Could not fetch plans:", error.message);
-  // }
+const Plans = async () => {
+  let plans = [];
+  try {
+    const data = await fetch(
+      "https://gym-management-0fmi.onrender.com/plans/",
+      {
+        cache: "no-store",
+      }
+    );
+    plans = await data.json();
+  } catch (error) {
+    console.log(error);
+    console.warn("Could not fetch plans:", error.message);
+  }
 
   return (
     <section
@@ -64,7 +43,7 @@ const Plans = () => {
             <div
               key={index}
               className={`bg-gray-800/70 rounded-2xl p-8 border-1 border-gray-500 ${
-                plan.type === "Pro" ? "ring-2 ring-green-500 -mt-8" : ""
+                plan.type === "Pro" ? "ring-2 ring-green-500 md:-mt-8" : ""
               }`}
             >
               <div className="flex items-start justify-between mb-8">
@@ -75,6 +54,11 @@ const Plans = () => {
                 </div>
 
                 {plan.type === "Pro" && (
+                  <div className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white text-sm font-semibold rounded-full">
+                    Most Popular
+                  </div>
+                )}
+                {plan.type === "Elite" && (
                   <div className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white text-sm font-semibold rounded-full">
                     Premium
                   </div>
@@ -101,7 +85,7 @@ const Plans = () => {
               </div>
               <BookPlanBtn plan={plan} />
 
-              {plan.name === "Pro" && (
+              {plan.type === "Pro" && (
                 <div className="mt-6 pt-6 border-t border-gray-700/50 text-center">
                   <div className="text-green-400 text-sm font-semibold mb-2">
                     🔥 Best Value
@@ -113,32 +97,6 @@ const Plans = () => {
               )}
             </div>
           ))}
-        </div>
-
-        <div className="mt-16 lg:hidden">
-          <div className="bg-gray-800/50 rounded-2xl p-6">
-            <h4 className="text-xl font-bold mb-6 text-center">
-              Plan Comparison
-            </h4>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center p-3 bg-gray-900/50 rounded-lg">
-                <span>Group Classes</span>
-                <div className="flex gap-4">
-                  <span className="text-gray-400">Limited</span>
-                  <span className="text-green-500">Unlimited</span>
-                  <span className="text-green-500">Unlimited</span>
-                </div>
-              </div>
-              <div className="flex justify-between items-center p-3 bg-gray-900/50 rounded-lg">
-                <span>Trainer Sessions</span>
-                <div className="flex gap-4">
-                  <span className="text-gray-400">0</span>
-                  <span className="text-green-500">4/month</span>
-                  <span className="text-green-500">Unlimited</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="mt-20 max-w-3xl mx-auto">
