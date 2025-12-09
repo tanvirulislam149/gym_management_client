@@ -102,7 +102,7 @@ const Plans = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`bg-gray-800/70 backdrop-blur-sm rounded-2xl p-8 border-2 transition-all duration-300 hover:transform hover:-translate-y-2 ${
+              className={`bg-gray-800/70 rounded-2xl p-8 border-2 backdrop-blur-sm transition-all duration-300 hover:transform hover:-translate-y-2 ${
                 plan.type === "Pro"
                   ? "border-green-500 relative scale-105"
                   : "border-gray-700"
@@ -143,16 +143,7 @@ const Plans = () => {
                 ))}
               </ul>
 
-              {/* <button
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  plan.type === "Pro"
-                    ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
-                    : "bg-gray-700 hover:bg-gray-600"
-                }`}
-              >
-                Get Started
-              </button> */}
-              <BookPlanBtn id={plan.id} />
+              <BookPlanBtn plan={plan} />
             </div>
           ))}
         </div>
