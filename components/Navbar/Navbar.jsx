@@ -47,7 +47,7 @@ const Navbar = () => {
   const user = useSelector((state) => state?.user?.user);
 
   return (
-    <div className="navbar shadow-sm py-3.5 lg:px-20 sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+    <div className="navbar flex justify-around shadow-sm py-3.5 lg:px-20 sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
       <div className="navbar-start w-6/12 sm:w-4/12">
         <Link href={"/"} className="font-bold text-xl sm:text-3xl">
           <div className="flex items-center">
