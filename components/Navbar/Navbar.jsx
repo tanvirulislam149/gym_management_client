@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import Notification from "../Notification/Notification";
 import Modal from "../Modal/Modal";
 import ErrorModal from "../ErrorModal/ErrorModal";
+import { FaDumbbell } from "react-icons/fa";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -48,11 +49,13 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
       <div className="navbar-start w-6/12 sm:w-4/12">
-        <Link
-          href={"/"}
-          className="font-bold text-xl text-green-400 sm:text-3xl"
-        >
-          Muscle Gain
+        <Link href={"/"} className="font-bold text-xl sm:text-3xl">
+          <div className="flex items-center">
+            <FaDumbbell className="text-3xl text-green-500 mr-3" />
+            <h1 className="text-2xl font-bold">
+              Muscle<span className="text-green-500">Gain</span>
+            </h1>
+          </div>
         </Link>
       </div>
       {/*   -------------------------desktop view---------------------  */}
