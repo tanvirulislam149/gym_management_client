@@ -59,7 +59,7 @@ const Navbar = () => {
         </Link>
       </div>
       {/*   -------------------------desktop view---------------------  */}
-      <div className="navbar-center w-6/12 sm:w-8/12">
+      <div className="navbar-center w-6/12 sm:w-7/12 ml-10 hidden md:flex">
         <div className="hidden md:flex mx-auto items-center">
           <ul className="menu menu-horizontal px-1 py-0 flex items-center text-base">
             <li>
@@ -106,73 +106,75 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-end">
-        <div className="mx-3">{user && <Notification />}</div>
-        {user ? (
-          <>
-            <div className="dropdown dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar w-13"
-              >
-                <div className="rounded-full border-3 border-green-400">
-                  <img
-                    alt="Tailwind CSS Navbar component"
-                    src={
-                      user?.image
-                        ? user?.image
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                    }
-                  />
-                </div>
-              </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 my-14 shadow text-center text-base cursor-auto"
-              >
-                <div className="w-25 mt-2 rounded-full mx-auto">
-                  <img
-                    className="rounded-lg w-25"
-                    alt="Tailwind CSS Navbar component"
-                    src={
-                      user?.image
-                        ? user?.image
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                    }
-                  />
-                </div>
-                <p className="my-2">{user.email}</p>
-                <Link
-                  className="bg-gray-200 py-2 my-1"
-                  href="/dashboard/my_profile"
+        <div className="hidden md:flex">
+          <div className="mx-3">{user && <Notification />}</div>
+          {user ? (
+            <>
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar w-13"
                 >
-                  Profile
-                </Link>
-                <Link
-                  className="bg-gray-200 py-2 my-1"
-                  href={
-                    user?.is_staff
-                      ? "/dashboard/summary"
-                      : "/dashboard/my_plans"
-                  }
+                  <div className="rounded-full border-3 border-green-400">
+                    <img
+                      alt="Tailwind CSS Navbar component"
+                      src={
+                        user?.image
+                          ? user?.image
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                      }
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-white text-black rounded-box z-1 mt-3 min-w-60 p-2 my-14 shadow text-center text-base cursor-auto"
                 >
-                  Dashboard
-                </Link>
+                  <div className="w-25 mt-2 rounded-full mx-auto">
+                    <img
+                      className="rounded-lg w-25"
+                      alt="Tailwind CSS Navbar component"
+                      src={
+                        user?.image
+                          ? user?.image
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                      }
+                    />
+                  </div>
+                  <p className="my-2">{user.email}</p>
+                  <Link
+                    className="bg-gray-200 py-2 my-1"
+                    href="/dashboard/my_profile"
+                  >
+                    Profile
+                  </Link>
+                  <Link
+                    className="bg-gray-200 py-2 my-1"
+                    href={
+                      user?.is_staff
+                        ? "/dashboard/summary"
+                        : "/dashboard/my_plans"
+                    }
+                  >
+                    Dashboard
+                  </Link>
 
-                <button
-                  onClick={handleLogout}
-                  className="btn bg-green-400 my-1 text-black border-0 w-full text-base"
-                >
-                  Log out
-                </button>
-              </ul>
-            </div>
-          </>
-        ) : (
-          <Link className="btn bg-green-400 text-black mx-2" href={"/login"}>
-            Login
-          </Link>
-        )}
+                  <button
+                    onClick={handleLogout}
+                    className="btn bg-green-400 my-1 text-black border-0 w-full text-base"
+                  >
+                    Log out
+                  </button>
+                </ul>
+              </div>
+            </>
+          ) : (
+            <Link className="btn bg-green-400 text-black mx-2" href={"/login"}>
+              Login
+            </Link>
+          )}
+        </div>
         {/* -----------------Mobile view----------------  */}
         <div className="md:hidden">{user && <Notification />}</div>
         <div className="dropdown dropdown-end">
