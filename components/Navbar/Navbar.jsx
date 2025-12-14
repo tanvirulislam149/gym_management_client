@@ -47,7 +47,7 @@ const Navbar = () => {
   const user = useSelector((state) => state?.user?.user);
 
   return (
-    <div className="navbar bg-base-100 shadow-sm py-5 lg:px-20 z-10 sticky top-0 border-b-1 border-green-400">
+    <div className="navbar shadow-sm py-3.5 lg:px-20 z-10 sticky top-0 border-b-1 border-gray-600">
       <div className="navbar-start w-6/12 sm:w-4/12">
         <Link href={"/"} className="font-bold text-xl sm:text-3xl">
           <div className="flex items-center">
