@@ -46,12 +46,13 @@ const Banner = () => {
               to helping you achieve your fitness goals.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105">
-                Start Free Trial
-              </button>
-              <button className="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-all duration-300 flex items-center justify-center">
-                <FaPlayCircle className="mr-2" /> Watch Tour
-              </button>
+              <Link href={"/register"}>
+                <Button>Be A Member</Button>
+              </Link>
+
+              <Link href={"/login"}>
+                <Button>Member Login</Button>
+              </Link>
             </div>
           </div>
           <div className="lg:w-1/2 relative">
