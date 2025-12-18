@@ -4,33 +4,12 @@ import Button from "../Button/Button";
 import Link from "next/link";
 import MessageCont from "../MessageCont/MessageCont";
 import { FaPlayCircle, FaUsers } from "react-icons/fa";
+import bannerImg from "../../images/gym.jpg";
+import Image from "next/image";
 
 const Banner = () => {
   return (
-    // <div
-    //   className={`${styles.container} text-5xl lg:text-7xl flex justify-center items-center`}
-    // >
-    //   <div className="">
-    //     <p className="mb-4">Build Perfect body shape for</p>
-    //     <p>good and healthy life</p>
-    //     <div className="flex justify-center">
-    //       <div className="mx-3">
-    //         <Link href={"/register"}>
-    //           <Button>Be A Member</Button>
-    //         </Link>
-    //       </div>
-    //       <div className="mx-3">
-    //         <Link href={"/login"}>
-    //           <Button>Member Login</Button>
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="text-base fixed md:right-10 right-2 md:bottom-5 bottom-2 z-50 cursor-pointer">
-    //     <MessageCont />
-    //   </div>
-    // </div>
-    <section id="home" className="pt-24 pb-16 md:py-32">
+    <section id="home" className="pt-24 pb-16 md:py-26">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-12 lg:mb-0">
@@ -57,11 +36,16 @@ const Banner = () => {
           </div>
           <div className="lg:w-1/2 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+              <Image
+                src={bannerImg}
                 alt="Modern Gym Interior"
                 className="w-full h-64 md:h-96 object-cover"
               />
+              {/* <img
+                src={bannerImg}
+                alt="Modern Gym Interior"
+                className="w-full h-64 md:h-96 object-cover"
+              /> */}
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent"></div>
             </div>
             <div className="absolute -bottom-6 -left-4 bg-gray-800/90 backdrop-blur-sm p-6 rounded-2xl shadow-2xl border border-gray-700">
