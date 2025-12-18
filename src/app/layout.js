@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       <body className={`${poppins.className}`}>
         <ReduxProvider>
           <Navbar />
-          <div className="max-w-[1400px] mx-auto">{children}</div>
+          {children}
           <Footer />
         </ReduxProvider>
       </body>
