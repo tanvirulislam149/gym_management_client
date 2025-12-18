@@ -21,7 +21,7 @@ const MessageCont = () => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative font-bold">
       {show && (
         <div className="chat chat-end absolute -top-14 -left-55">
           <div className="chat-bubble text-black bg-white">
