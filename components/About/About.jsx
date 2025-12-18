@@ -31,8 +31,8 @@ const About = () => {
             Why Choose <span className="text-green-500">PrimeFit</span>?
           </h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            We offer more than just a gym - a comprehensive fitness ecosystem
-            with personalized training, nutrition planning, and community
+            We offer not only a gym but also a comprehensive fitness ecosystem
+            with personalized training, nutrition planning and community
             support.
           </p>
         </div>
