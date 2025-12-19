@@ -3,14 +3,14 @@ import api_client from "@/api_client";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-const BookPlanBtn = ({ id }) => {
+const BookPlanBtn = ({ plan }) => {
   const [loading, setLoading] = useState(false);
   const user = useSelector((state) => state?.user?.user);
   const handleBookPlan = () => {
     setLoading(true);
     api_client
       .post("https://gym-management-0fmi.onrender.com/book_plans/", {
-        plans: id,
+        plans: plan.id,
       })
       .then((res) => {
         if (res.status === 201) {
@@ -27,13 +27,18 @@ const BookPlanBtn = ({ id }) => {
     <div>
       <button
         onClick={() => {
-          document.getElementById(`bookPlan${id}`).showModal();
+          document.getElementById(`bookPlan${plan.id}`).showModal();
         }}
-        className="btn bg-green-400 hover:bg-white my-3 text-black border-none"
+        // className="btn bg-green-400 hover:bg-white my-3 text-black border-none"
+        className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+          plan.type === "Pro"
+            ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
+            : "bg-gray-700 hover:bg-gray-600"
+        }`}
       >
         Book Plan
       </button>
-      <dialog id={`bookPlan${id}`} className="modal">
+      <dialog id={`bookPlan${plan.id}`} className="modal">
         <div className="modal-box bg-white text-black">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}

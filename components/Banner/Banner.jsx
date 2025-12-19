@@ -9,9 +9,9 @@ import Image from "next/image";
 
 const Banner = () => {
   return (
-    <section id="home" className="pt-24 pb-16 md:py-26">
+    <section id="home" className="pt-24 pb-16 md:py-18">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex  flex-col lg:flex-row items-center">
           <div className="lg:w-1/2 mb-12 lg:mb-0">
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               Transform Your Body,{" "}
@@ -34,8 +34,8 @@ const Banner = () => {
               </Link>
             </div>
           </div>
-          <div className="lg:w-1/2 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+          <div className="lg:w-1/2 relative ml-8">
+            <div className="relative w-11/12 rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src={bannerImg}
                 alt="Modern Gym Interior"
