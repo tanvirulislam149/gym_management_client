@@ -16,7 +16,7 @@ const Notification = () => {
   const fetch_notification = () => {
     setLoading(true);
     api_client
-      .get("https://gym-management-0fmi.onrender.com/notification/")
+      .get("https://gym-management-henna.vercel.app/notification/")
       .then((res) => setData(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));
@@ -54,7 +54,7 @@ const Notification = () => {
     if (newNotification) {
       api_client
         .post(
-          "https://gym-management-0fmi.onrender.com/notification/read_notification/"
+          "https://gym-management-henna.vercel.app/notification/read_notification/"
         )
         .then((res) => {
           setNewNotification(0);

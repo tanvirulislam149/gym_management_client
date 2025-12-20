@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://gym-management-0fmi.onrender.com/",
+    baseUrl: "https://gym-management-henna.vercel.app/",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       if (token) {

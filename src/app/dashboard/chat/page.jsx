@@ -29,7 +29,7 @@ const page = () => {
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("https://gym-management-0fmi.onrender.com/get_conversations/")
+      .get("https://gym-management-henna.vercel.app/get_conversations/")
       .then((res) => {
         // Sort conversations: unread first
         const sorted = res.data.sort((a, b) => {

@@ -6,7 +6,7 @@ import Reviews from "../../../../components/Reviews/Reviews";
 const ClassDetails = async ({ params }) => {
   const { id } = await params;
   const data = await fetch(
-    `https://gym-management-0fmi.onrender.com/fitness_classes/${id}`
+    `https://gym-management-henna.vercel.app/fitness_classes/${id}`
   );
   const fitness_class = await data.json();
   return (

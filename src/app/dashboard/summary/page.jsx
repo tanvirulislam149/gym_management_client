@@ -20,7 +20,7 @@ const Summary = () => {
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("https://gym-management-0fmi.onrender.com/dashboard/")
+      .get("https://gym-management-henna.vercel.app/dashboard/")
       .then((res) => setData(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));

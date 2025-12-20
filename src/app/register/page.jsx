@@ -72,7 +72,7 @@ const register = () => {
       }
       localStorage.setItem("token", loginResult?.data?.access);
       axios
-        .get("https://gym-management-0fmi.onrender.com/auth/users/me/", {
+        .get("https://gym-management-henna.vercel.app/auth/users/me/", {
           headers: {
             Authorization: `JWT ${loginResult?.data?.access}`,
           },
