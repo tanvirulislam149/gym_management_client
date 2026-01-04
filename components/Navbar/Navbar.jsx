@@ -225,9 +225,8 @@ const Navbar = () => {
               <Link href={"/#classes"}>Classes</Link>
             </li>
             {user && (
-              <li>
+              <li className="my-1 text-5xl">
                 <Link
-                  className={`hover:bg-transparent text-gray-300 hover:text-green-400 transition-colors duration-300 relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-green-500 hover:after:w-full after:transition-all after:duration-300`}
                   href={
                     user?.is_staff
                       ? "/dashboard/summary"
