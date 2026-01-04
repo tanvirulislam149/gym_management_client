@@ -7,7 +7,7 @@ const Fitness_classes = async () => {
   let classes = [];
   try {
     const data = await fetch(
-      "https://gym-management-henna.vercel.app/fitness_classes/",
+      "https://gym-management-0fmi.onrender.com/fitness_classes/",
       {
         cache: "no-store",
       }
