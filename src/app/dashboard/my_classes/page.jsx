@@ -14,7 +14,7 @@ const My_classes = () => {
   useEffect(() => {
     setLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/attendence/")
+      .get("https://gym-management-0fmi.onrender.com/attendence/")
       .then((res) => setClasses(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));

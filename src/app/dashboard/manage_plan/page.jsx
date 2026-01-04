@@ -21,7 +21,7 @@ const Manage_plan = () => {
   const fetchPlans = () => {
     setLoading(true);
     axios
-      .get("https://gym-management-henna.vercel.app/plans/")
+      .get("https://gym-management-0fmi.onrender.com/plans/")
       .then((res) => setPlans(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setLoading(false));

@@ -29,7 +29,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     if (user) {
       api_client
         .get(
-          `https://gym-management-henna.vercel.app/message/?receiver=${receiver}`
+          `https://gym-management-0fmi.onrender.com/message/?receiver=${receiver}`
         )
         .then((res) => {
           setMessages(res.data);
@@ -59,7 +59,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     };
     console.log(data);
     api_client
-      .post("https://gym-management-henna.vercel.app/message/", data)
+      .post("https://gym-management-0fmi.onrender.com/message/", data)
       .then((res) => {
         socketRef.current.send(JSON.stringify(data)); // sending msg to BE
         // getMessages();

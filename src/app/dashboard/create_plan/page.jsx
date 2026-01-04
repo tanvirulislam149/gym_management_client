@@ -23,7 +23,7 @@ const Create_plan = () => {
 
   useEffect(() => {
     axios
-      .get("https://gym-management-henna.vercel.app/fitness_classes/")
+      .get("https://gym-management-0fmi.onrender.com/fitness_classes/")
       .then((res) => setClasses(res.data))
       .catch((err) => {
         document.getElementById("errorModal").showModal();
@@ -45,7 +45,7 @@ const Create_plan = () => {
       const token = localStorage.getItem("token");
       axios
         .post(
-          "https://gym-management-henna.vercel.app/plans/",
+          "https://gym-management-0fmi.onrender.com/plans/",
           {
             ...data,
             price: parseInt(data.price),

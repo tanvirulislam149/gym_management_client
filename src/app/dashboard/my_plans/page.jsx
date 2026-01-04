@@ -19,7 +19,7 @@ const My_plans = () => {
   useEffect(() => {
     setPaymentLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/payment/")
+      .get("https://gym-management-0fmi.onrender.com/payment/")
       .then((res) => setPayments(res.data))
       .catch((err) => document.getElementById("errorModal").showModal())
       .finally(() => setPaymentLoading(false));
@@ -28,7 +28,7 @@ const My_plans = () => {
   useEffect(() => {
     setCardLoading(true);
     api_client
-      .get("https://gym-management-henna.vercel.app/book_plans/")
+      .get("https://gym-management-0fmi.onrender.com/book_plans/")
       .then((res) => {
         setBooked_plan(res.data);
         if (res?.data[0]?.current_plan_days) {
@@ -37,7 +37,7 @@ const My_plans = () => {
         if (res?.data[0]?.plans?.id) {
           api_client
             .get(
-              `https://gym-management-henna.vercel.app/plans/${res.data[0].plans.id}`
+              `https://gym-management-0fmi.onrender.com/plans/${res.data[0].plans.id}`
             )
             .then((res) => setPlan(res.data))
             .catch((err) => document.getElementById("errorModal").showModal())
