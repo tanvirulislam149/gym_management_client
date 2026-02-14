@@ -124,6 +124,9 @@ const Navbar = () => {
           {/* <div className="mx-3">{user && <Notification />}</div> */}
           {user ? (
             <>
+              <div className="mr-5">
+                <Notification />
+              </div>
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
