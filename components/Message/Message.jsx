@@ -4,11 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { IoSend } from "react-icons/io5";
 import MessageText from "./MessageText";
+import Button from "../Button/Button";
 
 const Message = ({ receiver, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [convo, setConvo] = useState([]);
+  const [convoNull, setConvoNull] = useState(false);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
   const messageContainerRef = useRef(null); //  ref on the scrollable box
@@ -49,8 +51,12 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     api_client
       .get("http://127.0.0.1:8000/conversations/")
       .then((res) => {
-        setConvo(res.data);
-        getMessages();
+        if (res.data.length) {
+          setConvo(res.data);
+          getMessages();
+        } else {
+          admin === false && setConvoNull(true);
+        }
       })
       .catch((err) => console.log(err));
   }, [receiver, convo.length]);
@@ -118,34 +124,46 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
           ref={messageContainerRef}
           className="mt-1 overflow-y-auto h-[400px] bg-black"
         >
-          <div className="chat chat-start">
-            {!admin && <div className="chat-bubble">How can I help you?</div>}
-          </div>
-          {messages.map((m) => (
-            <div key={m.id}>
-              <MessageText message={m} />
+          {convoNull ? (
+            <div className="flex justify-center my-20">
+              <Button>Click to start conversation</Button>
             </div>
-          ))}
+          ) : (
+            <>
+              <div className="chat chat-start">
+                {!admin && (
+                  <div className="chat-bubble">How can I help you?</div>
+                )}
+              </div>
+              {messages.map((m) => (
+                <div key={m.id}>
+                  <MessageText message={m} />
+                </div>
+              ))}
+            </>
+          )}
         </div>
       )}
-      <form
-        className="flex text-white w-full p-1 border-t-1 border-gray-600"
-        onSubmit={sendMessageHandler}
-      >
-        <input
-          type="text"
-          className="input bg-black w-full focus:outline-none focus:shadow-none border-0 ring-0"
-          name="msg_text"
-          placeholder="Type here"
-          autoComplete="off"
-        />
-        <button
-          type="submit"
-          className="border-0 btn bg-green-400 text-black rounded-full"
+      {!convoNull && (
+        <form
+          className="flex text-white w-full p-1 border-t-1 border-gray-600"
+          onSubmit={sendMessageHandler}
         >
-          <IoSend className="w-6 h-6 ml-1" />
-        </button>
-      </form>
+          <input
+            type="text"
+            className="input bg-black w-full focus:outline-none focus:shadow-none border-0 ring-0"
+            name="msg_text"
+            placeholder="Type here"
+            autoComplete="off"
+          />
+          <button
+            type="submit"
+            className="border-0 btn bg-green-400 text-black rounded-full"
+          >
+            <IoSend className="w-6 h-6 ml-1" />
+          </button>
+        </form>
+      )}
     </div>
   );
 };
