@@ -8,6 +8,7 @@ import MessageText from "./MessageText";
 const Message = ({ receiver, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [convo, setConvo] = useState([]);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
   const messageContainerRef = useRef(null); //  ref on the scrollable box
@@ -26,11 +27,9 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   const getMessages = () => {
     setLoading(true);
     let timeoutId;
-    if (user) {
+    if (user && convo.length) {
       api_client
-        .get(
-          `https://gym-management-0fmi.onrender.com/message/?receiver=${receiver}`
-        )
+        .get(`http://127.0.0.1:8000/message/?convo_id=${convo[0].id}`)
         .then((res) => {
           setMessages(res.data);
           setLoading(false);
@@ -45,10 +44,16 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         });
     }
   };
-
+  console.log(convo);
   useEffect(() => {
-    getMessages();
-  }, [receiver]);
+    api_client
+      .get("http://127.0.0.1:8000/conversations/")
+      .then((res) => {
+        setConvo(res.data);
+        getMessages();
+      })
+      .catch((err) => console.log(err));
+  }, [receiver, convo.length]);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
@@ -73,7 +78,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     if (user) {
       const room = [receiver, user.id].sort();
       socketRef.current = new WebSocket(
-        `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`
+        `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`,
       );
 
       socketRef.current.onopen = () => {

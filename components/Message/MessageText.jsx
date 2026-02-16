@@ -8,14 +8,14 @@ const MessageItem = ({ message }) => {
   const user = useSelector((state) => state?.user?.user);
 
   // Hook will auto-mark message as read when visible
-  useMarkAsRead(ref, message);
+  // useMarkAsRead(ref, message);
 
   return (
     <div
       ref={ref}
       key={message.id}
       className={`chat ${
-        message.sender.id === user.id ? "chat-end" : "chat-start"
+        message.message_sender === user.id ? "chat-end" : "chat-start"
       }`}
     >
       <div className="chat-bubble font-normal">{message.message_text}</div>
