@@ -10,7 +10,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [convo, setConvo] = useState([]);
-  const [convoNull, setConvoNull] = useState(false);
+  const [convoNull, setConvoNull] = useState(true);
   console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
   const messageContainerRef = useRef(null); //  ref on the scrollable box
@@ -47,19 +47,43 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     }
   };
   console.log(convo);
-  useEffect(() => {
+  const startConvoHandler = () => {
+    api_client
+      .post("http://127.0.0.1:8000/conversations/")
+      .then((res) => {
+        setConvoNull(false);
+        setConvo([res.data]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const get_convo = () => {
+    let timeoutId;
     api_client
       .get("http://127.0.0.1:8000/conversations/")
       .then((res) => {
         if (res.data.length) {
+          setConvoNull(false);
           setConvo(res.data);
           getMessages();
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
         } else {
           admin === false && setConvoNull(true);
         }
       })
-      .catch((err) => console.log(err));
-  }, [receiver, convo.length]);
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status == 401) {
+          timeoutId = setTimeout(get_convo, 2000);
+        }
+      });
+  };
+
+  useEffect(() => {
+    get_convo();
+  }, [receiver, convo.length, user]);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
@@ -126,7 +150,9 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         >
           {convoNull ? (
             <div className="flex justify-center my-20">
-              <Button>Click to start conversation</Button>
+              <button onClick={startConvoHandler}>
+                <Button>Click to start conversation</Button>
+              </button>
             </div>
           ) : (
             <>

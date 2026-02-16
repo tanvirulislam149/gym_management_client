@@ -26,26 +26,42 @@ const page = () => {
     setConversations(array);
   };
 
-  useEffect(() => {
-    setLoading(true);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   api_client
+  //     .get("https://gym-management-0fmi.onrender.com/get_conversations/")
+  //     .then((res) => {
+  //       // Sort conversations: unread first
+  //       const sorted = res.data.sort((a, b) => {
+  //         if (a.has_unread === b.has_unread) return 0;
+  //         return a.has_unread ? -1 : 1;
+  //       });
+  //       setConversations(sorted);
+  //     })
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false));
+  // }, []);
+
+  const get_convo = () => {
     api_client
-      .get("https://gym-management-0fmi.onrender.com/get_conversations/")
+      .get("http://127.0.0.1:8000/conversations/")
       .then((res) => {
-        // Sort conversations: unread first
-        const sorted = res.data.sort((a, b) => {
-          if (a.has_unread === b.has_unread) return 0;
-          return a.has_unread ? -1 : 1;
-        });
-        setConversations(sorted);
+        setConversations(res.data);
       })
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false));
-  }, []);
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    get_convo();
+  }, [receiver, user]);
+  console.log(conversations);
 
   const convoSocketRef = useRef(null);
   useEffect(() => {
     convoSocketRef.current = new WebSocket(
-      `wss://gym-management-0fmi.onrender.com/ws/conversations/${user?.id}/`
+      `wss://gym-management-0fmi.onrender.com/ws/conversations/${user?.id}/`,
     );
 
     convoSocketRef.current.onopen = () => {
@@ -119,45 +135,41 @@ const page = () => {
                     <span className="loading loading-spinner mt-10 text-white loading-xl"></span>
                   </div>
                 ) : (
-                  conversations.map((c) =>
-                    c.id == 1 ? (
-                      ""
-                    ) : (
-                      <li
-                        className="border-b-1 my-2 w-full mb-0 pb-0 cursor-pointer"
-                        key={c.id}
+                  conversations.map((c) => (
+                    <li
+                      className="border-b-1 my-2 w-full mb-0 pb-0 cursor-pointer"
+                      key={c.id}
+                    >
+                      <button
+                        onClick={() => handleMarkRead(c.id)}
+                        className={`w-full m-0 px-2 py-3 ${
+                          c.has_unread ? "font-bold" : ""
+                        }`}
                       >
-                        <button
-                          onClick={() => handleMarkRead(c.id)}
-                          className={`w-full m-0 px-2 py-3 ${
-                            c.has_unread ? "font-bold" : ""
-                          }`}
-                        >
-                          <div className="flex justify-between items-center">
-                            <div>
-                              <img
-                                className="w-9 h-9 rounded-full mr-2"
-                                src={`${
-                                  c.image
-                                    ? `${c.image}`
-                                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                                }`}
-                                alt=""
-                              />
-                            </div>
-                            <div>{c.email}</div>
-                            <div>
-                              {c.has_unread ? (
-                                <div className="w-3 h-3 bg-white rounded-full ml-3"></div>
-                              ) : (
-                                ""
-                              )}
-                            </div>
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <img
+                              className="w-9 h-9 rounded-full mr-2"
+                              src={`${
+                                c.sender.image
+                                  ? `${c.sender.image}`
+                                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                              }`}
+                              alt=""
+                            />
                           </div>
-                        </button>
-                      </li>
-                    )
-                  )
+                          <div>{c.sender.email}</div>
+                          <div>
+                            {c.has_unread ? (
+                              <div className="w-3 h-3 bg-white rounded-full ml-3"></div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+                      </button>
+                    </li>
+                  ))
                 )}
               </div>
             </ul>
