@@ -3,7 +3,7 @@ import useMarkAsRead from "@/hooks/markMsgRead";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
 
-const MessageItem = ({ message }) => {
+const MessageItem = ({ message, convo, admin }) => {
   const ref = useRef(null);
   const user = useSelector((state) => state?.user?.user);
 
@@ -15,7 +15,13 @@ const MessageItem = ({ message }) => {
       ref={ref}
       key={message.id}
       className={`chat ${
-        message.message_sender === user.id ? "chat-end" : "chat-start"
+        message.message_sender === convo?.sender.id
+          ? admin
+            ? "chat-start"
+            : "chat-end"
+          : admin
+            ? "chat-end"
+            : "chat-start"
       }`}
     >
       <div className="chat-bubble font-normal">{message.message_text}</div>

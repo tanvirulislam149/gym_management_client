@@ -9,13 +9,13 @@ import { useSelector } from "react-redux";
 const page = () => {
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [convo, setConvo] = useState(0);
+  const [selected_convo, setSelected_convo] = useState([]);
   const user = useSelector((state) => state?.user?.user);
 
-  const handleMarkRead = (id) => {
-    setConvo(id);
+  const handleMarkRead = (selected_convo) => {
+    setSelected_convo(selected_convo);
     const array = conversations.filter((c) => {
-      if (c.id == id) {
+      if (c.id == selected_convo.id) {
         // console.log(c.id, id);
         c.has_unread = false;
         return c;
@@ -54,22 +54,22 @@ const page = () => {
 
   useEffect(() => {
     get_convo();
-  }, [convo, user]);
+  }, []);
   console.log(conversations);
 
-  const convoSocketRef = useRef(null);
+  const selected_convoSocketRef = useRef(null);
   useEffect(() => {
-    convoSocketRef.current = new WebSocket(
+    selected_convoSocketRef.current = new WebSocket(
       `wss://gym-management-0fmi.onrender.com/ws/conversations/${user?.id}/`,
     );
 
-    convoSocketRef.current.onopen = () => {
+    selected_convoSocketRef.current.onopen = () => {
       console.log("WebSocket Connected");
     };
-    convoSocketRef.current.onclose = () => {
+    selected_convoSocketRef.current.onclose = () => {
       console.log("WebSocket Disconnected");
     };
-    convoSocketRef.current.onmessage = (e) => {
+    selected_convoSocketRef.current.onmessage = (e) => {
       // receiving msg from BE
       const newData = JSON.parse(e.data);
       console.log(newData);
@@ -80,7 +80,7 @@ const page = () => {
     };
 
     return () => {
-      convoSocketRef.current.close();
+      selected_convoSocketRef.current.close();
     };
   }, [user]);
 
@@ -104,9 +104,9 @@ const page = () => {
               </label>
             </div>
             <div className="w-full md:px-3">
-              {convo != 0 ? (
+              {selected_convo != 0 ? (
                 <Message
-                  convo_id={convo}
+                  selected_convo={selected_convo}
                   admin={true}
                   handleMarkRead={handleMarkRead}
                 />
@@ -140,7 +140,7 @@ const page = () => {
                       key={c.id}
                     >
                       <button
-                        onClick={() => handleMarkRead(c.id)}
+                        onClick={() => handleMarkRead(c)}
                         className={`w-full m-0 px-2 py-3 ${
                           c.has_unread ? "font-bold" : ""
                         }`}

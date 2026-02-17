@@ -6,7 +6,7 @@ import { IoSend } from "react-icons/io5";
 import MessageText from "./MessageText";
 import Button from "../Button/Button";
 
-const Message = ({ convo_id, admin, handleMarkRead }) => {
+const Message = ({ selected_convo, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [convo, setConvo] = useState([]);
@@ -28,10 +28,10 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
   const getMessages = () => {
     setLoading(true);
     let timeoutId;
-    if (user && convo.length) {
+    if (user) {
       api_client
         .get(
-          `http://127.0.0.1:8000/message/?convo_id=${admin ? convo_id : convo[0].id}`,
+          `http://127.0.0.1:8000/message/?convo_id=${admin ? selected_convo.id : convo[0].id}`,
         )
         .then((res) => {
           setMessages(res.data);
@@ -74,22 +74,31 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 401) {
+        if (err.response?.status == 401) {
           timeoutId = setTimeout(get_convo, 2000);
         }
       });
   };
+  console.log(messages);
 
   useEffect(() => {
-    get_convo();
-  }, [convo_id, convo.length, user]);
-  console.log(convo_id);
+    setLoading(true);
+    if (admin) {
+      setConvoNull(false);
+      setConvo([selected_convo]);
+      getMessages();
+      // setLoading(false);
+    } else {
+      get_convo();
+      setLoading(false);
+    }
+  }, [selected_convo, convo.length, user]);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
     const data = {
       conversation: convo[0].id,
-      message_sender: convo[0].sender.id,
+      message_sender: user.id,
       message_text: e.target.msg_text.value,
     };
     api_client
@@ -105,7 +114,7 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
   const socketRef = useRef(null);
   useEffect(() => {
     if (user) {
-      const room = [convo_id, user.id].sort();
+      const room = [selected_convo, user.id].sort();
       socketRef.current = new WebSocket(
         `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`,
       );
@@ -120,7 +129,7 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
 
-        if (admin && newData.convo_id.id == 1) {
+        if (admin && newData.selected_convo.id == 1) {
           handleMarkRead(newData.sender.id);
         }
       };
@@ -129,12 +138,16 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
         socketRef.current.close();
       };
     }
-  }, [user, convo_id]);
+  }, [user, selected_convo]);
 
   return (
     <div className="cursor-default bg-black rounded-t-lg rounded-2xl w-full border-1 border-gray-600">
       <div className="p-2.5 text-xl w-full sticky border-b-1 border-gray-600 text-white top-0 left-0 bg-black rounded-t-lg">
-        {admin ? messages[0]?.sender?.email : <p>Chat with Admin</p>}
+        {admin ? (
+          messages[0]?.conversation?.sender?.email
+        ) : (
+          <p>Chat with Admin</p>
+        )}
       </div>
       {loading ? (
         <div className="h-96 flex justify-center">
@@ -160,7 +173,11 @@ const Message = ({ convo_id, admin, handleMarkRead }) => {
               </div>
               {messages.map((m) => (
                 <div key={m.id}>
-                  <MessageText message={m} />
+                  <MessageText
+                    convo={admin ? selected_convo : convo[0]}
+                    message={m}
+                    admin={admin}
+                  />
                 </div>
               ))}
             </>
