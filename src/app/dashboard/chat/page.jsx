@@ -9,15 +9,14 @@ import { useSelector } from "react-redux";
 const page = () => {
   const [conversations, setConversations] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [receiver, setReceiver] = useState(0);
+  const [convo, setConvo] = useState(0);
   const user = useSelector((state) => state?.user?.user);
-  console.log(conversations);
 
   const handleMarkRead = (id) => {
-    setReceiver(id);
+    setConvo(id);
     const array = conversations.filter((c) => {
       if (c.id == id) {
-        console.log(c.id, id);
+        // console.log(c.id, id);
         c.has_unread = false;
         return c;
       }
@@ -55,7 +54,7 @@ const page = () => {
 
   useEffect(() => {
     get_convo();
-  }, [receiver, user]);
+  }, [convo, user]);
   console.log(conversations);
 
   const convoSocketRef = useRef(null);
@@ -105,9 +104,9 @@ const page = () => {
               </label>
             </div>
             <div className="w-full md:px-3">
-              {receiver != 0 ? (
+              {convo != 0 ? (
                 <Message
-                  receiver={receiver}
+                  convo_id={convo}
                   admin={true}
                   handleMarkRead={handleMarkRead}
                 />

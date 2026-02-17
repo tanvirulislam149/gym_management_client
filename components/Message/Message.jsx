@@ -6,12 +6,11 @@ import { IoSend } from "react-icons/io5";
 import MessageText from "./MessageText";
 import Button from "../Button/Button";
 
-const Message = ({ receiver, admin, handleMarkRead }) => {
+const Message = ({ convo_id, admin, handleMarkRead }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [convo, setConvo] = useState([]);
   const [convoNull, setConvoNull] = useState(true);
-  console.log(receiver, messages);
   const user = useSelector((state) => state?.user?.user);
   const messageContainerRef = useRef(null); //  ref on the scrollable box
 
@@ -31,7 +30,9 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
     let timeoutId;
     if (user && convo.length) {
       api_client
-        .get(`http://127.0.0.1:8000/message/?convo_id=${convo[0].id}`)
+        .get(
+          `http://127.0.0.1:8000/message/?convo_id=${admin ? convo_id : convo[0].id}`,
+        )
         .then((res) => {
           setMessages(res.data);
           setLoading(false);
@@ -46,7 +47,6 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         });
     }
   };
-  console.log(convo);
   const startConvoHandler = () => {
     api_client
       .post("http://127.0.0.1:8000/conversations/")
@@ -74,7 +74,6 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         }
       })
       .catch((err) => {
-        console.log(err);
         if (err.response.status == 401) {
           timeoutId = setTimeout(get_convo, 2000);
         }
@@ -83,21 +82,21 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
 
   useEffect(() => {
     get_convo();
-  }, [receiver, convo.length, user]);
+  }, [convo_id, convo.length, user]);
+  console.log(convo_id);
 
   const sendMessageHandler = (e) => {
     e.preventDefault();
-    console.log(receiver);
     const data = {
-      receiver: receiver, // id of admin is 1
+      conversation: convo[0].id,
+      message_sender: convo[0].sender.id,
       message_text: e.target.msg_text.value,
     };
-    console.log(data);
     api_client
-      .post("https://gym-management-0fmi.onrender.com/message/", data)
+      .post("http://127.0.0.1:8000/message/", data)
       .then((res) => {
         socketRef.current.send(JSON.stringify(data)); // sending msg to BE
-        // getMessages();
+        getMessages();
       })
       .catch((err) => console.log(err))
       .finally(() => (e.target.msg_text.value = ""));
@@ -106,14 +105,12 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
   const socketRef = useRef(null);
   useEffect(() => {
     if (user) {
-      const room = [receiver, user.id].sort();
+      const room = [convo_id, user.id].sort();
       socketRef.current = new WebSocket(
         `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`,
       );
 
-      socketRef.current.onopen = () => {
-        console.log("WebSocket Connected");
-      };
+      socketRef.current.onopen = () => {};
       socketRef.current.onclose = () => {
         console.log("WebSocket Disconnected");
       };
@@ -123,7 +120,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
 
-        if (admin && newData.receiver.id == 1) {
+        if (admin && newData.convo_id.id == 1) {
           handleMarkRead(newData.sender.id);
         }
       };
@@ -132,7 +129,7 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         socketRef.current.close();
       };
     }
-  }, [user, receiver]);
+  }, [user, convo_id]);
 
   return (
     <div className="cursor-default bg-black rounded-t-lg rounded-2xl w-full border-1 border-gray-600">
@@ -150,9 +147,9 @@ const Message = ({ receiver, admin, handleMarkRead }) => {
         >
           {convoNull ? (
             <div className="flex justify-center my-20">
-              <button onClick={startConvoHandler}>
+              <div onClick={startConvoHandler}>
                 <Button>Click to start conversation</Button>
-              </button>
+              </div>
             </div>
           ) : (
             <>
