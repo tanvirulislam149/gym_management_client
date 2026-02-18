@@ -10,15 +10,15 @@ const useMarkAsRead = (ref, message) => {
     if (!ref.current) return;
 
     // Only mark if this message is for me and not yet read
-    if (message.receiver.id !== user.id || message.is_read) return;
+    if (message.is_read) return;
 
     const observer = new IntersectionObserver(
       async (entries) => {
         if (entries[0].isIntersecting) {
           try {
             await api_client.post(
-              `https://gym-management-0fmi.onrender.com/message/${message.id}/read_message/`,
-              {}
+              `http://127.0.0.1:8000/message/${message.id}/read_message/`,
+              {},
             );
             console.log("Message marked as read:", message.id);
             observer.unobserve(ref.current); // stop observing after read
@@ -27,7 +27,7 @@ const useMarkAsRead = (ref, message) => {
           }
         }
       },
-      { threshold: 0.6 } // 60% visible before marking as read
+      { threshold: 0.6 }, // 60% visible before marking as read
     );
 
     observer.observe(ref.current);

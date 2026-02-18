@@ -94,6 +94,8 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
     }
   }, [selected_convo, convo.length, user]);
 
+  const socketRef = useRef(null);
+
   const sendMessageHandler = (e) => {
     e.preventDefault();
     const data = {
@@ -112,7 +114,6 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
       .finally(() => (e.target.msg_text.value = ""));
   };
 
-  const socketRef = useRef(null);
   useEffect(() => {
     if (user) {
       // const room = [selected_convo, user.id].sort();
@@ -135,8 +136,9 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
 
-        // if (admin && newData.selected_convo.id == 1) {    // unsolved
-        //   handleMarkRead(newData.sender.id);
+        // if (admin) {
+        //   // unsolved
+        //   handleMarkRead(newData.conversation);
         // }
       };
 

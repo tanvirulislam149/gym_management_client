@@ -8,7 +8,7 @@ const MessageItem = ({ message, convo, admin }) => {
   const user = useSelector((state) => state?.user?.user);
 
   // Hook will auto-mark message as read when visible
-  // useMarkAsRead(ref, message);
+  useMarkAsRead(ref, message);
 
   return (
     <div

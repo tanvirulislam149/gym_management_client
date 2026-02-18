@@ -57,30 +57,33 @@ const page = () => {
   }, []);
   console.log(conversations);
 
-  const selected_convoSocketRef = useRef(null);   // websocket for showing new conversation
+  const convoSocketRef = useRef(null); // websocket for showing new conversation
   useEffect(() => {
-    selected_convoSocketRef.current = new WebSocket(
-      `wss://gym-management-0fmi.onrender.com/ws/conversations/${user?.id}/`,
+    // convoSocketRef.current = new WebSocket(
+    //   `wss://gym-management-0fmi.onrender.com/ws/conversations/all_convo/`,
+    // );
+    convoSocketRef.current = new WebSocket(
+      `ws://127.0.0.1:8000/ws/conversations/all_convo/`,
     );
 
-    selected_convoSocketRef.current.onopen = () => {
+    convoSocketRef.current.onopen = () => {
       console.log("WebSocket Connected");
     };
-    selected_convoSocketRef.current.onclose = () => {
+    convoSocketRef.current.onclose = () => {
       console.log("WebSocket Disconnected");
     };
-    selected_convoSocketRef.current.onmessage = (e) => {
+    convoSocketRef.current.onmessage = (e) => {
       // receiving msg from BE
       const newData = JSON.parse(e.data);
       console.log(newData);
-      setConversations((prev) => {
+      setConversations((prev) => {   // preventing the repeatation of convo name
         const data = prev.filter((e) => e.id !== newData.id);
         return [newData, ...data];
       });
     };
 
     return () => {
-      selected_convoSocketRef.current.close();
+      convoSocketRef.current.close();
     };
   }, [user]);
 
