@@ -57,7 +57,7 @@ const page = () => {
   }, []);
   console.log(conversations);
 
-  const selected_convoSocketRef = useRef(null);
+  const selected_convoSocketRef = useRef(null);   // websocket for showing new conversation
   useEffect(() => {
     selected_convoSocketRef.current = new WebSocket(
       `wss://gym-management-0fmi.onrender.com/ws/conversations/${user?.id}/`,

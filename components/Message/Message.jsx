@@ -115,12 +115,12 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
   const socketRef = useRef(null);
   useEffect(() => {
     if (user) {
-      const room = [selected_convo, user.id].sort();
+      // const room = [selected_convo, user.id].sort();
       // socketRef.current = new WebSocket(
       //   `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`,
       // );
       socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/messages/${user.id}/`,
+        `ws://127.0.0.1:8000/ws/messages/${admin ? selected_convo.sender.id : user.id}/`,
       );
 
       socketRef.current.onopen = () => {
@@ -135,9 +135,9 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
         console.log(newData);
         setMessages((prev) => [...prev, newData]);
 
-        if (admin && newData.selected_convo.id == 1) {
-          handleMarkRead(newData.sender.id);
-        }
+        // if (admin && newData.selected_convo.id == 1) {    // unsolved
+        //   handleMarkRead(newData.sender.id);
+        // }
       };
 
       return () => {
