@@ -29,7 +29,17 @@ const MessageItem = ({ message, convo, admin }) => {
       <div className="chat-bubble font-normal flex">
         <p>{message.message_text} </p>
         <small className="mt-3 ml-2">
-          {message.message_sender === convo?.sender.id ? (
+          {!admin ? (
+            message.message_sender === convo?.sender.id ? (
+              message.is_read ? (
+                <IoCheckmarkDoneSharp className="text-green-400 h-3.5 w-3.5" />
+              ) : (
+                <IoCheckmarkOutline className="h-3.5 w-3.5" />
+              )
+            ) : (
+              ""
+            )
+          ) : message.message_sender !== convo?.sender.id ? (
             message.is_read ? (
               <IoCheckmarkDoneSharp className="text-green-400 h-3.5 w-3.5" />
             ) : (
