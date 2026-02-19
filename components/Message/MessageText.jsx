@@ -2,6 +2,7 @@
 import useMarkAsRead from "@/hooks/markMsgRead";
 import { useRef } from "react";
 import { useSelector } from "react-redux";
+import { IoCheckmarkDoneSharp, IoCheckmarkOutline } from "react-icons/io5";
 
 const MessageItem = ({ message, convo, admin }) => {
   const ref = useRef(null);
@@ -10,6 +11,7 @@ const MessageItem = ({ message, convo, admin }) => {
   // Hook will auto-mark message as read when visible
   useMarkAsRead(ref, message);
 
+  console.log(message);
   return (
     <div
       ref={ref}
@@ -24,7 +26,20 @@ const MessageItem = ({ message, convo, admin }) => {
             : "chat-start"
       }`}
     >
-      <div className="chat-bubble font-normal">{message.message_text}</div>
+      <div className="chat-bubble font-normal flex">
+        <p>{message.message_text} </p>
+        <small className="mt-3 ml-2">
+          {message.message_sender === convo?.sender.id ? (
+            message.is_read ? (
+              <IoCheckmarkDoneSharp className="text-green-400 h-3.5 w-3.5" />
+            ) : (
+              <IoCheckmarkOutline className="h-3.5 w-3.5" />
+            )
+          ) : (
+            ""
+          )}
+        </small>
+      </div>
     </div>
   );
 };
