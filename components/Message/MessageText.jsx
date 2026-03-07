@@ -11,7 +11,7 @@ const MessageItem = ({ message, convo, admin }) => {
   // Hook will auto-mark message as read when visible
   useMarkAsRead(ref, message);
 
-  console.log(message);
+  // console.log(message);
   return (
     <div
       ref={ref}

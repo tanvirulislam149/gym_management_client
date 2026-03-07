@@ -99,6 +99,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
   const sendMessageHandler = (e) => {
     e.preventDefault();
     const data = {
+      type: "send_message", // for websocket must add
       conversation: convo[0].id,
       message_sender: user.id,
       message_text: e.target.msg_text.value,
@@ -130,11 +131,19 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
       socketRef.current.onclose = () => {
         console.log("WebSocket Disconnected");
       };
+      console.log("check msgs", messages);
       socketRef.current.onmessage = (e) => {
         // receiving msg from BE
-        const newData = JSON.parse(e.data);
-        console.log(newData);
-        setMessages((prev) => [...prev, newData]);
+        let newData = JSON.parse(e.data);
+        if (newData.type === "msg_read") {
+          setMessages((prev) =>
+            prev.map((msg) =>
+              msg.id === newData.id ? { ...msg, is_read: true } : msg,
+            ),
+          );
+        } else {
+          setMessages((prev) => [...prev, newData]);
+        }
 
         // if (admin) {
         //   // unsolved
