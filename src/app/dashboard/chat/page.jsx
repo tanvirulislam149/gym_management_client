@@ -45,7 +45,19 @@ const page = () => {
     api_client
       .get("http://127.0.0.1:8000/conversations/")
       .then((res) => {
-        setConversations(res.data);
+        setConversations((prev) => {
+          // preventing the repeatation of convo name
+          let read_convo = [];
+          let unread_convo = [];
+          res?.data?.map((e) => {
+            if (e.has_unread) {
+              unread_convo.push(e);
+            } else {
+              read_convo.push(e);
+            }
+          });
+          return [...unread_convo, ...read_convo];
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -67,19 +79,26 @@ const page = () => {
     );
 
     convoSocketRef.current.onopen = () => {
-      console.log("WebSocket Connected");
+      console.log("Convo WebSocket Connected");
     };
     convoSocketRef.current.onclose = () => {
-      console.log("WebSocket Disconnected");
+      console.log("Convo WebSocket Disconnected");
     };
     convoSocketRef.current.onmessage = (e) => {
       // receiving msg from BE
       const newData = JSON.parse(e.data);
-      console.log("convo ", newData);
       setConversations((prev) => {
         // preventing the repeatation of convo name
-        const data = prev.filter((e) => e.id !== newData.id);
-        return [newData, ...data];
+        let read_convo = [];
+        let unread_convo = [];
+        prev.map((e) => {
+          if (e.id === newData.id) {
+            unread_convo.push({ ...e, has_unread: true });
+          } else {
+            read_convo.push(e);
+          }
+        });
+        return [...unread_convo, ...read_convo];
       });
     };
 
