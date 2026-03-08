@@ -75,8 +75,9 @@ const page = () => {
     convoSocketRef.current.onmessage = (e) => {
       // receiving msg from BE
       const newData = JSON.parse(e.data);
-      console.log(newData);
-      setConversations((prev) => {   // preventing the repeatation of convo name
+      console.log("convo ", newData);
+      setConversations((prev) => {
+        // preventing the repeatation of convo name
         const data = prev.filter((e) => e.id !== newData.id);
         return [newData, ...data];
       });

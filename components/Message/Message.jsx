@@ -145,8 +145,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
           setMessages((prev) => [...prev, newData]);
         }
 
-        // if (admin) {
-        //   // unsolved
+        // if (admin && newData.type !== "msg_read") {
         //   handleMarkRead(newData.conversation);
         // }
       };
