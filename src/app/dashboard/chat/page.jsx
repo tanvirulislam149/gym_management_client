@@ -55,11 +55,8 @@ const page = () => {
 
   const convoSocketRef = useRef(null); // websocket for showing new conversation
   useEffect(() => {
-    // convoSocketRef.current = new WebSocket(
-    //   `wss://gym-management-0fmi.onrender.com/ws/conversations/all_convo/`,
-    // );
     convoSocketRef.current = new WebSocket(
-      `ws://127.0.0.1:8000/ws/conversations/all_convo/`,
+      `wss://gym-management-0fmi.onrender.com/ws/conversations/all_convo/`,
     );
 
     convoSocketRef.current.onopen = () => {

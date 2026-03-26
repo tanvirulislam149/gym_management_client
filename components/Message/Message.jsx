@@ -108,8 +108,6 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
     api_client
       .post("https://gym-management-0fmi.onrender.com/message/", data)
       .then((res) => {
-        // socketRef.current.send(JSON.stringify(data)); // sending msg to BE
-        // getMessages();
       })
       .catch((err) => console.log(err))
       .finally(() => (e.target.msg_text.value = ""));
@@ -117,12 +115,8 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
 
   useEffect(() => {
     if (user) {
-      // const room = [selected_convo, user.id].sort();
-      // socketRef.current = new WebSocket(
-      //   `wss://gym-management-0fmi.onrender.com/ws/messages/${`${room[0]}and${room[1]}`}/`,
-      // );
       socketRef.current = new WebSocket(
-        `ws://127.0.0.1:8000/ws/messages/${admin ? selected_convo.sender.id : user.id}/`,
+        `wss://gym-management-0fmi.onrender.com/ws/messages/${admin ? selected_convo.sender.id : user.id}/`,
       );
 
       socketRef.current.onopen = () => {
