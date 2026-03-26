@@ -25,25 +25,9 @@ const page = () => {
     setConversations(array);
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   api_client
-  //     .get("https://gym-management-0fmi.onrender.com/get_conversations/")
-  //     .then((res) => {
-  //       // Sort conversations: unread first
-  //       const sorted = res.data.sort((a, b) => {
-  //         if (a.has_unread === b.has_unread) return 0;
-  //         return a.has_unread ? -1 : 1;
-  //       });
-  //       setConversations(sorted);
-  //     })
-  //     .catch((err) => console.log(err))
-  //     .finally(() => setLoading(false));
-  // }, []);
-
   const get_convo = () => {
     api_client
-      .get("http://127.0.0.1:8000/conversations/")
+      .get("https://gym-management-0fmi.onrender.com/conversations/")
       .then((res) => {
         setConversations((prev) => {
           // preventing the repeatation of convo name

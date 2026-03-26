@@ -16,7 +16,7 @@ const useMarkAsRead = (ref, message) => {
         if (entries[0].isIntersecting) {
           try {
             await api_client.post(
-              `http://127.0.0.1:8000/message/${message.id}/read_message/`,
+              `https://gym-management-0fmi.onrender.com/message/${message.id}/read_message/`,
               {},
             );
 

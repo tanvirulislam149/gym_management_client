@@ -31,7 +31,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
     if (user) {
       api_client
         .get(
-          `http://127.0.0.1:8000/message/?convo_id=${admin ? selected_convo.id : convo[0].id}`,
+          `https://gym-management-0fmi.onrender.com/message/?convo_id=${admin ? selected_convo.id : convo[0].id}`,
         )
         .then((res) => {
           setMessages(res.data);
@@ -49,7 +49,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
   };
   const startConvoHandler = () => {
     api_client
-      .post("http://127.0.0.1:8000/conversations/")
+      .post("https://gym-management-0fmi.onrender.com/conversations/")
       .then((res) => {
         setConvoNull(false);
         setConvo([res.data]);
@@ -60,7 +60,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
   const get_convo = () => {
     let timeoutId;
     api_client
-      .get("http://127.0.0.1:8000/conversations/")
+      .get("https://gym-management-0fmi.onrender.com/conversations/")
       .then((res) => {
         if (res.data.length) {
           setConvoNull(false);
@@ -106,7 +106,7 @@ const Message = ({ selected_convo, admin, handleMarkRead }) => {
     };
     socketRef.current.send(JSON.stringify(data)); // sending msg to BE
     api_client
-      .post("http://127.0.0.1:8000/message/", data)
+      .post("https://gym-management-0fmi.onrender.com/message/", data)
       .then((res) => {
         // socketRef.current.send(JSON.stringify(data)); // sending msg to BE
         // getMessages();
