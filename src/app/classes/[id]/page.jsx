@@ -68,6 +68,7 @@ const ClassDetails = async ({ params }) => {
             </p>
           </div>
 
+          <Reviews id={fitness_class.id} />
           {/* Reviews
           <div className="bg-[#13161c] rounded-2xl border border-gray-800/60 p-6 shadow-xl">
             <div className="flex justify-between items-center flex-wrap gap-2 mb-5">
