@@ -10,7 +10,7 @@ const Fitness_classes = async () => {
       "https://gym-management-0fmi.onrender.com/fitness_classes/",
       {
         cache: "no-store",
-      }
+      },
     );
     classes = await data.json();
   } catch (error) {
@@ -18,7 +18,7 @@ const Fitness_classes = async () => {
   }
   return (
     <section id="classes" className="py-16">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto lg:px-18 px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Our <span className="text-green-500">Fitness Classes</span>
@@ -29,7 +29,7 @@ const Fitness_classes = async () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {classes.map((classItem, index) => (
             <div
               key={index}
@@ -39,18 +39,18 @@ const Fitness_classes = async () => {
                 className={`h-48 bg-gradient-to-r flex items-center justify-center`}
               >
                 <Image
-                  className="h-full"
+                  className="w-full h-full object-cover"
                   src={classItem.image}
                   width={500}
                   height={500}
                   alt="Picture of the author"
                 />
               </div>
-              <div className="p-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-2xl font-bold">{classItem.name}</h3>
+              <div className="p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="text-xl font-bold">{classItem.name}</h3>
                 </div>
-                <p className="text-gray-300 mb-6">
+                <p className="text-gray-300 text-sm line-clamp-2 mb-3">
                   {classItem.description.slice(0, 100)}...
                 </p>
                 <Link
