@@ -30,9 +30,16 @@ const ReviewPost = ({ id, fetchReview }) => {
       .finally(() => setLoading(false));
   };
   return (
-    <form id="myForm" onSubmit={(e) => handleReview(e)} className="my-4">
+    <form
+      id="myForm"
+      onSubmit={(e) => handleReview(e)}
+      className="my-4 bg-[#13161c] rounded-2xl border border-gray-800/60 p-6 shadow-xl"
+    >
       <div>
-        <label htmlFor="" className="font-bold text-xl">
+        <h3 className="text-xl font-semibold text-white border-l-4 border-green-500 pl-3 mb-5">
+          Write a review
+        </h3>
+        <label htmlFor="" className="font-bold text-sm">
           Rating:
         </label>
         <br />
@@ -50,13 +57,13 @@ const ReviewPost = ({ id, fetchReview }) => {
         </div>
       </div>
       <br />
-      <label htmlFor="" className="font-bold text-xl">
+      <label htmlFor="" className="font-bold text-sm">
         Comment:
       </label>
       <br />
       <textarea
         name="comment"
-        className="textarea lg:w-1/2 w-full"
+        className="textarea w-full"
         placeholder="Enter your comment"
         id=""
       ></textarea>

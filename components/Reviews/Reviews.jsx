@@ -131,6 +131,7 @@ const Reviews = ({ id }) => {
           )}
         </div>
       </div>
+      <ReviewPost />
       <ErrorModal />
     </div>
   );

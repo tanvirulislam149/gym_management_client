@@ -55,7 +55,7 @@ const Available_class = ({ id }) => {
         classes.map((c) => (
           <div
             key={c.id}
-            className="bg-[#0e1117] rounded-xl p-4 border border-gray-700 mb- hover:border-green-600/40 transition"
+            className="bg-[#0e1117] rounded-xl p-4 border border-gray-700 mb-3 hover:border-green-600/40 transition"
           >
             <div className="flex justify-between items-start flex-wrap gap-2 mb-2">
               <div className="font-mono text-green-300 text-sm">
