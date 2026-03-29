@@ -13,7 +13,7 @@ const Available_class = ({ id }) => {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://gym-management-0fmi.onrender.com/scheduled_classes/?fitness_class_id=${id}`
+      `https://gym-management-0fmi.onrender.com/scheduled_classes/?fitness_class_id=${id}`,
     )
       .then((response) => response.json())
       .then((data) => setClasses(data))
@@ -47,19 +47,56 @@ const Available_class = ({ id }) => {
   };
   return (
     <div className="px-4 overflow-y-auto lg:h-[500px]">
-      <p className="text-center text-2xl font-bold my-3 border-b-2">
+      {/* <p className="text-center text-2xl font-bold my-3 border-b-2">
         Available Classes
-      </p>
+      </p> */}
       {loading ? (
         <div className="w-full mt-20 flex justify-center items-center">
           <span className="loading loading-spinner loading-xl"></span>
         </div>
       ) : classes.length ? (
         classes.map((c) => (
-          <div key={c.id} className="card bg-base-200 my-4 w-full lg:w-90">
-            <div className="card-body">
-              <h2 className="text-lg">
-                <span className="font-bold">Time: </span>
+          // <div key={c.id} className="card bg-base-200 my-4 w-full lg:w-90">
+          //   <div className="card-body">
+          //     <h2 className="text-lg">
+          //       <span className="font-bold">Time: </span>
+          //       {new Date(c.date_time).toLocaleString("en-US", {
+          //         year: "numeric",
+          //         month: "long",
+          //         day: "numeric",
+          //         hour: "2-digit",
+          //         minute: "2-digit",
+          //       })}
+          //     </h2>
+          //     <hr />
+          //     <h2 className="text-lg">
+          //       <span className="font-bold">Instructor: </span>
+          //       {c.instructor}
+          //     </h2>
+          //     <hr />
+          //     <h2 className="text-lg">
+          //       <span className="font-bold">Total Seats: </span>
+          //       {c.total_seats}
+          //     </h2>
+          //     <hr />
+          //     <div className="card-actions justify-end">
+          //       <button
+          //         disabled={new Date(c.date_time) < new Date() ? true : false}
+          //         onClick={() => {
+          //           user
+          //             ? handleBookClass(c.id)
+          //             : document.getElementById("my_modal_3").showModal();
+          //         }}
+          //         className="btn btn-primary text-black mt-3"
+          //       >
+          //         Book now
+          //       </button>
+          //     </div>
+          //   </div>
+          // </div>
+          <div className="bg-[#0e1117] rounded-xl p-4 border border-gray-700 mb-3 hover:border-green-600/40 transition">
+            <div className="flex justify-between items-start flex-wrap gap-2 mb-2">
+              <div className="font-mono text-green-300 text-sm">
                 {new Date(c.date_time).toLocaleString("en-US", {
                   year: "numeric",
                   month: "long",
@@ -67,32 +104,33 @@ const Available_class = ({ id }) => {
                   hour: "2-digit",
                   minute: "2-digit",
                 })}
-              </h2>
-              <hr />
-              <h2 className="text-lg">
-                <span className="font-bold">Instructor: </span>
-                {c.instructor}
-              </h2>
-              <hr />
-              <h2 className="text-lg">
-                <span className="font-bold">Total Seats: </span>
-                {c.total_seats}
-              </h2>
-              <hr />
-              <div className="card-actions justify-end">
-                <button
-                  disabled={new Date(c.date_time) < new Date() ? true : false}
-                  onClick={() => {
-                    user
-                      ? handleBookClass(c.id)
-                      : document.getElementById("my_modal_3").showModal();
-                  }}
-                  className="btn btn-primary text-black mt-3"
-                >
-                  Book now
-                </button>
+              </div>
+              <div className="bg-[#1e2a24] px-2 py-1 rounded-full text-xs text-green-300">
+                {c.total_seats} seats
               </div>
             </div>
+            <div className="flex items-center gap-2 text-gray-300 text-sm mb-3">
+              <span>Instructor:</span>
+              <span className="font-medium text-white">{c.instructor}</span>
+            </div>
+            {/* <button
+              onClick={() => onBook(classId, c.id)}
+              disabled={disabled}
+              className={`w-full py-2 rounded-lg font-medium transition-all ${disabled ? "bg-gray-700 cursor-not-allowed text-gray-400" : "bg-green-700 hover:bg-green-600 text-white shadow"}`}
+            >
+              {disabled ? "❌ No seats" : "📖 Book this class"}
+            </button> */}
+            <button
+              disabled={new Date(c.date_time) < new Date() ? true : false}
+              onClick={() => {
+                user
+                  ? handleBookClass(c.id)
+                  : document.getElementById("my_modal_3").showModal();
+              }}
+              className="btn btn-primary text-black mt-3"
+            >
+              Book now
+            </button>
           </div>
         ))
       ) : (
