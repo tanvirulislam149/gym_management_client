@@ -58,7 +58,7 @@ const AllReview = () => {
               slidesPerView: 2,
               spaceBetween: 20,
             },
-            1024: {
+            1100: {
               slidesPerView: 3,
               spaceBetween: 30,
             },
@@ -89,7 +89,7 @@ const AllReview = () => {
                       </div>
                     </div>
                     <div className="w-8/12 ml-4">
-                      <p className="font-bold">{r.user.email}</p>
+                      <p className="font-bold">{r.user.email.split("@")[0]}</p>
                       <div className="flex">
                         <div className="rating">
                           {[1, 2, 3, 4, 5].map((star) => (
