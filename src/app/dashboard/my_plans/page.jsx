@@ -37,7 +37,7 @@ const My_plans = () => {
         if (res?.data[0]?.plans?.id) {
           api_client
             .get(
-              `https://gym-management-0fmi.onrender.com/plans/${res.data[0].plans.id}`
+              `https://gym-management-0fmi.onrender.com/plans/${res.data[0].plans.id}`,
             )
             .then((res) => setPlan(res.data))
             .catch((err) => document.getElementById("errorModal").showModal())
@@ -63,12 +63,12 @@ const My_plans = () => {
                       <span>
                         {format(
                           parseISO(active?.split(" to ")[0]),
-                          "MMMM dd, yyyy"
+                          "MMMM dd, yyyy",
                         )}{" "}
                         to{" "}
                         {format(
                           parseISO(active?.split(" to ")[1]),
-                          "MMMM dd, yyyy"
+                          "MMMM dd, yyyy",
                         )}
                       </span>
                     ) : (
@@ -159,10 +159,11 @@ const My_plans = () => {
                         {plan?.price} BDT
                       </h2>
                       <h2 className="text-xl font-bold leading-none mt-4">
-                        {plan?.type}
+                        {plan?.type} <br />
+                        Membership <br />
                       </h2>
-                      <h2 className="text-xl font-bold leading-none mb-4">
-                        Membership
+                      <h2 className="text-xl font-bold leading-none mt-4">
+                        {plan?.months} months access
                       </h2>
                       <ul>
                         {plan?.fitness_classes?.map((c) => (
