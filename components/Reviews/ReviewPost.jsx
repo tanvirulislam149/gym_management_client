@@ -30,56 +30,54 @@ const ReviewPost = ({ id, fetchReview }) => {
       .finally(() => setLoading(false));
   };
   return (
-    <>
-      <form
-        id="myForm"
-        onSubmit={(e) => handleReview(e)}
-        className="my-4 bg-[#13161c] rounded-2xl border border-gray-800/60 p-6 shadow-xl"
-      >
-        <div>
-          <h3 className="text-xl font-semibold text-white border-l-4 border-green-500 pl-3 mb-5">
-            Write a review
-          </h3>
-          <label htmlFor="" className="font-bold text-sm">
-            Rating:
-          </label>
-          <br />
-          <div className="rating post_review">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <input
-                key={star}
-                type="radio"
-                value={star}
-                name={`post_rating`}
-                className="mask mask-star-2 bg-green-400"
-                aria-label="1 star"
-              />
-            ))}
-          </div>
-        </div>
-        <br />
+    <form
+      id="myForm"
+      onSubmit={(e) => handleReview(e)}
+      className="my-4 bg-[#13161c] rounded-2xl border border-gray-800/60 p-6 shadow-xl"
+    >
+      <div>
+        <h3 className="text-xl font-semibold text-white border-l-4 border-green-500 pl-3 mb-5">
+          Write a review
+        </h3>
         <label htmlFor="" className="font-bold text-sm">
-          Comment:
+          Rating:
         </label>
         <br />
-        <textarea
-          name="comment"
-          className="textarea w-full"
-          placeholder="Enter your comment"
-          id=""
-        ></textarea>
-        <br />
-        {!user && (
-          <p className="text-red-400">Please login first to give review.</p>
-        )}
-        <input
-          type="submit"
-          disabled={loading || !user}
-          value={loading ? "Submitting..." : "Submit"}
-          className="btn btn-primary mt-2 text-black disabled:text-gray-400"
-        />
-        <ErrorModal />
-      </form>
+        <div className="rating post_review">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <input
+              key={star}
+              type="radio"
+              value={star}
+              name={`post_rating`}
+              className="mask mask-star-2 bg-green-400"
+              aria-label="1 star"
+            />
+          ))}
+        </div>
+      </div>
+      <br />
+      <label htmlFor="" className="font-bold text-sm">
+        Comment:
+      </label>
+      <br />
+      <textarea
+        name="comment"
+        className="textarea w-full"
+        placeholder="Enter your comment"
+        id=""
+      ></textarea>
+      <br />
+      {!user && (
+        <p className="text-red-400">Please login first to give review.</p>
+      )}
+      <input
+        type="submit"
+        disabled={loading || !user}
+        value={loading ? "Submitting..." : "Submit"}
+        className="btn btn-primary mt-2 text-black disabled:text-gray-400"
+      />
+      <ErrorModal />
       {/* Modal For review error */}
       <dialog id="reviewErr" className="modal">
         <div className="modal-box bg-white text-black">
@@ -97,7 +95,7 @@ const ReviewPost = ({ id, fetchReview }) => {
           <button>close</button>
         </form>
       </dialog>
-    </>
+    </form>
   );
 };
 
